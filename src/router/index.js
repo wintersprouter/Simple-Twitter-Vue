@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import NotFound from '../views/NotFound.vue'
+import './../assets/sass/main.scss'
 
 Vue.use(VueRouter)
 
