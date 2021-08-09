@@ -70,7 +70,7 @@
           },
           {
             id:2,
-            name:'user-list',
+            name:'users-list',
             title: '使用者列表',
           }
         ],
