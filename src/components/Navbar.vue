@@ -1,0 +1,152 @@
+<template>
+  <v-card
+    height="100vh"
+    width="235"
+    absolute
+    tile
+    class="d-flex flex-column justify-space-between"
+  >
+    <v-list flat rounded nav>
+      <!-- user -->
+      <v-list-item-group v-model="selectedItem" color="primary">
+        <!-- logo -->
+        <router-link to="/">
+          <v-btn
+            icon
+            color="primary"
+            rounded
+            class="ml-1"
+            width="70px"
+            height="45px"
+          >
+            <v-img
+              src="../assets/img/logo.svg"
+              max-width="40px"
+              max-height="40px"
+            ></v-img>
+          </v-btn>
+        </router-link>
+        <!-- logo-end -->
+        <v-list-item
+          v-for="userOption in userOptions"
+          :key="userOption.id"
+          link
+          class="mt-5 pr-5"
+        >
+          <v-list-item-icon class="ml-3">
+            <v-img :src="userOption.icon" :alt="userOption.name"></v-img>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title
+              v-text="userOption.title"
+              class="font-weight-bold text-left"
+            ></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item class="mt-3">
+          <v-btn block rounded color="primary" dark
+            ><v-list-item-title class="font-weight-medium" v-text="'推文'">
+            </v-list-item-title>
+          </v-btn>
+        </v-list-item>
+      </v-list-item-group>
+      <!-- user-end -->
+      <!-- admin -->
+      <v-list-item-group v-model="selectedItem" color="primary">
+        <!-- logo -->
+        <router-link to="/">
+          <v-btn
+            icon
+            color="primary"
+            rounded
+            class="ml-1"
+            width="70px"
+            height="45px"
+          >
+            <v-img
+              src="../assets/img/logo.svg"
+              max-width="40px"
+              max-height="40px"
+            ></v-img>
+          </v-btn>
+        </router-link>
+        <!-- logo-end -->
+        <v-list-item
+          v-for="adminOption in adminOptions"
+          :key="adminOption.id"
+          link
+          class="mt-5 pr-5"
+        >
+          <v-list-item-icon class="ml-3">
+            <v-img :src="adminOption.icon" :alt="adminOption.name"></v-img>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title
+              v-text="adminOption.title"
+              class="font-weight-bold text-left"
+            ></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-item-group>
+      <!-- admin-end -->
+    </v-list>
+    <!-- logout -->
+    <v-list flat rounded nav>
+      <v-list-item-group v-model="selectedItem" color="primary">
+        <v-list-item>
+          <v-list-item-icon class="mx-4">
+            <v-img src="../assets/img/logout.svg" max-width="20"></v-img>
+            <v-list-item-content>
+              <v-list-item-title class="font-weight-bold text-left ml-4"
+                >登出</v-list-item-title
+              >
+            </v-list-item-content>
+          </v-list-item-icon>
+        </v-list-item>
+      </v-list-item-group>
+    </v-list>
+    <!-- logout -->
+  </v-card>
+</template>
+<script>
+import home from "./../assets/img/home.svg";
+import user from "./../assets/img/user.svg";
+import setting from "./../assets/img/setting.svg";
+export default {
+  name: "Navbar",
+  data: () => {
+    return {
+      selectedItem: 1,
+      userOptions: [
+        {
+          id: 1,
+          icon: home,
+          title: "首頁",
+        },
+        {
+          id: 2,
+          icon: user,
+          title: "個人首頁",
+        },
+        {
+          id: 3,
+          icon: setting,
+          title: "設定",
+        },
+      ],
+      adminOptions: [
+        {
+          id: 1,
+          icon: home,
+          title: "推文清單",
+        },
+        {
+          id: 2,
+          icon: user,
+          title: "使用者列表",
+        },
+      ],
+    };
+  },
+};
+</script>
