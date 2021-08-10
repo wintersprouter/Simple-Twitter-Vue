@@ -44,10 +44,61 @@
           </v-list-item-content>
         </v-list-item>
         <v-list-item class="mt-3">
-          <v-btn block rounded color="primary" dark
-            ><v-list-item-title class="font-weight-medium" v-text="'推文'">
-            </v-list-item-title>
-          </v-btn>
+          <v-dialog v-model="dialog" max-width="600px" max-hight="300px">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                block
+                rounded
+                color="primary"
+                dark
+                v-bind="attrs"
+                v-on="on"
+                elevation="0"
+              >
+                推文
+              </v-btn>
+            </template>
+            <v-card elevation="0" style="border-radius: 14px">
+              <v-card-actions>
+                <v-btn color="primary" text @click="dialog = false"
+                  ><span>&#10005;</span>
+                </v-btn>
+              </v-card-actions>
+              <v-divider></v-divider>
+              <v-card-actions>
+                <v-container class="d-flex justify-space-between">
+                  <v-avatar size="50" class="mr-5">
+                    <img
+                      src="https://cdn.vuetifyjs.com/images/john.jpg"
+                      alt="MasterCard"
+                    />
+                  </v-avatar>
+
+                  <v-textarea
+                    :rules="rules"
+                    :value="value"
+                    counter="150"
+                    auto-grow
+                    row-height="15"
+                    placeholder="有什麼新鮮事？"
+                  ></v-textarea>
+                </v-container>
+              </v-card-actions>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="primary"
+                  rounded
+                  elevation="0"
+                  @click="dialog = false"
+                  mb-5
+                >
+                  推文
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-list-item>
       </v-list-item-group>
       <!-- user-end -->
@@ -116,6 +167,9 @@ export default {
   name: "Navbar",
   data: () => {
     return {
+      dialog: false,
+      rules: [(v) => v.length <= 150 || "Max 150 characters"],
+      value: "",
       selectedItem: 1,
       userOptions: [
         {
@@ -150,3 +204,5 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+</style>
