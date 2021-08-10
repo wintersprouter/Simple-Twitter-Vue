@@ -1,13 +1,18 @@
 <template>
-  <Navbar />
+  <section>
+    <!-- <Navbar left /> -->
+    <FollowRecommendations right />
+  </section>
 </template>
 
 <script>
-import Navbar from './../components/Navbar'
+// import Navbar from "./../components/Navbar";
+import FollowRecommendations from "./../components/FollowRecommendations";
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    Navbar
+    // Navbar,
+    FollowRecommendations,
   },
-}
+};
 </script>
