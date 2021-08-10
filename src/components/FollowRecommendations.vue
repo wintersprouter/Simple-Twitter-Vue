@@ -1,60 +1,49 @@
 <template>
   <v-container>
-    <v-card
-      class="
-        pa-4
-        text-left
-        secondary
-        text-no-wrap
-        rounded-t-xl
-        font-weight-bold;
-      "
-      max-width="344"
-      outlined
-    >
-      跟隨誰
+    <v-card class="secondary rounded-t-xl" max-width="350" outlined>
+      <v-card-title class="text-left card-list-title">跟隨誰</v-card-title>
     </v-card>
-
-    <v-card class="secondary" max-width="344" outlined>
-      <v-divider class="mb-2"></v-divider>
+    <v-card class="secondary" max-width="350" outlined>
+      <v-divider></v-divider>
       <v-row align="center" justify="space-around">
-        <div class="user-info d-flex">
-          <v-list-item two-line>
-            <v-list-item-avatar
-              class="user-info-avatar"
-              color="warning lighten-2"
-              size="50"
+        <v-list-item two-line class="ma-2">
+          <v-list-item-avatar
+            class="user-info-avatar"
+            color="warning lighten-2"
+            size="50"
+          >
+            <img
+              src="https://cdn.vuetifyjs.com/images/john.jpg"
+              alt="MasterCard"
+            />
+          </v-list-item-avatar>
+          <v-list-item-content class="user-info-text">
+            <v-list-item-title class="user-info-text-name"
+              >MasterCard</v-list-item-title
             >
-              <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
-            </v-list-item-avatar>
-            <v-list-item-content class="user-info-text">
-              <v-list-item-title class="user-info-text-name"
-                >SALLY</v-list-item-title
-              >
-              <v-list-item-subtitle class="user-info-text-account"
-                >@SALLY</v-list-item-subtitle
-              >
-            </v-list-item-content>
-          </v-list-item>
-        </div>
-        <v-card-actions class="followship-button">
-          <!-- <v-btn rounded color="primary" dark> 正在跟隨 </v-btn> -->
-          <v-btn rounded outlined color="primary" dark> 跟隨</v-btn>
-        </v-card-actions>
+            <v-list-item-subtitle class="user-info-text-account"
+              >@MasterCard</v-list-item-subtitle
+            >
+          </v-list-item-content>
+          <v-card-actions class="followship-button">
+            <v-btn rounded color="primary" dark> 正在跟隨 </v-btn>
+            <!-- <v-btn rounded outlined color="primary" dark> 跟隨</v-btn> -->
+          </v-card-actions>
+        </v-list-item>
       </v-row>
-      <v-divider class="mt-2"></v-divider>
+      <v-divider></v-divider>
     </v-card>
-    <v-card
-      class="pa-4 text-left secondary text-no-wrap rounded-b-xl"
-      max-width="344"
-      outlined
-    >
-      顯示更多
+    <v-card class="text-left secondary rounded-b-xl" max-width="350" outlined>
+      <v-card-text id="show-more-cards">顯示更多</v-card-text>
     </v-card>
   </v-container>
 </template>
 <script>
-export default {};
+export default {
+  name: "FollowRecommendations",
+};
 </script>
-<style scoped>
+<style lang="scss">
+@import "./../assets/scss/components/_FollowRecommendations.scss";
 </style>
+
