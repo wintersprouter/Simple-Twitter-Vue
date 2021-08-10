@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import 'vuetify/dist/vuetify.min.css'
 import Vuetify from 'vuetify/lib/framework'
 
 Vue.use(Vuetify)
@@ -19,7 +20,7 @@ export default new Vuetify({
     disable: false,
     themes: {
       light: {
-        primary: '#1DA1F2',
+        primary: '#ff6600',
         secondary: '#F5F8FA',
         accent: '#1C1C1C'
       }
