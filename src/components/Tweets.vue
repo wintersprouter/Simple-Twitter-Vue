@@ -8,8 +8,10 @@
         <v-card-text class="py-0">
           <v-list-item-group>
             <v-list-item-title>
-              <span class="mr-2">MasterCard</span>
-              <span>@MasterCard</span> <span> · </span> <span> 3 小時</span>
+              <span class="mr-2 tweets-name">MasterCard</span>
+              <span class="tweets-account">@MasterCard</span>
+              <span class="tweets-account"> · </span>
+              <span class="tweets-account"> 3 小時</span>
             </v-list-item-title>
             <v-list-item-content class="pt-2 pb-0">
               Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis
@@ -30,9 +32,15 @@
             <span>17</span>
           </v-list-item>
           <v-list-item>
-            <v-btn icon color="pink" v-bind="attrs" v-on="on">
-              <v-icon>mdi-message-reply-outline</v-icon>
-            </v-btn>
+            <v-dialog v-model="dialog" max-width="600px" max-hight="300px">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn icon color="pink" v-bind="attrs" v-on="on">
+                  <v-icon>mdi-message-reply-outline</v-icon>
+                </v-btn>
+              </template>
+              <!-- modal -->
+              <ReplyTweetModal />
+            </v-dialog>
             <span>545</span>
           </v-list-item>
         </v-card-actions>
@@ -42,8 +50,12 @@
   </v-card>
 </template>
 <script>
+import ReplyTweetModal from "./../components/ReplyTweetModal";
 export default {
   name: "Tweets",
+  components: {
+    ReplyTweetModal,
+  },
   data: () => {
     return {
       dialog: false,

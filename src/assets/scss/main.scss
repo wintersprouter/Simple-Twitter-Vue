@@ -1,16 +1,23 @@
 $font-family: 'Noto Sans TC', sans-serif;
 $font-size-title:18px;
 $font-size-root:15px;
+$font-size-small:13px;
 
 $font-color-root:#1C1C1C;
 $font-color-primary:#ff6600;
+$font-color-outline:#CCD6DD;
+$font-color-account:#657786;
 
 $font-style-title:normal;
 
 $font-weight-title: 700;
+$font-weight-sub-title:500;
+$font-weight-content:400;
 
 $font-line-title: 26px;
 $font-line-sub-title:15px;
+$font-line-root:22px;
+$font-line-small:13px;
 
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap");
 
@@ -20,6 +27,25 @@ $font-line-sub-title:15px;
     font-style: $font-style-title;
     color: $font-color-root
   }
+  .tweets-name ,.tweets-content{
+    font-size: $font-size-root;
+    line-height: $font-line-root;
+    color: $font-color-root;
+  }
+  .tweets-name {
+    font-weight: $font-weight-title;
+
+  }
+  .tweets-account{
+    font-weight: $font-weight-sub-title;
+    font-size: $font-line-sub-title;
+    line-height: $font-line-root;
+    color: $font-color-account;
+  }
+  .tweets-content{
+    font-weight: $font-weight-content;
+  }
+  
   font-family: $font-family, sans-serif !important;
   color:$font-color-root;
   font-size:$font-size-root;
