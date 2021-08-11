@@ -30,7 +30,7 @@
             <span>17</span>
           </v-list-item>
           <v-list-item>
-            <v-btn icon color="pink">
+            <v-btn icon color="pink" v-bind="attrs" v-on="on">
               <v-icon>mdi-message-reply-outline</v-icon>
             </v-btn>
             <span>545</span>
@@ -42,8 +42,15 @@
   </v-card>
 </template>
 <script>
-export default {};
+export default {
+  name: "Tweets",
+  data: () => {
+    return {
+      dialog: false,
+    };
+  },
+};
 </script>
 <style lang="scss" scoped>
-@import "./../assets/scss/components/_UserTweets.scss";
+@import "./../assets/scss/components/_Tweets.scss";
 </style>

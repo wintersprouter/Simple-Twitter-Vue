@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <section class="left-section"><Navbar /></section>
-        <section class="middle-section"><UserTweets /></section>
+        <section class="middle-section"><Tweets /><ReplyTweetModal /></section>
         <section class="right-section"><FollowRecommendations /></section>
       </v-row>
     </v-container>
@@ -13,13 +13,16 @@
 <script>
 import Navbar from "./../components/Navbar";
 import FollowRecommendations from "./../components/FollowRecommendations";
-import UserTweets from "./../components/UserTweets";
+import Tweets from "./../components/Tweets";
+import ReplyTweetModal from "./../components/ReplyTweetModal";
+
 export default {
   name: "Home",
   components: {
     Navbar,
-    UserTweets,
+    Tweets,
     FollowRecommendations,
+    ReplyTweetModal,
   },
 };
 </script>
