@@ -1,5 +1,16 @@
 @import "./../main.scss";
-  #show-more-cards {
+  #recommend-list-bottom-title {
+    margin-left: 8px;
     color: $font-color-primary;
     cursor: pointer;
+  }
+  
+  .recommend-list {
+    margin: 15px auto; 
+    .recommend-list-top-title {
+      margin-left: 8px;
+    }
+    .user-info-avatar{
+      margin-left: 8px;
+    }
   }
