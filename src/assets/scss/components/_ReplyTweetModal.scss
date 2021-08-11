@@ -1,0 +1,22 @@
+@import "./../main.scss";
+.modal-top {
+  position: relative;
+  #connect-line {
+    background-color: $font-color-outline;
+    position: absolute;
+    left: 6%;
+    top: 50% ;
+    height: 80px;
+  }
+  .tweet-reply-title,.tweet-reply-target{
+    font-weight: $font-weight-sub-title;
+    font-size: $font-size-small;
+    line-height: $font-line-small;
+  }
+  .tweet-reply-title{
+    color:$font-color-account;
+  }
+  .tweet-reply-target{
+    color: $font-color-primary;
+  }
+}

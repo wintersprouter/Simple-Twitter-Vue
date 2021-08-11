@@ -77,6 +77,7 @@
                     :value="value"
                     counter="150"
                     auto-grow
+                    autofocus
                     row-height="15"
                     placeholder="有什麼新鮮事？"
                   ></v-textarea>
