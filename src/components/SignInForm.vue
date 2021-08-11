@@ -26,6 +26,7 @@
 </template>
 <script>
 export default {
+  name: "SignInForm",
   data() {
     const defaultForm = Object.freeze({
       account: "",
