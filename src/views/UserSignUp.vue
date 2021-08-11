@@ -5,7 +5,7 @@
   </v-container>
 </template>
 <script>
-import UserForm from "./../assets/scss/components/UserForm.vue";
+import UserForm from "../components/UserForm.vue";
 export default {
   name: "UserSignUp",
   component: {
