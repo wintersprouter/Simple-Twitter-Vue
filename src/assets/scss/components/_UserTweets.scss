@@ -1,0 +1,16 @@
+@import "./../main.scss";
+.tweet-list {
+  max-width: 600px;
+  margin: 0 auto;
+  .tweet-card {
+    margin: 0 auto;
+    padding-left: 15px;
+    display: flex;
+    .tweet-card-avatar {
+      margin-top: 10px;
+    }
+    .tweet-card-list {
+      padding-top: 10px;
+    }
+  }
+}  

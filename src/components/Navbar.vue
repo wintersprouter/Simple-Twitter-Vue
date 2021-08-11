@@ -1,10 +1,8 @@
 <template>
   <v-card
     height="100vh"
-    width="235"
-    absolute
-    tile
-    class="d-flex flex-column justify-space-between"
+    elevation="0"
+    class="mx-0 d-flex flex-column justify-space-between"
   >
     <v-list flat rounded nav>
       <!-- user -->
@@ -204,5 +202,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-</style>
