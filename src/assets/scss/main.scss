@@ -1,26 +1,5 @@
 @import "./utility/reset.scss";
-$font-family: 'Noto Sans TC', sans-serif;
-$font-size-title:18px;
-$font-size-root:15px;
-$font-size-small:13px;
-
-$font-color-root:#1C1C1C;
-$font-color-primary:#ff6600;
-$font-color-outline:#CCD6DD;
-$font-color-account:#657786;
-
-$font-style-title:normal;
-
-$font-weight-title: 700;
-$font-weight-sub-title:500;
-$font-weight-content:400;
-
-$font-line-title: 26px;
-$font-line-sub-title:15px;
-$font-line-root:22px;
-$font-line-small:13px;
-
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap");
+@import "./utility/variables.scss";
 
 .v-application {
   [class*='text-'] {
