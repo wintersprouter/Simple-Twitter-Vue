@@ -1,0 +1,28 @@
+@import "./../main.scss";
+.detail-tweet-card {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 15px;
+  .detail-tweet-card-content{
+    font-weight:$font-weight-sub-title;
+    font-size:$font-size-large; 
+    color: $font-color-root;
+    line-height: $font-line-large;
+  }
+  .detail-tweet-card-time{
+    font-weight: $font-weight-sub-title;
+    font-size: $font-size-root;
+    line-height: $font-line-root;
+    color:  $font-color-account;
+  }
+  .tweet-card-reply-count ,.tweet-card-like-count{
+    margin-right: 1rem;
+    color: $font-color-black;
+
+  }
+  .tweet-card-reply-count ,.tweet-card-like-count,.tweet-card-reply-text ,.tweet-card-like-text{
+    font-weight: $font-weight-title;
+    font-size: $font-size-medium;
+    line-height: $font-line-medium;
+  }
+}

@@ -52,7 +52,7 @@
 <script>
 import ReplyTweetModal from "./../components/ReplyTweetModal";
 export default {
-  name: "Tweets",
+  name: "UserTweets",
   components: {
     ReplyTweetModal,
   },
@@ -64,5 +64,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "./../assets/scss/components/_Tweets.scss";
+@import "./../assets/scss/components/_UserTweets.scss";
 </style>

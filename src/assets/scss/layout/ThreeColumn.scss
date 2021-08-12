@@ -1,0 +1,29 @@
+.v-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+
+.left-section {
+  order: 0;
+  flex-grow: 0;
+  flex-shrink: 0.5;
+  flex-basis: 25%;
+  /* 235px */
+}
+.middle-section {
+  order: 1;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 50% ;
+  margin: 0 auto;
+  /* 600px */
+}
+
+.right-section {
+  order: 2;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 25%;
+  /* 350px */
+}

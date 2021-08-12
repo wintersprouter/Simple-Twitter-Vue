@@ -23,7 +23,8 @@ export default new Vuetify({
         primary: '#ff6600',
         secondary: '#F5F8FA',
         accent: '#1C1C1C',
-        outline: '#CCD6DD'
+        outline: '#CCD6DD',
+        gary: '#657786'
       }
     }
   }

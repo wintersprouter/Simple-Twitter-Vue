@@ -2,7 +2,9 @@
   <v-card
     height="100vh"
     elevation="0"
-    class="mx-0 d-flex flex-column justify-space-between"
+    width="210px"
+    justify="space-between"
+    class="nav-list flex-column"
   >
     <v-list flat rounded nav>
       <!-- user -->
@@ -203,3 +205,10 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+.nav-list {
+  display: flex;
+  float: right;
+  margin: 0 auto;
+}
+</style>

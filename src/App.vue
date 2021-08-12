@@ -17,4 +17,8 @@ export default {
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
+.v-main {
+  width: 75%;
+  margin: 0 auto 3rem auto;
+}
 </style>
