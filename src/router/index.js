@@ -18,6 +18,11 @@ const routes = [
     component: () => import('../views/TweetDetail.vue')
   },
   {
+    path: '/user',
+    name: 'user',
+    component: () => import('../views/UserProfile.vue')
+  },
+  {
     path: '/signin',
     name: 'sign-in',
     component: UserSignIn
