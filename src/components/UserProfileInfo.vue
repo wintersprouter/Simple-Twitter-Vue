@@ -23,9 +23,21 @@
     <v-card-text class="profile-content">
       <v-card-actions>
         <v-row class="flex-row-reverse">
-          <v-btn outlined color="primary" class="text-no-wrap rounded-pill px-4"
-            >編輯個人資料</v-btn
-          >
+          <v-dialog v-model="dialog" max-width="600px" max-hight="300px">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                outlined
+                v-bind="attrs"
+                v-on="on"
+                color="primary"
+                class="text-no-wrap rounded-pill px-4"
+                >編輯個人資料</v-btn
+              >
+            </template>
+            <!-- modal -->
+            <UserProfileEditModal />
+          </v-dialog>
+
           <v-btn
             elevation="0"
             color="primary"
@@ -58,12 +70,19 @@
   </v-card>
 </template>
 <script>
+import UserProfileEditModal from "./UserProfileEditModal.vue";
 export default {
+  name: "UserProfileInfo",
+  components: {
+    UserProfileEditModal,
+  },
   data: () => ({
     zIndex: 0,
+    dialog: false,
   }),
 };
 </script>
 <style lang="scss">
 @import "./../assets/scss/components/_UserProfileInfo.scss";
 </style>
+

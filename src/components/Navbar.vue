@@ -77,7 +77,8 @@
                   <v-textarea
                     :rules="rules"
                     :value="value"
-                    counter="150"
+                    counter
+                    maxlength="150"
                     auto-grow
                     autofocus
                     row-height="15"

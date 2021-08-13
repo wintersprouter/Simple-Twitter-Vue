@@ -50,7 +50,8 @@
         <v-textarea
           :rules="rules"
           :value="value"
-          counter="50"
+          counter
+          maxlength="50"
           auto-grow
           row-height="15"
           placeholder="推你的回覆"
@@ -58,7 +59,6 @@
         ></v-textarea>
       </v-container>
     </v-card-actions>
-
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn color="primary" rounded elevation="0" @click="dialog = false" mb-5>
