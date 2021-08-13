@@ -3,7 +3,8 @@
     <v-row>
       <section class="left-section"><Navbar /></section>
       <section class="middle-section">
-        <UserProfileInfo /><UserProfileNav /><UserTweets />
+        <UserProfileInfo /><UserProfileNav /> <v-divider></v-divider
+        ><UserTweets />
       </section>
       <section class="right-section"><FollowRecommendations /></section>
     </v-row>
