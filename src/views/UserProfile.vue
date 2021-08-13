@@ -3,7 +3,7 @@
     <v-row>
       <section class="left-section"><Navbar /></section>
       <section class="middle-section">
-        <UserProfileInfo /><UserProfileNav />
+        <UserProfileInfo /><UserProfileNav /><UserTweets />
       </section>
       <section class="right-section"><FollowRecommendations /></section>
     </v-row>
@@ -14,6 +14,7 @@ import Navbar from "./../components/Navbar";
 import FollowRecommendations from "./../components/FollowRecommendations";
 import UserProfileInfo from "./../components/UserProfileInfo";
 import UserProfileNav from "./../components/UserProfileNav";
+import UserTweets from "./../components/UserTweets";
 
 export default {
   name: "Home",
@@ -22,6 +23,7 @@ export default {
     FollowRecommendations,
     UserProfileInfo,
     UserProfileNav,
+    UserTweets,
   },
 };
 </script>
