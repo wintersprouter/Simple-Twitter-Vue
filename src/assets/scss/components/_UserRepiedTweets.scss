@@ -1,0 +1,16 @@
+@import "./../main.scss";
+.profile-reply-card{
+  max-width: 600px;
+  padding:  0 15px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  .connect-line {
+    background-color: $font-color-outline;
+    position: absolute;
+    left: 7%;
+    top:38% ;
+    height: 65px;
+  }
+
+}

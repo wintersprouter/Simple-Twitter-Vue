@@ -23,8 +23,13 @@ const routes = [
     component: () => import('../views/UserProfile.vue')
   },
   {
+    path: '/user/replies',
+    name: 'user-replies',
+    component: () => import('../views/UserProfileRepied.vue')
+  },
+  {
     path: '/user/follower',
-    name: 'user',
+    name: 'user-follower',
     component: () => import('../views/Followship.vue')
   },
   {

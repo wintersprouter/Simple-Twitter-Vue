@@ -4,27 +4,26 @@
       <section class="left-section"><Navbar /></section>
       <section class="middle-section">
         <UserProfileInfo /><UserProfileNav /> <v-divider></v-divider
-        ><UserTweets />
+        ><UserRepiedTweets />
       </section>
       <section class="right-section"><FollowRecommendations /></section>
     </v-row>
   </v-container>
 </template>
 <script>
+import UserRepiedTweets from "../components/UserRepiedTweets.vue";
 import Navbar from "./../components/Navbar";
 import FollowRecommendations from "./../components/FollowRecommendations";
 import UserProfileInfo from "./../components/UserProfileInfo";
 import UserProfileNav from "./../components/UserProfileNav";
-import UserTweets from "./../components/UserTweets";
-
 export default {
-  name: "UserProfile",
+  name: "UserProfileRepied",
   components: {
     Navbar,
     FollowRecommendations,
     UserProfileInfo,
     UserProfileNav,
-    UserTweets,
+    UserRepiedTweets,
   },
 };
 </script>
