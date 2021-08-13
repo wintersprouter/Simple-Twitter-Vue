@@ -23,11 +23,17 @@
     <v-card-text class="profile-content">
       <v-card-actions>
         <v-row class="flex-row-reverse">
-          <v-btn
-            outlined
-            color="primary"
-            class="text-no-wrap rounded-pill button-edit"
+          <v-btn outlined color="primary" class="text-no-wrap rounded-pill px-4"
             >編輯個人資料</v-btn
+          >
+          <v-btn
+            elevation="0"
+            color="primary"
+            class="text-no-wrap rounded-pill px-4"
+            >正在跟隨</v-btn
+          >
+          <v-btn outlined color="primary" class="text-no-wrap rounded-pill px-4"
+            >跟隨</v-btn
           >
         </v-row>
       </v-card-actions>
