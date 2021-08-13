@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="0" outlined tile class="profile-card">
+  <v-card elevation="0" tile class="profile-card">
     <v-img
       height="200px"
       src="https://cdn.vuetifyjs.com/images/cards/forest-art.jpg"
