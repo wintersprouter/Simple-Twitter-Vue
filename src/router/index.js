@@ -23,6 +23,11 @@ const routes = [
     component: () => import('../views/UserProfile.vue')
   },
   {
+    path: '/user/follower',
+    name: 'user',
+    component: () => import('../views/Followship.vue')
+  },
+  {
     path: '/signin',
     name: 'sign-in',
     component: UserSignIn
