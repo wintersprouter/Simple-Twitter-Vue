@@ -31,7 +31,9 @@
             <!-- <v-btn rounded color="primary" elevation="0" dark class="px-4">
                 正在跟隨
               </v-btn> -->
-            <v-btn rounded outlined color="primary" dark> 跟隨</v-btn>
+            <v-btn rounded outlined color="primary" class="px-4" dark>
+              跟隨</v-btn
+            >
           </v-card-actions>
         </v-list-item>
       </v-row>
@@ -62,7 +64,7 @@
             <v-btn rounded color="primary" elevation="0" dark class="px-4">
               正在跟隨
             </v-btn>
-            <!-- <v-btn rounded outlined color="primary" dark> 跟隨</v-btn> -->
+            <!-- <v-btn rounded outlined color="primary" class="px-4" dark> 跟隨</v-btn> -->
           </v-card-actions>
         </v-list-item>
       </v-row>
@@ -93,7 +95,7 @@
             <v-btn rounded color="primary" elevation="0" dark class="px-4">
               正在跟隨
             </v-btn>
-            <!-- <v-btn rounded outlined color="primary" dark> 跟隨</v-btn> -->
+            <!-- <v-btn rounded outlined color="primary" class="px-4" dark> 跟隨</v-btn> -->
           </v-card-actions>
         </v-list-item>
       </v-row>
