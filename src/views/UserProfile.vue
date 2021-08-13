@@ -2,7 +2,9 @@
   <v-container>
     <v-row>
       <section class="left-section"><Navbar /></section>
-      <section class="middle-section"><UserProfileInfo /></section>
+      <section class="middle-section">
+        <UserProfileInfo /><UserProfileNav />
+      </section>
       <section class="right-section"><FollowRecommendations /></section>
     </v-row>
   </v-container>
@@ -11,6 +13,7 @@
 import Navbar from "./../components/Navbar";
 import FollowRecommendations from "./../components/FollowRecommendations";
 import UserProfileInfo from "./../components/UserProfileInfo";
+import UserProfileNav from "./../components/UserProfileNav";
 
 export default {
   name: "Home",
@@ -18,6 +21,7 @@ export default {
     Navbar,
     FollowRecommendations,
     UserProfileInfo,
+    UserProfileNav,
   },
 };
 </script>
