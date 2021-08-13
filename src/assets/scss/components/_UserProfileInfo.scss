@@ -23,7 +23,7 @@
     font-weight:$font-weight-content;
     font-size: $font-size-intro;
     line-height:$font-line-intro;
-    color: #000000;
+    color: $font-color-black;
   }
   .profile-followship{
     padding:1rem 0.2rem;
@@ -32,6 +32,9 @@
       font-weight: $font-weight-sub-title;
       font-size: $font-size-intro;
       line-height: $font-line-intro;
+    }
+    .profile-following-count,.profile-follower-count {
+      color: $font-color-black;
     }
   }
   // "https://assets.dryicons.com/uploads/icon/svg/12631/d3fab4d2-3a88-4439-9a83-3bea496ed86b.svg"

@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="0" outlined tile class="tweet-list">
+  <v-card elevation="0" tile class="tweet-list">
     <v-card elevation="0" class="tweet-card">
       <v-avatar size="50" class="tweet-card-avatar">
         <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="MasterCard" />
