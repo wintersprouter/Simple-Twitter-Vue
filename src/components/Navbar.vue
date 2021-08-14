@@ -36,13 +36,16 @@
           <v-list-item-icon class="ml-3">
             <v-img :src="userOption.icon" :alt="userOption.name"></v-img>
           </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title
-              v-text="userOption.title"
-              class="font-weight-bold text-left"
-            ></v-list-item-title>
-          </v-list-item-content>
+          <router-link :to="userOption.path" class="nav-link">
+            <v-list-item-content>
+              <v-list-item-title
+                v-text="userOption.title"
+                class="font-weight-bold text-left"
+              ></v-list-item-title>
+            </v-list-item-content>
+          </router-link>
         </v-list-item>
+
         <v-list-item class="mt-3">
           <v-dialog v-model="dialog" max-width="600px" max-hight="300px">
             <template v-slot:activator="{ on, attrs }">
@@ -107,7 +110,7 @@
       <!-- admin -->
       <v-list-item-group v-model="selectedItem" color="primary">
         <!-- logo -->
-        <router-link to="/">
+        <router-link to="/admin/tweets">
           <v-btn
             icon
             color="primary"
@@ -124,6 +127,7 @@
           </v-btn>
         </router-link>
         <!-- logo-end -->
+
         <v-list-item
           v-for="adminOption in adminOptions"
           :key="adminOption.id"
@@ -133,12 +137,14 @@
           <v-list-item-icon class="ml-3">
             <v-img :src="adminOption.icon" :alt="adminOption.name"></v-img>
           </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title
-              v-text="adminOption.title"
-              class="font-weight-bold text-left"
-            ></v-list-item-title>
-          </v-list-item-content>
+          <router-link :to="adminOption.path" class="nav-link">
+            <v-list-item-content>
+              <v-list-item-title
+                v-text="adminOption.title"
+                class="font-weight-bold text-left"
+              ></v-list-item-title>
+            </v-list-item-content>
+          </router-link>
         </v-list-item>
       </v-list-item-group>
       <!-- admin-end -->
@@ -178,16 +184,19 @@ export default {
           id: 1,
           icon: home,
           title: "首頁",
+          path: "/",
         },
         {
           id: 2,
           icon: user,
           title: "個人首頁",
+          path: "/user",
         },
         {
           id: 3,
           icon: setting,
           title: "設定",
+          path: "/setting",
         },
       ],
       adminOptions: [
@@ -195,11 +204,13 @@ export default {
           id: 1,
           icon: home,
           title: "推文清單",
+          path: "/admin/tweets",
         },
         {
           id: 2,
           icon: user,
           title: "使用者列表",
+          path: "/admin/users",
         },
       ],
     };
@@ -211,5 +222,8 @@ export default {
   display: flex;
   float: right;
   margin: 0 auto;
+  .nav-link {
+    text-decoration: none;
+  }
 }
 </style>
