@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="0" outlined tile class="reply-list">
+  <v-card elevation="0" tile class="reply-list">
     <v-card elevation="0" class="reply-card">
       <v-card-text class="ml-1">
         <v-row>

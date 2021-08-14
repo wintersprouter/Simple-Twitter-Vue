@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="0" outlined tile class="detail-tweet-card">
+  <v-card elevation="0" tile class="detail-tweet-card">
     <v-card-text class="ml-1">
       <v-row>
         <v-avatar size="50" class="tweet-card-avatar mb-2">
