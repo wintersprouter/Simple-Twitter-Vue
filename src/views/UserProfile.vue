@@ -5,7 +5,7 @@
       <section class="middle-section">
         <v-card elevation="0" height="55px">
           <v-container class="d-flex pt-1">
-            <v-btn icon>
+            <v-btn icon onclick="history.back()">
               <v-icon color="black">mdi-arrow-left</v-icon>
             </v-btn>
             <v-text class="ml-3">
