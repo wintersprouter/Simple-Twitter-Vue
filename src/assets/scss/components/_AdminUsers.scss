@@ -1,0 +1,19 @@
+@import "./../main.scss";
+.admin-users-card {
+  width: 245px;
+  height: 314px;
+  background: $card-background-color;
+  border-radius: 10px;
+  margin: 0 auto;
+  
+  .profile-avatar {
+    position: absolute;
+    border: 4px solid #ffffff;
+    box-sizing: border-box;
+    right: calc(50% - 50px);
+    top: 68px;
+    .profile-avatar-image,.profile-cover-image {
+      object-fit: cover;
+    }
+  }
+}
