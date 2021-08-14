@@ -2,10 +2,8 @@
 .admin-users-card {
   width: 245px;
   height: 314px;
-  background: $card-background-color;
   border-radius: 10px;
   margin: 0 auto;
-  
   .profile-avatar {
     position: absolute;
     border: 4px solid #ffffff;
@@ -15,5 +13,46 @@
     .profile-avatar-image,.profile-cover-image {
       object-fit: cover;
     }
+  }
+  .admin-users-card-name , .admin-users-card-account {
+    justify-content: center;
+    padding-bottom: 0 ;
+    font-size: $font-size-root;
+    line-height: $font-line-root;
+  }
+  .admin-users-card-name {
+    font-weight: $font-weight-medium;
+    color: $font-color-root;
+  }
+  .admin-users-card-account {
+    font-weight: $font-weight-sub-title;
+    color: $font-color-account;
+  }
+  .admin-users-card-icon {
+    color: $font-color-account;
+    margin-right: 0.5rem;
+  }
+  .users-reply-count, .users-like-count {
+    font-weight: $font-weight-sub-title;
+    font-size: $font-size-root;
+    line-height: $font-line-sub-title;
+    color: $font-color-root;
+  }
+  .users-reply-count {
+    margin-right: 1rem;
+  }
+  .users-following-count, .users-following-text, .users-follower-count, .users-follower-text {
+    font-weight: $font-weight-sub-title;
+    font-size: $font-size-intro;
+    line-height: $font-line-intro;
+  }
+  .users-following-text {
+    margin-right: 0.5rem;
+  }
+  .users-following-count, .users-follower-count {
+    color: $font-color-black;
+  }
+  .users-following-text, .users-follower-text {
+    color: $font-color-account;
   }
 }
