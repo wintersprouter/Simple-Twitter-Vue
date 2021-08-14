@@ -7,7 +7,7 @@
     font-style: $font-style-title;
     color: $font-color-root
   }
-  .tweets-name ,.tweets-content{
+  .tweets-name ,.tweets-content {
     font-size: $font-size-root;
     line-height: $font-line-root;
     color: $font-color-root;
@@ -16,14 +16,20 @@
     font-weight: $font-weight-title;
 
   }
-  .tweets-account{
+  .tweets-account {
     font-weight: $font-weight-sub-title;
     font-size: $font-line-sub-title;
     line-height: $font-line-root;
     color: $font-color-account;
   }
-  .tweets-content{
+  .tweets-content {
     font-weight: $font-weight-content;
+  }
+  .header-title {
+    font-weight: $font-weight-title;
+    font-size: $font-size-title;
+    line-height: $font-line-title;
+    color: $font-color-root;
   }
   
   font-family: $font-family, sans-serif !important;

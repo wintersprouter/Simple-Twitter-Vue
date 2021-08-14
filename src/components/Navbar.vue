@@ -33,16 +33,18 @@
           link
           class="mt-5 pr-5"
         >
-          <v-list-item-icon class="ml-3">
-            <v-img :src="userOption.icon" :alt="userOption.name"></v-img>
-          </v-list-item-icon>
-          <router-link :to="userOption.path" class="nav-link">
-            <v-list-item-content>
-              <v-list-item-title
-                v-text="userOption.title"
-                class="font-weight-bold text-left"
-              ></v-list-item-title>
-            </v-list-item-content>
+          <router-link
+            :to="userOption.path"
+            class="nav-link font-weight-bold text-left"
+          >
+            <v-list-item class="nav-option">
+              <v-list-item-icon class="ml-3 nav-icon">
+                <v-img :src="userOption.icon" :alt="userOption.name"></v-img>
+              </v-list-item-icon>
+              <v-list-item-title>
+                {{ userOption.title }}
+              </v-list-item-title>
+            </v-list-item>
           </router-link>
         </v-list-item>
 
@@ -134,16 +136,18 @@
           link
           class="mt-5 pr-5"
         >
-          <v-list-item-icon class="ml-3">
-            <v-img :src="adminOption.icon" :alt="adminOption.name"></v-img>
-          </v-list-item-icon>
-          <router-link :to="adminOption.path" class="nav-link">
-            <v-list-item-content>
-              <v-list-item-title
-                v-text="adminOption.title"
-                class="font-weight-bold text-left"
-              ></v-list-item-title>
-            </v-list-item-content>
+          <router-link
+            :to="adminOption.path"
+            class="nav-link font-weight-bold text-left"
+          >
+            <v-list-item>
+              <v-list-item-icon class="ml-3 nav-icon">
+                <v-img :src="adminOption.icon" :alt="adminOption.name"></v-img>
+              </v-list-item-icon>
+              <v-list-item-title>
+                {{ adminOption.title }}
+              </v-list-item-title>
+            </v-list-item>
           </router-link>
         </v-list-item>
       </v-list-item-group>
@@ -224,6 +228,11 @@ export default {
   margin: 0 auto;
   .nav-link {
     text-decoration: none;
+  }
+  .nav-link:hover,
+  .nav-option:hover,
+  .nav-icon:hover {
+    color: #ff6600;
   }
 }
 </style>
