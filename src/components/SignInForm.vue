@@ -4,29 +4,28 @@
     elevation="0"
     max-width="540px"
     class="mx-auto mt-0"
-    @submit.prevent="handleSubmit()"
+    @submit.stop.prevent="handleSubmit()"
   >
     <v-text-field
       label="帳號"
-      filled
-      autofocus
-      dense
-      required
       v-model="account"
       name="account"
       :rules="[rules.required]"
+      autofocus
+      filled
+      dense
     ></v-text-field>
     <v-text-field
       label="密碼"
       v-model="password"
       name="password"
+      :rules="[rules.required, rules.min]"
       counter
       filled
       dense
       :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
       @click:append="show = !show"
       :type="show ? 'text' : 'password'"
-      :rules="[rules.required, rules.min]"
     ></v-text-field>
     <v-btn block elevation="0" rounded color="primary" dark type="submit"
       >登入
@@ -35,12 +34,13 @@
 </template>
 <script>
 import authorizationAPI from "../apis/authorization";
+import { Toast } from "./../utils/helpers";
 export default {
   name: "SignInForm",
   data() {
     return {
-      account: " ",
-      password: " ",
+      account: "",
+      password: "",
       show: false,
       rules: {
         required: (value) => !!value || "Required.",
@@ -51,6 +51,13 @@ export default {
   methods: {
     async handleSubmit() {
       try {
+        if (!this.account || !this.password) {
+          Toast.fire({
+            icon: "warning",
+            title: "請填入帳號和密碼",
+          });
+          return;
+        }
         const response = await authorizationAPI.signIn({
           account: this.account,
           password: this.password,
@@ -60,12 +67,27 @@ export default {
         if (data.status !== "success") {
           throw new Error(data.message);
         }
+        if (data.user.role !== "user") {
+          Toast.fire({
+            icon: "warning",
+            title: "管理員不可登入!",
+          });
+          return;
+        }
 
         localStorage.setItem("token", data.token);
 
-        this.$router.push("/");
+        this.$router.push("/tweets");
+        Toast.fire({
+          icon: "success",
+          title: `Hi ${data.user.name} 歡迎回來`,
+        });
       } catch {
         this.password = "";
+        Toast.fire({
+          icon: "warning",
+          title: "帳號或密碼有誤",
+        });
       }
     },
   },

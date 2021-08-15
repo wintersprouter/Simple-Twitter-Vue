@@ -10,7 +10,7 @@
       <!-- user -->
       <v-list-item-group v-model="selectedItem" color="primary">
         <!-- logo -->
-        <router-link to="/">
+        <router-link to="/tweets">
           <v-btn
             icon
             color="primary"

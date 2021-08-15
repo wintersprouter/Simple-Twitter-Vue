@@ -10,6 +10,11 @@ const routes = [
   {
     path: '/',
     name: 'root',
+    redirect: '/signin'
+  },
+  {
+    path: '/tweets',
+    name: 'tweets',
     component: Home
   },
   {
