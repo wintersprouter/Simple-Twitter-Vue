@@ -13,6 +13,16 @@ const routes = [
     redirect: '/signin'
   },
   {
+    path: '/signin',
+    name: 'sign-in',
+    component: UserSignIn
+  },
+  {
+    path: '/signup',
+    name: 'sign-up',
+    component: () => import('../views/UserSignUp.vue')
+  },
+  {
     path: '/tweets',
     name: 'tweets',
     component: Home
@@ -52,16 +62,7 @@ const routes = [
     name: 'admin-users',
     component: () => import('../views/AdminUsersList.vue')
   },
-  {
-    path: '/signin',
-    name: 'sign-in',
-    component: UserSignIn
-  },
-  {
-    path: '/signup',
-    name: 'sign-up',
-    component: () => import('../views/UserSignUp.vue')
-  },
+
   {
     path: '*',
     name: 'not-found',
