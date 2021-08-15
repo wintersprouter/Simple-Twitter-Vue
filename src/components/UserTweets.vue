@@ -19,30 +19,25 @@
           </v-list-item-group>
         </v-card-text>
 
-        <v-card-actions class="py-0">
-          <v-list-item>
-            <v-btn v-if="tweet.isLike" icon color="pink">
-              <v-icon>mdi-heart</v-icon>
-            </v-btn>
+        <v-card-actions class="pb-0 pt-1 justify-start">
+          <v-dialog v-model="dialog" max-width="600px" max-hight="300px">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon color="gary" v-bind="attrs" v-on="on">
+                <v-icon>mdi-message-reply-outline</v-icon>
+              </v-btn>
+            </template>
+            <!-- modal -->
+            <ReplyTweetModal />
+          </v-dialog>
+          <span class="mr-8">{{ tweet.repliedCount }}</span>
 
-            <v-btn v-else icon color="pink">
-              <v-icon>mdi-heart-outline</v-icon>
-            </v-btn>
-
-            <span>{{ tweet.likedCount }}</span>
-          </v-list-item>
-          <v-list-item>
-            <v-dialog v-model="dialog" max-width="600px" max-hight="300px">
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn icon color="pink" v-bind="attrs" v-on="on">
-                  <v-icon>mdi-message-reply-outline</v-icon>
-                </v-btn>
-              </template>
-              <!-- modal -->
-              <ReplyTweetModal />
-            </v-dialog>
-            <span>{{ tweet.repliedCount }}</span>
-          </v-list-item>
+          <v-btn v-if="tweet.isLike" icon color="pink">
+            <v-icon>mdi-heart</v-icon>
+          </v-btn>
+          <v-btn v-else icon color="gary">
+            <v-icon>mdi-heart-outline</v-icon>
+          </v-btn>
+          <span>{{ tweet.likedCount }}</span>
         </v-card-actions>
       </v-list>
     </v-card>

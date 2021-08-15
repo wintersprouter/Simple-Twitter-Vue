@@ -24,7 +24,8 @@ export default new Vuetify({
         secondary: '#F5F8FA',
         accent: '#1C1C1C',
         outline: '#CCD6DD',
-        gary: '#657786'
+        gary: '#657786',
+        pink: '#E0245E'
       }
     }
   }
