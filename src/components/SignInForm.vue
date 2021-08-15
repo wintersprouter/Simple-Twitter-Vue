@@ -27,7 +27,14 @@
       @click:append="show = !show"
       :type="show ? 'text' : 'password'"
     ></v-text-field>
-    <v-btn block elevation="0" rounded color="primary" dark type="submit"
+    <v-btn
+      block
+      elevation="0"
+      rounded
+      color="primary"
+      dark
+      type="submit"
+      :loading="loading"
       >登入
     </v-btn>
   </v-form>
@@ -46,6 +53,8 @@ export default {
         required: (value) => !!value || "Required.",
         min: (v) => v.length >= 5 || "Min 5 characters",
       },
+      loading: false,
+      isProcessing: false,
     };
   },
   methods: {
@@ -58,6 +67,7 @@ export default {
           });
           return;
         }
+        this.loading = true;
         const response = await authorizationAPI.signIn({
           account: this.account,
           password: this.password,
@@ -83,6 +93,7 @@ export default {
           title: `Hi ${data.user.name} 歡迎回來`,
         });
       } catch {
+        this.loading = false;
         this.password = "";
         Toast.fire({
           icon: "warning",
