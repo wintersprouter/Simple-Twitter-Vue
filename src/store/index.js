@@ -27,7 +27,7 @@ export default new Vuex.Store({
       }
       state.isAuthenticated = true
       state.token = localStorage.getItem('token')
-    },
+    }
   },
   actions: {
     async fetchCurrentUser({ commit }) {

@@ -199,7 +199,7 @@ export default {
           id: 2,
           icon: user,
           title: "個人首頁",
-          path: "/user",
+          path: { name: "user", params: { id: 1 } },
         },
         {
           id: 3,

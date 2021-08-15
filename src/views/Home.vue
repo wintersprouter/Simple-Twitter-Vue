@@ -12,8 +12,8 @@
             <v-container class="d-flex justify-space-between px-4 pt-4 pb-0">
               <v-avatar size="50" class="mr-5">
                 <img
-                  src="https://cdn.vuetifyjs.com/images/john.jpg"
-                  alt="MasterCard"
+                  :src="currentUser.avatar"
+                  :alt="'@' + currentUser.account"
                 />
               </v-avatar>
               <v-textarea
@@ -52,6 +52,7 @@
 import Navbar from "./../components/Navbar";
 import FollowRecommendations from "./../components/FollowRecommendations";
 import UserTweets from "./../components/UserTweets";
+import { mapState } from "vuex";
 
 export default {
   name: "Home",
@@ -59,6 +60,9 @@ export default {
     Navbar,
     UserTweets,
     FollowRecommendations,
+  },
+  computed: {
+    ...mapState(["currentUser", "isAuthenticated"]),
   },
 };
 </script>

@@ -34,7 +34,7 @@ const routes = [
     component: () => import('../views/TweetDetail.vue')
   },
   {
-    path: '/user',
+    path: '/users/:id',
     name: 'user',
     component: () => import('../views/UserProfile.vue')
   },
