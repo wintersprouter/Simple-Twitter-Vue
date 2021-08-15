@@ -29,7 +29,7 @@
               </v-btn>
             </template>
             <!-- modal -->
-            <ReplyTweetModal />
+            <ReplyTweetModal :init-tweet="tweet" />
           </v-dialog>
           <span class="mr-8 tweet-card-count">{{ tweet.repliedCount }}</span>
 

@@ -10,29 +10,26 @@
     <v-card-actions>
       <v-container class="d-flex justify-space-between modal-top">
         <v-avatar size="50" class="tweet-card-avatar">
-          <img
-            src="https://cdn.vuetifyjs.com/images/john.jpg"
-            alt="MasterCard"
-          />
+          <img :src="initTweet.avatar" :alt="initTweet.name" />
         </v-avatar>
         <v-divider vertical inset class="my-1" id="connect-line"></v-divider>
 
         <v-card-text class="py-0">
           <v-list-item-title>
-            <span class="mr-2 tweets-name">MasterCard</span>
-            <span class="tweets-account">@MasterCard</span>
+            <span class="mr-2 tweets-name">{{ initTweet.name }}</span>
+            <span class="tweets-account">@{{ initTweet.account }}</span>
             <span class="tweets-account"> · </span>
-            <span class="tweets-account"> 3 小時</span>
+            <span class="tweets-account">
+              {{ initTweet.createdAt | fromNow }}</span
+            >
           </v-list-item-title>
           <v-list-item-content class="pt-2 pb-2">
-            Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco
-            cillum dolor. Voluptate exercitation incididunt aliquip deserunt
-            reprehenderit elit laborum.
+            {{ initTweet.description }}
           </v-list-item-content>
           <v-list-item-subtitle>
             <span class="tweet-reply-title mr-1">回覆給</span>
             <span class="tweet-reply-target"
-              >@aomorm</span
+              >@{{ initTweet.account }}</span
             ></v-list-item-subtitle
           >
         </v-card-text>
@@ -42,10 +39,7 @@
     <v-card-actions>
       <v-container class="d-flex justify-space-between">
         <v-avatar size="50" class="mr-5">
-          <img
-            src="https://cdn.vuetifyjs.com/images/john.jpg"
-            alt="MasterCard"
-          />
+          <img :src="currentUser.avatar" :alt="currentUser.name" />
         </v-avatar>
         <v-textarea
           :rules="rules"
@@ -68,11 +62,24 @@
   </v-card>
 </template>
 <script>
+import { fromNowFilter } from "./../utils/mixins";
+import { mapState } from "vuex";
 export default {
   data: () => {
     return {
       dialog: false,
+      tweet: this.initTweet,
     };
+  },
+  props: {
+    initTweet: {
+      type: Object,
+      required: true,
+    },
+  },
+  mixins: [fromNowFilter],
+  computed: {
+    ...mapState(["currentUser", "isAuthenticated"]),
   },
 };
 </script>
