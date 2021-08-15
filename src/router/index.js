@@ -33,6 +33,11 @@ const routes = [
     component: () => import('../views/Followship.vue')
   },
   {
+    path: '/admin/signin',
+    name: 'admin-sign-in',
+    component: () => import('../views/AdminSignIn.vue')
+  },
+  {
     path: '/admin/tweets',
     name: 'admin-tweets',
     component: () => import('../views/AdminTweetsList.vue')
