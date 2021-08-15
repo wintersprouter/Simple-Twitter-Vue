@@ -92,7 +92,7 @@ export default {
           icon: "success",
           title: `Hi ${data.user.name} 歡迎回來`,
         });
-      } catch {
+      } catch (error) {
         this.loading = false;
         this.password = "";
         Toast.fire({
