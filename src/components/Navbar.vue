@@ -110,7 +110,11 @@
       </v-list-item-group>
       <!-- user-end -->
       <!-- admin -->
-      <v-list-item-group v-model="selectedItem" color="primary">
+      <v-list-item-group
+        v-if="currentUser.role === 'admin'"
+        v-model="selectedItem"
+        color="primary"
+      >
         <!-- logo -->
         <router-link to="/admin/tweets">
           <v-btn
@@ -175,6 +179,7 @@
 import home from "./../assets/img/home.svg";
 import user from "./../assets/img/user.svg";
 import setting from "./../assets/img/setting.svg";
+import { mapState } from "vuex";
 export default {
   name: "Navbar",
   data: () => {
@@ -218,6 +223,9 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    ...mapState(["currentUser", "isAuthenticated"]),
   },
 };
 </script>
