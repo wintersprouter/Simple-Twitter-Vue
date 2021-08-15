@@ -15,7 +15,7 @@
                 >{{ tweet.createdAt | fromNow }}
               </span>
             </v-list-item-title>
-            <v-list-item-content class="pt-2 pb-0">
+            <v-list-item-content class="pt-2 pb-0 tweet-card-description">
               {{ tweet.description }}
             </v-list-item-content>
           </v-list-item-group>
@@ -31,7 +31,7 @@
             <!-- modal -->
             <ReplyTweetModal />
           </v-dialog>
-          <span class="mr-8">{{ tweet.repliedCount }}</span>
+          <span class="mr-8 tweet-card-count">{{ tweet.repliedCount }}</span>
 
           <v-btn v-if="tweet.isLike" icon color="pink">
             <v-icon>mdi-heart</v-icon>
@@ -39,7 +39,7 @@
           <v-btn v-else icon color="gary">
             <v-icon>mdi-heart-outline</v-icon>
           </v-btn>
-          <span>{{ tweet.likedCount }}</span>
+          <span class="tweet-card-count">{{ tweet.likedCount }}</span>
         </v-card-actions>
       </v-list>
     </v-card>
