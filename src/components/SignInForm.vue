@@ -1,5 +1,5 @@
 <template>
-  <v-card tile elevation="0" max-width="540px" class="mx-auto mt-15" ref="form">
+  <v-card tile elevation="0" max-width="540px" class="mx-auto mt-0" ref="form">
     <v-text-field
       label="帳號"
       filled
@@ -21,7 +21,9 @@
       filled
       dense
     ></v-text-field>
-    <v-btn block rounded color="primary" dark @click="submit">登入 </v-btn>
+    <v-btn block elevation="0" rounded color="primary" dark @click="submit"
+      >登入
+    </v-btn>
   </v-card>
 </template>
 <script>
