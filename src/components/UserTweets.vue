@@ -11,7 +11,9 @@
               <span class="mr-2 tweets-name">{{ tweet.name }}</span>
               <span class="tweets-account">@{{ tweet.account }}</span>
               <span class="tweets-account"> · </span>
-              <span class="tweets-account">{{ tweet.createdAt }} </span>
+              <span class="tweets-account"
+                >{{ tweet.createdAt | fromNow }}
+              </span>
             </v-list-item-title>
             <v-list-item-content class="pt-2 pb-0">
               {{ tweet.description }}
@@ -46,6 +48,7 @@
 </template>
 <script>
 import ReplyTweetModal from "./../components/ReplyTweetModal";
+import { fromNowFilter } from "./../utils/mixins";
 export default {
   name: "UserTweets",
   props: {
@@ -63,6 +66,7 @@ export default {
   components: {
     ReplyTweetModal,
   },
+  mixins: [fromNowFilter],
 };
 </script>
 <style lang="scss" scoped>
