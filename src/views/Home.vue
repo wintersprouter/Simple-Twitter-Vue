@@ -41,7 +41,11 @@
           </v-form>
         </v-card>
         <v-divider></v-divider>
-        <UserTweets />
+        <UserTweets
+          v-for="tweet in tweets"
+          :key="tweet.id"
+          :initial-tweet="tweet"
+        />
       </section>
       <section class="right-section"><FollowRecommendations /></section>
     </v-row>
@@ -53,16 +57,42 @@ import Navbar from "./../components/Navbar";
 import FollowRecommendations from "./../components/FollowRecommendations";
 import UserTweets from "./../components/UserTweets";
 import { mapState } from "vuex";
+import tweetsAPI from "../apis/tweets";
+import { Toast } from "./../utils/helpers";
 
 export default {
   name: "Home",
+  data() {
+    return {
+      tweets: [],
+    };
+  },
   components: {
     Navbar,
     UserTweets,
     FollowRecommendations,
   },
+
   computed: {
     ...mapState(["currentUser", "isAuthenticated"]),
+  },
+  created() {
+    this.fetchTweets();
+  },
+  methods: {
+    async fetchTweets() {
+      try {
+        const { data } = await tweetsAPI.getTweets();
+        console.log(data);
+        this.tweets = data;
+      } catch (error) {
+        Toast.fire({
+          icon: "error",
+          title: "無法取得推文資料，請稍後再試",
+        });
+        console.log("error", error);
+      }
+    },
   },
 };
 </script>
