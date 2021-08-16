@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import NotFound from '../views/NotFound.vue'
 import UserSignIn from '../views/UserSignIn.vue'
+import store from './../store'
 
 Vue.use(VueRouter)
 
@@ -13,18 +14,28 @@ const routes = [
     redirect: '/signin'
   },
   {
+    path: '/signin',
+    name: 'sign-in',
+    component: UserSignIn
+  },
+  {
+    path: '/signup',
+    name: 'sign-up',
+    component: () => import('../views/UserSignUp.vue')
+  },
+  {
     path: '/tweets',
     name: 'tweets',
     component: Home
   },
   {
-    path: '/tweet',
+    path: '/tweet/:id',
     name: 'tweet',
     component: () => import('../views/TweetDetail.vue')
   },
   {
-    path: '/user',
-    name: 'user',
+    path: '/users/:id',
+    name: 'users',
     component: () => import('../views/UserProfile.vue')
   },
   {
@@ -52,16 +63,7 @@ const routes = [
     name: 'admin-users',
     component: () => import('../views/AdminUsersList.vue')
   },
-  {
-    path: '/signin',
-    name: 'sign-in',
-    component: UserSignIn
-  },
-  {
-    path: '/signup',
-    name: 'sign-up',
-    component: () => import('../views/UserSignUp.vue')
-  },
+
   {
     path: '*',
     name: 'not-found',
@@ -70,7 +72,12 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  linkExactActiveClass: 'active',
   routes
+})
+router.beforeEach((to, from, next) => {
+  store.dispatch('fetchCurrentUser')
+  next()
 })
 
 export default router

@@ -43,6 +43,9 @@
     line-height: $font-line-header;
     color: $font-color-account;
   }
+  .links, .nav-link {
+    text-decoration: none;
+  }
   
   font-family: $font-family, sans-serif !important;
   color:$font-color-root;

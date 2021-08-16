@@ -1,7 +1,7 @@
 <template>
   <v-card elevation="0" style="border-radius: 14px">
     <v-card-actions>
-      <v-btn color="primary" text @click="dialog = false"
+      <v-btn @click.stop.prevent="handleClick" icon
         ><span>&#10005;</span>
       </v-btn>
     </v-card-actions>
@@ -10,69 +10,127 @@
     <v-card-actions>
       <v-container class="d-flex justify-space-between modal-top">
         <v-avatar size="50" class="tweet-card-avatar">
-          <img
-            src="https://cdn.vuetifyjs.com/images/john.jpg"
-            alt="MasterCard"
-          />
+          <img :src="initTweet.avatar" :alt="initTweet.name" />
         </v-avatar>
         <v-divider vertical inset class="my-1" id="connect-line"></v-divider>
 
         <v-card-text class="py-0">
           <v-list-item-title>
-            <span class="mr-2 tweets-name">MasterCard</span>
-            <span class="tweets-account">@MasterCard</span>
+            <span class="mr-2 tweets-name">{{ initTweet.name }}</span>
+            <span class="tweets-account">@{{ initTweet.account }}</span>
             <span class="tweets-account"> · </span>
-            <span class="tweets-account"> 3 小時</span>
+            <span class="tweets-account">
+              {{ initTweet.createdAt | fromNow }}</span
+            >
           </v-list-item-title>
           <v-list-item-content class="pt-2 pb-2">
-            Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco
-            cillum dolor. Voluptate exercitation incididunt aliquip deserunt
-            reprehenderit elit laborum.
+            {{ initTweet.description }}
           </v-list-item-content>
           <v-list-item-subtitle>
             <span class="tweet-reply-title mr-1">回覆給</span>
             <span class="tweet-reply-target"
-              >@aomorm</span
+              >@{{ initTweet.account }}</span
             ></v-list-item-subtitle
           >
         </v-card-text>
       </v-container>
     </v-card-actions>
-
-    <v-card-actions>
-      <v-container class="d-flex justify-space-between">
-        <v-avatar size="50" class="mr-5">
-          <img
-            src="https://cdn.vuetifyjs.com/images/john.jpg"
-            alt="MasterCard"
-          />
-        </v-avatar>
-        <v-textarea
-          :rules="rules"
-          :value="value"
-          counter
-          maxlength="50"
-          auto-grow
-          row-height="15"
-          placeholder="推你的回覆"
-          autofocus
-        ></v-textarea>
-      </v-container>
-    </v-card-actions>
-    <v-card-actions>
-      <v-spacer></v-spacer>
-      <v-btn color="primary" rounded elevation="0" @click="dialog = false" mb-5>
-        回覆
-      </v-btn>
-    </v-card-actions>
+    <v-form @submit.stop.prevent="handleSubmit(initTweet.id)">
+      <v-card-actions>
+        <v-container class="d-flex justify-space-between">
+          <v-avatar size="50" class="mr-5">
+            <img :src="currentUser.avatar" :alt="currentUser.name" />
+          </v-avatar>
+          <v-textarea
+            v-model="repliedContent"
+            counter
+            maxlength="50"
+            auto-grow
+            row-height="15"
+            placeholder="推你的回覆"
+            autofocus
+          ></v-textarea>
+        </v-container>
+      </v-card-actions>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn
+          color="primary"
+          rounded
+          elevation="0"
+          type="submit"
+          class="mb-5 mr-2"
+          :disabled="isProcessing"
+        >
+          回覆
+        </v-btn>
+      </v-card-actions>
+    </v-form>
   </v-card>
 </template>
 <script>
+import { fromNowFilter } from "./../utils/mixins";
+import { mapState } from "vuex";
+import tweetsAPI from "./../apis/tweets";
+import { Toast } from "./../utils/helpers";
 export default {
   data: () => {
     return {
-      dialog: false,
+      repliedContent: " ",
+      tweet: this.initTweet,
+      isProcessing: false,
+      dialog: true,
     };
+  },
+  props: {
+    initTweet: {
+      type: Object,
+      required: true,
+    },
+  },
+  mixins: [fromNowFilter],
+  computed: {
+    ...mapState(["currentUser"]),
+  },
+  methods: {
+    async handleSubmit(tweetId) {
+      try {
+        if (!this.repliedContent) {
+          Toast.fire({ icon: "warning", title: "您尚未填寫任何內容" });
+          return;
+        }
+        this.isProcessing = true;
+
+        const { data } = await tweetsAPI.postReply({
+          tweetId,
+          comment: this.repliedContent,
+        });
+
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+
+        const reply = {
+          id: this.initTweet.id,
+          content: this.repliedContent,
+          creatAt: new Date(),
+        };
+        this.$emit("after-create-reply", reply);
+        this.repliedContent = "";
+
+        Toast.fire({
+          icon: "success",
+          title: `回覆 @${this.initTweet.account} 的推文成功`,
+        });
+      } catch (error) {
+        this.repliedContent = "";
+        this.isProcessing = false;
+        Toast.fire({ icon: "error", title: "無法新增回文，請稍後再試" });
+      }
+    },
+    handleClick() {
+      this.$emit("after-click-close");
+    },
   },
 };
 </script>
