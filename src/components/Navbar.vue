@@ -232,9 +232,7 @@ export default {
 <style lang="scss">
 .nav-list {
   display: flex;
-  float: right;
   margin: 0 auto;
-
   .nav-link:hover,
   .nav-option:hover,
   .nav-icon:hover {
