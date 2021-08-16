@@ -24,9 +24,9 @@
                   >{{ tweet.createdAt | fromNow }}
                 </span>
               </v-list-item-title>
-              <v-list-item-content class="pt-2 pb-0 tweet-card-description">
+              <v-list-item-action-text class="pt-2 pb-0 tweet-card-description">
                 {{ tweet.description }}
-              </v-list-item-content>
+              </v-list-item-action-text>
             </v-list-item-group>
           </router-link>
         </v-card-text>
@@ -50,12 +50,19 @@
           <v-btn
             v-if="tweet.isLike"
             @click.stop.prevent="postUnlike(tweet)"
+            :disabled="isProcessing"
             icon
             color="pink"
           >
             <v-icon>mdi-heart</v-icon>
           </v-btn>
-          <v-btn v-else @click.stop.prevent="postLike(tweet)" icon color="gary">
+          <v-btn
+            v-else
+            @click.stop.prevent="postLike(tweet)"
+            :disabled="isProcessing"
+            icon
+            color="gary"
+          >
             <v-icon>mdi-heart-outline</v-icon>
           </v-btn>
           <span class="tweet-card-count">{{ tweet.likedCount }}</span>
@@ -83,6 +90,7 @@ export default {
     return {
       tweet: this.initialTweet,
       dialog: false,
+      isProcessing: false,
     };
   },
   components: {
@@ -101,17 +109,20 @@ export default {
   methods: {
     async postLike(tweet) {
       try {
+        this.isProcessing = true;
         const { data } = await tweetsAPI.postLike(tweet.id);
         if (data.status !== "success") {
           throw new Error(data.message);
         }
         tweet.isLike = !tweet.isLike;
         tweet.likedCount += 1;
+        this.isProcessing = false;
         Toast.fire({
           icon: "success",
           title: `對 ${this.tweet.name} 的推文按讚`,
         });
       } catch (error) {
+        this.isProcessing = false;
         Toast.fire({
           icon: "error",
           title: `無法對  ${this.tweet.name} 的推文按讚，請稍後再試`,
@@ -121,17 +132,20 @@ export default {
     },
     async postUnlike(tweet) {
       try {
+        this.isProcessing = true;
         const { data } = await tweetsAPI.postUnlike(tweet.id);
         if (data.status !== "success") {
           throw new Error(data.message);
         }
         tweet.isLike = !tweet.isLike;
         tweet.likedCount -= 1;
+        this.isProcessing = false;
         Toast.fire({
           icon: "success",
           title: `收回對 ${this.tweet.name} 推文按的讚`,
         });
       } catch (error) {
+        this.isProcessing = false;
         Toast.fire({
           icon: "error",
           title: `無法收回對  ${this.tweet.name} 推文按的讚，請稍後再試`,

@@ -11,7 +11,11 @@
     }
     .tweet-card-list {
       padding-top: 10px;
+      .v-list-item-group{
+        max-width: 490px;
       .tweet-card-description { 
+        max-width: 490px;
+        padding:0 ;
         font-size: $font-size-root;
         line-height: $font-line-root;
         color: $font-color-root;
@@ -23,6 +27,7 @@
       }
       .tweet-card-count, .tweet-card-description {
         font-weight: $font-weight-sub-title;
+      }
       }
     }
   }

@@ -114,6 +114,7 @@ export default {
         if (data.status !== "success") {
           throw new Error(data.message);
         }
+        this.fetchTweets();
         this.text = "";
         this.isProcessing = false;
 
@@ -127,9 +128,6 @@ export default {
         Toast.fire({ icon: "error", title: "無法新增推文，請稍後再試" });
       }
     },
-  },
-  updated() {
-    this.fetchTweets();
   },
 };
 </script>
