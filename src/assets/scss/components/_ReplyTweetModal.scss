@@ -4,7 +4,7 @@
   #connect-line {
     background-color: $font-color-outline;
     position: absolute;
-    left: 6%;
+    left: 6.5%;
     top: 50% ;
     height: 80px;
   }
@@ -12,6 +12,9 @@
     font-weight: $font-weight-sub-title;
     font-size: $font-size-small;
     line-height: $font-line-small;
+  }
+  .tweet-description {
+    max-width: 490px;
   }
   .tweet-reply-title{
     color:$font-color-account;
