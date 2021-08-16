@@ -35,39 +35,41 @@
         </v-card-text>
       </v-container>
     </v-card-actions>
-
-    <v-card-actions>
-      <v-container class="d-flex justify-space-between">
-        <v-avatar size="50" class="mr-5">
-          <img :src="currentUser.avatar" :alt="currentUser.name" />
-        </v-avatar>
-        <v-textarea
-          :rules="rules"
-          :value="value"
-          counter
-          maxlength="50"
-          auto-grow
-          row-height="15"
-          placeholder="推你的回覆"
-          autofocus
-        ></v-textarea>
-      </v-container>
-    </v-card-actions>
-    <v-card-actions>
-      <v-spacer></v-spacer>
-      <v-btn color="primary" rounded elevation="0" @click="dialog = false" mb-5>
-        回覆
-      </v-btn>
-    </v-card-actions>
+    <v-form @submit.stop.prevent="handleSubmit(initTweet.id)">
+      <v-card-actions>
+        <v-container class="d-flex justify-space-between">
+          <v-avatar size="50" class="mr-5">
+            <img :src="currentUser.avatar" :alt="currentUser.name" />
+          </v-avatar>
+          <v-textarea
+            v-model="repliedContent"
+            counter
+            maxlength="50"
+            auto-grow
+            row-height="15"
+            placeholder="推你的回覆"
+            autofocus
+          ></v-textarea>
+        </v-container>
+      </v-card-actions>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn color="primary" rounded elevation="0" type="submit" mb-5>
+          回覆
+        </v-btn>
+      </v-card-actions>
+    </v-form>
   </v-card>
 </template>
 <script>
 import { fromNowFilter } from "./../utils/mixins";
 import { mapState } from "vuex";
+import tweetsAPI from "./../apis/tweets";
+import { Toast } from "./../utils/helpers";
 export default {
   data: () => {
     return {
-      dialog: false,
+      repliedContent: "",
       tweet: this.initTweet,
     };
   },
@@ -79,7 +81,42 @@ export default {
   },
   mixins: [fromNowFilter],
   computed: {
-    ...mapState(["currentUser", "isAuthenticated"]),
+    ...mapState(["currentUser"]),
+  },
+  methods: {
+    async handleSubmit(tweetId) {
+      try {
+        if (!this.repliedContent) {
+          Toast.fire({ icon: "warning", title: "您尚未填寫任何內容" });
+          return;
+        }
+        this.isProcessing = true;
+        const { data } = await tweetsAPI.postReply({
+          tweetId,
+          comment: this.repliedContent,
+        });
+
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+        const reply = {
+          id: this.initTweet.id,
+          content: this.repliedContent,
+          creatAt: new Date(),
+        };
+        this.dialog = false;
+        this.repliedContent = "";
+        this.$emit("after-create-reply", reply);
+
+        Toast.fire({
+          icon: "success",
+          title: `回覆 @${this.initTweet.account} 的推文成功`,
+        });
+      } catch (error) {
+        this.repliedContent = "";
+        Toast.fire({ icon: "error", title: "無法新增回文，請稍後再試" });
+      }
+    },
   },
 };
 </script>

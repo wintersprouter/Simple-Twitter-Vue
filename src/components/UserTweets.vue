@@ -39,7 +39,10 @@
               </v-btn>
             </template>
             <!-- modal -->
-            <ReplyTweetModal :init-tweet="tweet" />
+            <ReplyTweetModal
+              :init-tweet="tweet"
+              @after-create-reply="afterCreateReply(tweet)"
+            />
           </v-dialog>
           <span class="mr-8 tweet-card-count">{{ tweet.repliedCount }}</span>
 
@@ -133,6 +136,12 @@ export default {
           title: `無法收回對  ${this.tweet.name} 推文按的讚，請稍後再試`,
         });
         console.log("error", error);
+      }
+    },
+    afterCreateReply(comment) {
+      if (this.tweet.id === comment.id) {
+        this.tweet.repliedCount += 1;
+        this.dialog = false;
       }
     },
   },
