@@ -2,7 +2,7 @@
   <v-card elevation="0" tile class="tweet-list">
     <v-card elevation="0" class="tweet-card">
       <router-link
-        :to="{ name: 'users', query: { userId: tweet.UserId } }"
+        :to="{ name: 'users', query: { id: tweet.UserId } }"
         class="links"
       >
         <v-avatar size="50" class="tweet-card-avatar">
@@ -12,7 +12,7 @@
       <v-list class="tweet-card-list">
         <v-card-text class="py-0">
           <router-link
-            :to="{ name: 'tweet', query: { tweetId: tweet.id } }"
+            :to="{ name: 'tweet', query: { id: tweet.id } }"
             class="links"
           >
             <v-list-item-group>
@@ -46,7 +46,7 @@
           <v-btn v-if="tweet.isLike" icon color="pink">
             <v-icon>mdi-heart</v-icon>
           </v-btn>
-          <v-btn v-else icon color="gary">
+          <v-btn @click.stop.prevent="postLike(tweet)" v-else icon color="gary">
             <v-icon>mdi-heart-outline</v-icon>
           </v-btn>
           <span class="tweet-card-count">{{ tweet.likedCount }}</span>
@@ -58,12 +58,15 @@
 </template>
 <script>
 import ReplyTweetModal from "./../components/ReplyTweetModal";
+import tweetsAPI from "./../apis/tweets";
+import { Toast } from "./../utils/helpers";
 import { fromNowFilter } from "./../utils/mixins";
+import { mapState } from "vuex";
 export default {
   name: "UserTweets",
   props: {
     initialTweet: {
-      type: Array,
+      type: Object,
       required: true,
     },
   },
@@ -76,7 +79,41 @@ export default {
   components: {
     ReplyTweetModal,
   },
+  watch: {
+    initialTweet(newValue) {
+      this.tweet = {
+        ...this.tweet,
+        ...newValue,
+      };
+    },
+  },
+  computed: {
+    ...mapState(["currentUser", "isAuthenticated"]),
+  },
   mixins: [fromNowFilter],
+  methods: {
+    async postLike(tweet) {
+      try {
+        const { data } = await tweetsAPI.postLike(tweet.id);
+        console.log(data.message);
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+        tweet.isLike = !tweet.isLike;
+        tweet.likedCount += 1;
+        Toast.fire({
+          icon: "success",
+          title: `對 ${this.tweet.name} 的推文按讚`,
+        });
+      } catch (error) {
+        Toast.fire({
+          icon: "error",
+          title: `無法對  ${this.tweet.name} 的推文按讚，請稍後再試`,
+        });
+        console.log("error", error);
+      }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
