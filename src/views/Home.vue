@@ -128,6 +128,9 @@ export default {
       }
     },
   },
+  updated() {
+    this.fetchTweets();
+  },
 };
 </script>
 <style lang="scss">
