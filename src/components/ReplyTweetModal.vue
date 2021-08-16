@@ -1,7 +1,7 @@
 <template>
   <v-card elevation="0" style="border-radius: 14px">
     <v-card-actions>
-      <v-btn color="primary" text @click="dialog = false"
+      <v-btn @click.stop.prevent="handleClick" icon
         ><span>&#10005;</span>
       </v-btn>
     </v-card-actions>
@@ -54,7 +54,14 @@
       </v-card-actions>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="primary" rounded elevation="0" type="submit" mb-5>
+        <v-btn
+          color="primary"
+          rounded
+          elevation="0"
+          type="submit"
+          class="mb-5 mr-2"
+          :disabled="isProcessing"
+        >
           回覆
         </v-btn>
       </v-card-actions>
@@ -69,8 +76,10 @@ import { Toast } from "./../utils/helpers";
 export default {
   data: () => {
     return {
-      repliedContent: "",
+      repliedContent: " ",
       tweet: this.initTweet,
+      isProcessing: false,
+      dialog: true,
     };
   },
   props: {
@@ -91,6 +100,7 @@ export default {
           return;
         }
         this.isProcessing = true;
+
         const { data } = await tweetsAPI.postReply({
           tweetId,
           comment: this.repliedContent,
@@ -99,14 +109,14 @@ export default {
         if (data.status !== "success") {
           throw new Error(data.message);
         }
+
         const reply = {
           id: this.initTweet.id,
           content: this.repliedContent,
           creatAt: new Date(),
         };
-        this.dialog = false;
-        this.repliedContent = "";
         this.$emit("after-create-reply", reply);
+        this.repliedContent = "";
 
         Toast.fire({
           icon: "success",
@@ -114,8 +124,12 @@ export default {
         });
       } catch (error) {
         this.repliedContent = "";
+        this.isProcessing = false;
         Toast.fire({ icon: "error", title: "無法新增回文，請稍後再試" });
       }
+    },
+    handleClick() {
+      this.$emit("after-click-close");
     },
   },
 };

@@ -42,6 +42,7 @@
             <ReplyTweetModal
               :init-tweet="tweet"
               @after-create-reply="afterCreateReply(tweet)"
+              @after-click-close="afterClickClose"
             />
           </v-dialog>
           <span class="mr-8 tweet-card-count">{{ tweet.repliedCount }}</span>
@@ -143,6 +144,9 @@ export default {
         this.tweet.repliedCount += 1;
         this.dialog = false;
       }
+    },
+    afterClickClose() {
+      this.dialog = false;
     },
   },
 };
