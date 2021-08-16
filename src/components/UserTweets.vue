@@ -1,24 +1,34 @@
 <template>
   <v-card elevation="0" tile class="tweet-list">
     <v-card elevation="0" class="tweet-card">
-      <v-avatar size="50" class="tweet-card-avatar">
-        <img :src="tweet.avatar" :alt="tweet.name" />
-      </v-avatar>
+      <router-link
+        :to="{ name: 'users', query: { userId: tweet.UserId } }"
+        class="links"
+      >
+        <v-avatar size="50" class="tweet-card-avatar">
+          <img :src="tweet.avatar" :alt="tweet.name" />
+        </v-avatar>
+      </router-link>
       <v-list class="tweet-card-list">
         <v-card-text class="py-0">
-          <v-list-item-group>
-            <v-list-item-title>
-              <span class="mr-2 tweets-name">{{ tweet.name }}</span>
-              <span class="tweets-account">@{{ tweet.account }}</span>
-              <span class="tweets-account"> · </span>
-              <span class="tweets-account"
-                >{{ tweet.createdAt | fromNow }}
-              </span>
-            </v-list-item-title>
-            <v-list-item-content class="pt-2 pb-0 tweet-card-description">
-              {{ tweet.description }}
-            </v-list-item-content>
-          </v-list-item-group>
+          <router-link
+            :to="{ name: 'tweet', query: { tweetId: tweet.id } }"
+            class="links"
+          >
+            <v-list-item-group>
+              <v-list-item-title>
+                <span class="mr-2 tweets-name">{{ tweet.name }}</span>
+                <span class="tweets-account">@{{ tweet.account }}</span>
+                <span class="tweets-account"> · </span>
+                <span class="tweets-account"
+                  >{{ tweet.createdAt | fromNow }}
+                </span>
+              </v-list-item-title>
+              <v-list-item-content class="pt-2 pb-0 tweet-card-description">
+                {{ tweet.description }}
+              </v-list-item-content>
+            </v-list-item-group>
+          </router-link>
         </v-card-text>
 
         <v-card-actions class="pb-0 pt-1 justify-start">

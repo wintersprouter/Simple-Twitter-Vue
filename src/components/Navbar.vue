@@ -234,9 +234,7 @@ export default {
   display: flex;
   float: right;
   margin: 0 auto;
-  .nav-link {
-    text-decoration: none;
-  }
+
   .nav-link:hover,
   .nav-option:hover,
   .nav-icon:hover {

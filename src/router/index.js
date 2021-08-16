@@ -29,13 +29,13 @@ const routes = [
     component: Home
   },
   {
-    path: '/tweet',
+    path: '/tweet/:id',
     name: 'tweet',
     component: () => import('../views/TweetDetail.vue')
   },
   {
     path: '/users/:id',
-    name: 'user',
+    name: 'users',
     component: () => import('../views/UserProfile.vue')
   },
   {
