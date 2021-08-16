@@ -2,7 +2,7 @@
   <v-card elevation="0" tile class="tweet-list">
     <v-card elevation="0" class="tweet-card">
       <router-link
-        :to="{ name: 'users', query: { id: tweet.UserId } }"
+        :to="{ name: 'users', query: { userId: tweet.UserId } }"
         class="links"
       >
         <v-avatar size="50" class="tweet-card-avatar">
@@ -12,7 +12,7 @@
       <v-list class="tweet-card-list">
         <v-card-text class="py-0">
           <router-link
-            :to="{ name: 'tweet', query: { id: tweet.id } }"
+            :to="{ name: 'tweet', query: { tweetId: tweet.id } }"
             class="links"
           >
             <v-list-item-group>
@@ -43,10 +43,15 @@
           </v-dialog>
           <span class="mr-8 tweet-card-count">{{ tweet.repliedCount }}</span>
 
-          <v-btn v-if="tweet.isLike" icon color="pink">
+          <v-btn
+            v-if="tweet.isLike"
+            @click.stop.prevent="postUnlike(tweet)"
+            icon
+            color="pink"
+          >
             <v-icon>mdi-heart</v-icon>
           </v-btn>
-          <v-btn @click.stop.prevent="postLike(tweet)" v-else icon color="gary">
+          <v-btn v-else @click.stop.prevent="postLike(tweet)" icon color="gary">
             <v-icon>mdi-heart-outline</v-icon>
           </v-btn>
           <span class="tweet-card-count">{{ tweet.likedCount }}</span>
@@ -61,7 +66,7 @@ import ReplyTweetModal from "./../components/ReplyTweetModal";
 import tweetsAPI from "./../apis/tweets";
 import { Toast } from "./../utils/helpers";
 import { fromNowFilter } from "./../utils/mixins";
-import { mapState } from "vuex";
+
 export default {
   name: "UserTweets",
   props: {
@@ -87,15 +92,12 @@ export default {
       };
     },
   },
-  computed: {
-    ...mapState(["currentUser", "isAuthenticated"]),
-  },
+
   mixins: [fromNowFilter],
   methods: {
     async postLike(tweet) {
       try {
         const { data } = await tweetsAPI.postLike(tweet.id);
-        console.log(data.message);
         if (data.status !== "success") {
           throw new Error(data.message);
         }
@@ -109,6 +111,26 @@ export default {
         Toast.fire({
           icon: "error",
           title: `無法對  ${this.tweet.name} 的推文按讚，請稍後再試`,
+        });
+        console.log("error", error);
+      }
+    },
+    async postUnlike(tweet) {
+      try {
+        const { data } = await tweetsAPI.postUnlike(tweet.id);
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+        tweet.isLike = !tweet.isLike;
+        tweet.likedCount -= 1;
+        Toast.fire({
+          icon: "success",
+          title: `收回對 ${this.tweet.name} 推文按的讚`,
+        });
+      } catch (error) {
+        Toast.fire({
+          icon: "error",
+          title: `無法收回對  ${this.tweet.name} 推文按的讚，請稍後再試`,
         });
         console.log("error", error);
       }
