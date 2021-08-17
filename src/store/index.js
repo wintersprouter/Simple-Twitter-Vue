@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { Toast } from '../utils/helpers'
 import usersAPI from './../apis/users'
 
 Vue.use(Vuex)
@@ -17,7 +18,17 @@ export default new Vuex.Store({
       introduction: ''
     },
     isAuthenticated: false,
-    token: ''
+    token: '',
+    topUsers: [
+      {
+        id: -1,
+        name: '',
+        account: '',
+        avatar: '',
+        followerCount: 0,
+        isFollowed: false
+      }
+    ]
   },
   mutations: {
     setCurrentUser(state, currentUser) {
@@ -27,6 +38,9 @@ export default new Vuex.Store({
       }
       state.isAuthenticated = true
       state.token = localStorage.getItem('token')
+    },
+    setTopUsers(state, topUsers) {
+      state.topUsers = topUsers
     }
   },
   actions: {
@@ -48,6 +62,22 @@ export default new Vuex.Store({
       } catch (error) {
         console.log('error', error)
         console.error(error.message)
+      }
+    },
+    async fetchTopUsers({ commit }) {
+      try {
+        const { data } = await usersAPI.getTopUsers()
+        if (data.status === 'error') {
+          throw new Error(data.message)
+        }
+        commit('setTopUsers', data.users)
+      } catch (error) {
+        console.log('error', error)
+        console.error(error.message)
+        Toast.fire({
+          icon: 'error',
+          title: '無法取得推薦追隨者名單'
+        })
       }
     }
   },

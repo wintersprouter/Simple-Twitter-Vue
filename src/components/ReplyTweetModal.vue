@@ -23,9 +23,9 @@
               {{ initTweet.createdAt | fromNow }}</span
             >
           </v-list-item-title>
-          <v-list-item-content class="pt-2 pb-2">
+          <p class="pt-2 pb-1 pr-0 tweet-description">
             {{ initTweet.description }}
-          </v-list-item-content>
+          </p>
           <v-list-item-subtitle>
             <span class="tweet-reply-title mr-1">回覆給</span>
             <span class="tweet-reply-target"
@@ -38,7 +38,7 @@
     <v-form @submit.stop.prevent="handleSubmit(initTweet.id)">
       <v-card-actions>
         <v-container class="d-flex justify-space-between">
-          <v-avatar size="50" class="mr-5">
+          <v-avatar size="50" class="ml-2 mr-5">
             <img :src="currentUser.avatar" :alt="currentUser.name" />
           </v-avatar>
           <v-textarea
@@ -74,20 +74,21 @@ import { mapState } from "vuex";
 import tweetsAPI from "./../apis/tweets";
 import { Toast } from "./../utils/helpers";
 export default {
-  data: () => {
-    return {
-      repliedContent: " ",
-      tweet: this.initTweet,
-      isProcessing: false,
-      dialog: true,
-    };
-  },
   props: {
     initTweet: {
       type: Object,
       required: true,
     },
   },
+  data: () => {
+    return {
+      repliedContent: " ",
+      initTweet: this.initTweet,
+      isProcessing: false,
+      dialog: true,
+    };
+  },
+
   mixins: [fromNowFilter],
   computed: {
     ...mapState(["currentUser"]),
