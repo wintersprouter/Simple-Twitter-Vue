@@ -77,7 +77,6 @@ export default {
     UserTweets,
     FollowRecommendations,
   },
-
   computed: {
     ...mapState(["currentUser", "isAuthenticated", "topUsers"]),
   },

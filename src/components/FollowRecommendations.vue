@@ -15,13 +15,18 @@
       <v-divider></v-divider>
       <v-row align="center" justify="space-around">
         <v-list-item two-line class="ma-2" width="100%">
-          <v-list-item-avatar
-            class="user-info-avatar"
-            color="warning lighten-2"
-            size="50"
+          <router-link
+            :to="{ name: 'users', query: { userId: user.id } }"
+            class="links"
           >
-            <img :src="user.avatar" :alt="user.name" />
-          </v-list-item-avatar>
+            <v-list-item-avatar
+              class="user-info-avatar"
+              color="warning lighten-2"
+              size="50"
+            >
+              <img :src="user.avatar" :alt="user.name" />
+            </v-list-item-avatar>
+          </router-link>
           <v-list-item-content class="user-info-text">
             <v-list-item-title class="user-info-text-name">{{
               user.name
@@ -32,16 +37,18 @@
           </v-list-item-content>
           <v-card-actions class="followship-button">
             <v-btn
-              v-if="currentUser.isFollowed && currentUser.id !== user.id"
+              v-if="user.isFollowed && currentUser.id !== user.id"
               color="primary"
               elevation="0"
               dark
+              rounded
               class="px-4"
             >
               正在跟隨
             </v-btn>
             <v-btn
-              v-if="!currentUser.isFollowed && currentUser.id !== user.id"
+              v-if="!user.isFollowed && currentUser.id !== user.id"
+              @click.stop.prevent="follow(user.id)"
               rounded
               outlined
               color="primary"
@@ -64,6 +71,8 @@
 
 <script>
 import { mapState } from "vuex";
+import followshipsAPI from "./../apis/followships";
+import { Toast } from "./../utils/helpers";
 
 export default {
   name: "FollowRecommendations",
@@ -78,6 +87,36 @@ export default {
       users: this.initialTopUsers,
       isProcessing: false,
     };
+  },
+  methods: {
+    async follow(followingId) {
+      try {
+        const { data } = await followshipsAPI.follow({ followingId });
+
+        console.log("data", data);
+
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+
+        this.users = this.users.map((user) => {
+          if (user.id !== followingId) {
+            return user;
+          } else {
+            return {
+              ...user,
+              followerCount: user.followerCount + 1,
+              isFollowed: true,
+            };
+          }
+        });
+      } catch (error) {
+        Toast.fire({
+          icon: "error",
+          title: "無法加入追蹤，請稍後再試",
+        });
+      }
+    },
   },
   watch: {
     initialTopUsers(newValue) {

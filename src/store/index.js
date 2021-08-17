@@ -38,12 +38,10 @@ export default new Vuex.Store({
       }
       state.isAuthenticated = true
       state.token = localStorage.getItem('token')
+      console.log(state.currentUser)
     },
     setTopUsers(state, topUsers) {
-      state.topUsers = {
-        ...state.topUsers,
-        ...topUsers
-      }
+      state.topUsers = topUsers
     }
   },
   actions: {
@@ -73,8 +71,6 @@ export default new Vuex.Store({
         if (data.status === 'error') {
           throw new Error(data.message)
         }
-        console.log(data)
-        console.log(data.users)
         commit('setTopUsers', data.users)
       } catch (error) {
         console.log('error', error)
