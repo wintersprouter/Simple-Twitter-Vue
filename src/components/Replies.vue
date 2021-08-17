@@ -3,9 +3,14 @@
     <v-card elevation="0" class="reply-card">
       <v-card-text class="ml-1">
         <v-row>
-          <v-avatar size="50" class="tweet-card-avatar mb-2">
-            <img :src="reply.avatar" :alt="reply.name" />
-          </v-avatar>
+          <router-link
+            :to="{ name: 'users', query: { id: reply.UserId } }"
+            class="links"
+          >
+            <v-avatar size="50" class="tweet-card-avatar mb-2">
+              <img :src="reply.avatar" :alt="reply.name" />
+            </v-avatar>
+          </router-link>
           <v-list class="pt-1 ml-1">
             <v-list-item-title class="ml-1">
               <span class="tweets-name">{{ reply.name }}</span>
