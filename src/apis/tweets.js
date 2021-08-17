@@ -11,6 +11,11 @@ export default {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
+  getTweet(tweetId) {
+    return apiHelper.get(`/tweets/${tweetId}`, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+  },
   postLike(tweetId) {
     return apiHelper.post(`/tweets/${tweetId}/like`, null, {
       headers: { Authorization: `Bearer ${getToken()}` }

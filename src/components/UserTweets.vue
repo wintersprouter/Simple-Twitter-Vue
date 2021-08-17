@@ -11,10 +11,7 @@
       </router-link>
       <v-list class="tweet-card-list">
         <v-card-text class="py-0">
-          <router-link
-            :to="{ name: 'tweet', query: { tweetId: tweet.id } }"
-            class="links"
-          >
+          <router-link :to="`/tweets/${tweet.id}`" class="links">
             <v-list-item-group>
               <v-list-item-title>
                 <span class="mr-2 tweets-name">{{ tweet.name }}</span>

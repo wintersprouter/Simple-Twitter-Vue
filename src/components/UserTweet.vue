@@ -3,15 +3,14 @@
     <v-card-text class="ml-1">
       <v-row>
         <v-avatar size="50" class="tweet-card-avatar mb-2">
-          <img
-            src="https://cdn.vuetifyjs.com/images/john.jpg"
-            alt="MasterCard"
-          />
+          <img :src="tweet.avatar" :alt="tweet.name" />
         </v-avatar>
-        <v-list class="pt-1 ml-1" align="center">
-          <v-list-item-title class="tweets-name">MasterCard</v-list-item-title>
+        <v-list class="pt-1 ml-2">
+          <v-list-item-title class="tweets-name">{{
+            tweet.name
+          }}</v-list-item-title>
           <v-list-item-subtitle class="tweets-account"
-            >@MasterCard</v-list-item-subtitle
+            >@{{ tweet.account }}</v-list-item-subtitle
           >
         </v-list>
       </v-row>
@@ -19,19 +18,19 @@
 
     <v-card-text class="detail-tweet-card-content">
       <v-card-tilte class="detail-tweet-card-content">
-        這幾年我都有跟兒福聯盟合作，去年更演出短片參與推廣，非常榮幸。這次兒盟成立了「1420Hz兒少發聲平台」，針對台灣14歲到20歲兒少提供一個安全又能暢所欲言的網路平台。網站設計非常棒，註冊成為會員還可以編輯自己的專屬人物，論壇上的行為還可兌換寶石裝飾自己的聲星球（根本就是遊戲，也太可愛了吧！！）
+        {{ tweet.description }}
       </v-card-tilte>
     </v-card-text>
-    <v-card-subtitle class="detail-tweet-card-time"
-      >上午 10:05・2020年6月10日</v-card-subtitle
-    >
+    <v-card-subtitle class="detail-tweet-card-time">{{
+      tweet.createdAt | fromNow
+    }}</v-card-subtitle>
 
     <v-divider class="mx-1"></v-divider>
 
     <v-card-subtitle>
-      <span class="tweet-card-reply-count">34</span>
+      <span class="tweet-card-reply-count">{{ tweet.repliedCount }}</span>
       <span class="tweet-card-reply-text mr-3">回覆</span>
-      <span class="tweet-card-like-count">808</span>
+      <span class="tweet-card-like-count">{{ tweet.likedCount }}</span>
       <span class="tweet-card-like-text">喜歡次數</span>
     </v-card-subtitle>
 
@@ -46,16 +45,32 @@
             </v-btn>
           </template>
           <!-- modal -->
-          <ReplyTweetModal />
+          <ReplyTweetModal
+            :init-tweet="tweet"
+            @after-create-reply="afterCreateReply(tweet)"
+            @after-click-close="afterClickClose"
+          />
         </v-dialog>
       </v-list-item>
 
       <v-list-item>
-        <v-btn icon color="gary">
-          <v-icon>mdi-heart-outline</v-icon>
-          <!-- <v-btn icon color="pink">
+        <v-btn
+          v-if="tweet.isLike"
+          @click.stop.prevent="postUnlike(tweet)"
+          :disabled="isProcessing"
+          icon
+          color="pink"
+        >
           <v-icon>mdi-heart</v-icon>
-        </v-btn> -->
+        </v-btn>
+        <v-btn
+          v-else
+          @click.stop.prevent="postLike(tweet)"
+          :disabled="isProcessing"
+          icon
+          color="gary"
+        >
+          <v-icon>mdi-heart-outline</v-icon>
         </v-btn>
       </v-list-item>
     </v-card-actions>
@@ -63,11 +78,33 @@
 </template>
 <script>
 import ReplyTweetModal from "./ReplyTweetModal.vue";
+import { fromNowFilter } from "./../utils/mixins";
 export default {
   name: "UserTweet",
   components: {
     ReplyTweetModal,
   },
+  props: {
+    initialTweet: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      tweet: this.initialTweet,
+      dialog: false,
+    };
+  },
+  watch: {
+    initialTweet(newValue) {
+      this.tweet = {
+        ...this.tweet,
+        ...newValue,
+      };
+    },
+  },
+  mixins: [fromNowFilter],
 };
 </script>
 <style lang="scss">
