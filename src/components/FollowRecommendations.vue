@@ -38,11 +38,13 @@
           <v-card-actions class="followship-button">
             <v-btn
               v-if="user.isFollowed && currentUser.id !== user.id"
+              @click.stop.prevent="unfollow(user.id)"
               color="primary"
               elevation="0"
               dark
               rounded
               class="px-4"
+              :disabled="isProcessing"
             >
               正在跟隨
             </v-btn>
@@ -54,6 +56,7 @@
               color="primary"
               class="px-4"
               dark
+              :disabled="isProcessing"
             >
               跟隨</v-btn
             >
@@ -91,6 +94,7 @@ export default {
   methods: {
     async follow(followingId) {
       try {
+        this.isProcessing = true;
         const { data } = await followshipsAPI.follow({ followingId });
 
         console.log("data", data);
@@ -98,6 +102,10 @@ export default {
         if (data.status !== "success") {
           throw new Error(data.message);
         }
+        Toast.fire({
+          icon: "success",
+          title: `${data.message}`,
+        });
 
         this.users = this.users.map((user) => {
           if (user.id !== followingId) {
@@ -110,11 +118,38 @@ export default {
             };
           }
         });
+        this.isProcessing = false;
       } catch (error) {
+        this.isProcessing = false;
         Toast.fire({
           icon: "error",
           title: "無法加入追蹤，請稍後再試",
         });
+      }
+    },
+    async unfollow(followingId) {
+      try {
+        this.isProcessing = true;
+        const { data } = await followshipsAPI.unfollow({ followingId });
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+        this.users = this.users.map((user) => {
+          if (user.id !== followingId) {
+            return user;
+          } else {
+            return {
+              ...user,
+              followerCount: user.followerCount - 1,
+              isFollowed: false,
+            };
+          }
+        });
+        Toast.fire({ icon: "success", title: `${data.message}` });
+        this.isProcessing = false;
+      } catch (error) {
+        this.isProcessing = false;
+        Toast.fire({ icon: "error", title: "無法移除追蹤，請稍後再試" });
       }
     },
   },

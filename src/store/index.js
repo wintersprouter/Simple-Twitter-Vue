@@ -38,7 +38,6 @@ export default new Vuex.Store({
       }
       state.isAuthenticated = true
       state.token = localStorage.getItem('token')
-      console.log(state.currentUser)
     },
     setTopUsers(state, topUsers) {
       state.topUsers = topUsers
