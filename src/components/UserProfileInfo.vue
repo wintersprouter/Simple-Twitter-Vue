@@ -2,7 +2,8 @@
   <v-card elevation="0" tile class="profile-card">
     <v-img
       height="200px"
-      src="https://cdn.vuetifyjs.com/images/cards/forest-art.jpg"
+      :src="user.avatar"
+      :alt="user.name"
       class="profile-cover-image"
     >
     </v-img>
@@ -14,16 +15,17 @@
       bottom
       fab
     >
-      <img
-        class="profile-avatar-image"
-        alt="user"
-        src="https://s3-alpha-sig.figma.com/img/7075/8e0a/7c0f47389595381eca543235de212578?Expires=1629676800&Signature=Gl7kltNyWTw0~J6NS5uuY7h8xlKMYqLdS8uw-bwTJq-nlegZL15vZu9dzHtE3d5-O0iks8cb6liwxfA-2Y-Iwduraa4IbCG10zS-hJNVXYzof9I4R3xUtUJ6WMVfeOx6sRko9yyaCHy51WftLXBil7bjiH6UIJFcDH~fW6aIV0jGzYRjTfVioIy7y9nyBBqKoGFAPKaRBsqC6Yb-9lMo5RQki4AA7PsydN-rHQ5Q4bAqI1w-2fzgkZwNMoCmMBXLQbWaDA3EUNYHCmlg1yLWN5Y7-qw4JUu06nIMsV~aDIxcDrY2x9s3jjfwHDD0B4LvRzwACX4EjW28XMAiZj2o9w__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-      />
+      <img class="profile-avatar-image" :alt="user.name" :src="user.cover" />
     </v-avatar>
     <v-card-text class="profile-content">
       <v-card-actions>
         <v-row class="flex-row-reverse">
-          <v-dialog v-model="dialog" max-width="600px" max-hight="300px">
+          <v-dialog
+            v-if="currentUser.id === user.id"
+            v-model="dialog"
+            max-width="600px"
+            max-hight="300px"
+          >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 outlined
@@ -71,15 +73,27 @@
 </template>
 <script>
 import UserProfileEditModal from "./UserProfileEditModal.vue";
+import { mapState } from "vuex";
 export default {
   name: "UserProfileInfo",
   components: {
     UserProfileEditModal,
   },
+  props: {
+    initialUser: {
+      type: Object,
+      required: true,
+    },
+  },
   data: () => ({
+    user: this.initialUser,
     zIndex: 0,
     dialog: false,
   }),
+
+  computed: {
+    ...mapState(["currentUser", "isAuthenticated"]),
+  },
 };
 </script>
 <style lang="scss">

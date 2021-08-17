@@ -1,10 +1,7 @@
 <template>
   <v-card elevation="0" tile class="tweet-list">
     <v-card elevation="0" class="tweet-card">
-      <router-link
-        :to="{ name: 'users', query: { userId: tweet.UserId } }"
-        class="links"
-      >
+      <router-link :to="`/users/${tweet.UserId}`" class="links">
         <v-avatar size="50" class="tweet-card-avatar">
           <img :src="tweet.avatar" :alt="tweet.name" />
         </v-avatar>

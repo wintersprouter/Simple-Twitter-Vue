@@ -244,9 +244,8 @@ export default {
     },
   },
   beforeRouteUpdate(to, from, next) {
-    this.getTweet(to.params.id);
-    this.getRepies(to.params.id);
-
+    this.fetchTweet(to.params.id);
+    this.fetchReplies(to.params.id);
     next();
   },
 };

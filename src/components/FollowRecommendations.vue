@@ -15,10 +15,7 @@
       <v-divider></v-divider>
       <v-row align="center" justify="space-around">
         <v-list-item two-line class="ma-2" width="100%">
-          <router-link
-            :to="{ name: 'users', query: { userId: user.id } }"
-            class="links"
-          >
+          <router-link :to="`/users/${user.id}`" class="links">
             <v-list-item-avatar
               class="user-info-avatar"
               color="warning lighten-2"

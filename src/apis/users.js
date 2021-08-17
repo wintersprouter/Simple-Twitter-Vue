@@ -10,5 +10,10 @@ export default {
     return apiHelper.get('/users/current', {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
+  },
+  getUserProfileInfo(userId) {
+    return apiHelper.get(`/users/${userId}`, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
   }
 }
