@@ -5,7 +5,7 @@
       <section class="middle-section">
         <v-card elevation="0" height="55px">
           <v-container class="d-flex p-0">
-            <v-btn icon onclick="history.back()">
+            <v-btn icon @click="$router.back()">
               <v-icon color="black">mdi-arrow-left</v-icon>
             </v-btn>
             <v-card-title class="header-title py-0">推文</v-card-title>

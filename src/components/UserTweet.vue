@@ -2,9 +2,14 @@
   <v-card elevation="0" tile class="detail-tweet-card">
     <v-card-text class="ml-1">
       <v-row>
-        <v-avatar size="50" class="tweet-card-avatar mb-2">
-          <img :src="tweet.avatar" :alt="tweet.name" />
-        </v-avatar>
+        <router-link
+          :to="{ name: 'users', query: { id: tweet.UserId } }"
+          class="links"
+        >
+          <v-avatar size="50" class="tweet-card-avatar mb-2">
+            <img :src="tweet.avatar" :alt="tweet.name" />
+          </v-avatar>
+        </router-link>
         <v-list class="pt-1 ml-2">
           <v-list-item-title class="tweets-name">{{
             tweet.name
@@ -28,9 +33,9 @@
     <v-divider class="mx-1"></v-divider>
 
     <v-card-subtitle>
-      <span class="tweet-card-reply-count">{{ tweet.repliedCount }}</span>
+      <span class="tweet-card-reply-count mr-1">{{ tweet.repliedCount }}</span>
       <span class="tweet-card-reply-text mr-3">回覆</span>
-      <span class="tweet-card-like-count">{{ tweet.likedCount }}</span>
+      <span class="tweet-card-like-count mr-1">{{ tweet.likedCount }}</span>
       <span class="tweet-card-like-text">喜歡次數</span>
     </v-card-subtitle>
 
@@ -79,6 +84,8 @@
 <script>
 import ReplyTweetModal from "./ReplyTweetModal.vue";
 import { fromNowFilter } from "./../utils/mixins";
+import tweetsAPI from "./../apis/tweets";
+import { Toast } from "./../utils/helpers";
 export default {
   name: "UserTweet",
   components: {
@@ -94,6 +101,7 @@ export default {
     return {
       tweet: this.initialTweet,
       dialog: false,
+      isProcessing: false,
     };
   },
   watch: {
@@ -105,6 +113,63 @@ export default {
     },
   },
   mixins: [fromNowFilter],
+  methods: {
+    async postLike(tweet) {
+      try {
+        this.isProcessing = true;
+        const { data } = await tweetsAPI.postLike(tweet.id);
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+        tweet.isLike = !tweet.isLike;
+        tweet.likedCount += 1;
+        this.isProcessing = false;
+        Toast.fire({
+          icon: "success",
+          title: `對 @${this.tweet.account} 的推文按讚`,
+        });
+      } catch (error) {
+        this.isProcessing = false;
+        Toast.fire({
+          icon: "error",
+          title: `無法對 @${this.tweet.account} 的推文按讚，請稍後再試`,
+        });
+        console.log("error", error);
+      }
+    },
+    async postUnlike(tweet) {
+      try {
+        this.isProcessing = true;
+        const { data } = await tweetsAPI.postUnlike(tweet.id);
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+        tweet.isLike = !tweet.isLike;
+        tweet.likedCount -= 1;
+        this.isProcessing = false;
+        Toast.fire({
+          icon: "success",
+          title: `收回對 @${this.tweet.account} 推文按的讚`,
+        });
+      } catch (error) {
+        this.isProcessing = false;
+        Toast.fire({
+          icon: "error",
+          title: `無法收回對 @${this.tweet.account} 推文按的讚，請稍後再試`,
+        });
+        console.log("error", error);
+      }
+    },
+    afterCreateReply(comment) {
+      if (this.tweet.id === comment.id) {
+        this.tweet.repliedCount += 1;
+        this.dialog = false;
+      }
+    },
+    afterClickClose() {
+      this.dialog = false;
+    },
+  },
 };
 </script>
 <style lang="scss">

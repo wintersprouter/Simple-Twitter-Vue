@@ -116,13 +116,13 @@ export default {
         this.isProcessing = false;
         Toast.fire({
           icon: "success",
-          title: `對 ${this.tweet.name} 的推文按讚`,
+          title: `對 @${this.tweet.account} 的推文按讚`,
         });
       } catch (error) {
         this.isProcessing = false;
         Toast.fire({
           icon: "error",
-          title: `無法對  ${this.tweet.name} 的推文按讚，請稍後再試`,
+          title: `無法對 @${this.tweet.account} 的推文按讚，請稍後再試`,
         });
         console.log("error", error);
       }
@@ -139,13 +139,13 @@ export default {
         this.isProcessing = false;
         Toast.fire({
           icon: "success",
-          title: `收回對 ${this.tweet.name} 推文按的讚`,
+          title: `收回對 @${this.tweet.account} 推文按的讚`,
         });
       } catch (error) {
         this.isProcessing = false;
         Toast.fire({
           icon: "error",
-          title: `無法收回對  ${this.tweet.name} 推文按的讚，請稍後再試`,
+          title: `無法收回對 @${this.tweet.account} 推文按的讚，請稍後再試`,
         });
         console.log("error", error);
       }
