@@ -49,6 +49,11 @@ export default {
     },
   },
   mixins: [fromNowFilter],
+  watch: {
+    initReplies(newValue) {
+      this.replies = [...newValue];
+    },
+  },
 };
 </script>
 <style lang="scss">
