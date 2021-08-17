@@ -101,23 +101,25 @@ export default {
           return;
         }
         this.isProcessing = true;
+        const content = { comment: this.repliedContent };
 
         const { data } = await tweetsAPI.postReply({
           tweetId,
-          comment: this.repliedContent,
+          comment: content.comment,
         });
+        const nowTime = new Date();
 
         if (data.status !== "success") {
           throw new Error(data.message);
         }
-
-        const reply = {
+        const replyComment = {
           id: this.initTweet.id,
-          content: this.repliedContent,
-          creatAt: new Date(),
+          content: content.comment,
+          nowTime,
         };
-        this.$emit("after-create-reply", reply);
         this.repliedContent = "";
+
+        this.$emit("after-create-reply", replyComment);
 
         Toast.fire({
           icon: "success",
