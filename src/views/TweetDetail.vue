@@ -12,7 +12,8 @@
           </v-container>
         </v-card>
         <v-divider></v-divider><UserTweet :initial-tweet="tweet" />
-        <v-divider></v-divider><Replies /><v-divider></v-divider>
+        <v-divider></v-divider
+        ><Replies :reply="reply" v-for="reply in replies" :key="reply.id" />
       </section>
       <section class="right-section">
         <FollowRecommendations :initial-top-users="topUsers" />
@@ -40,11 +41,13 @@ export default {
   data() {
     return {
       tweet: {},
+      replies: [],
     };
   },
   created() {
     const { id } = this.$route.params;
     this.fetchTweet(id);
+    this.fetchReplies(id);
   },
   computed: {
     ...mapState(["currentUser", "topUsers"]),
@@ -58,6 +61,18 @@ export default {
         Toast.fire({
           icon: "error",
           title: "無法取得推文資料，請稍後再試",
+        });
+        console.log("error", error);
+      }
+    },
+    async fetchReplies(tweetId) {
+      try {
+        const { data } = await tweetsAPI.getReplies(tweetId);
+        this.replies = data;
+      } catch (error) {
+        Toast.fire({
+          icon: "error",
+          title: "無法取得回文資料，請稍後再試",
         });
         console.log("error", error);
       }

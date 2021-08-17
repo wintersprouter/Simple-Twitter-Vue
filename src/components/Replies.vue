@@ -4,61 +4,51 @@
       <v-card-text class="ml-1">
         <v-row>
           <v-avatar size="50" class="tweet-card-avatar mb-2">
-            <img
-              src="https://cdn.vuetifyjs.com/images/john.jpg"
-              alt="MasterCard"
-            />
+            <img :src="reply.avatar" :alt="reply.name" />
           </v-avatar>
           <v-list class="pt-1 ml-1">
             <v-list-item-title class="ml-1">
-              <span class="tweets-name">MasterCard</span>
-              <span class="ml-1 tweets-account">@MasterCard</span>
-              <span class="ml-1 tweets-account">· 13 小時</span>
+              <span class="tweets-name">{{ reply.name }}</span>
+              <span class="ml-1 tweets-account"
+                >@{{ reply.commentAccount }}</span
+              >
+              <span class="ml-1 tweets-account"
+                >· {{ reply.createdAt | fromNow }}</span
+              >
             </v-list-item-title>
             <v-list-item-subtitle class="ml-1">
               <span class="tweets-account">回覆</span>
-              <span class="reply-target ml-1">@dkfodko</span>
+              <span class="reply-target ml-1"
+                >@{{ reply.tweetAuthorAccount }}</span
+              >
             </v-list-item-subtitle>
-            <v-list-item-content class="reply-content ml-1"
-              >Good Job!</v-list-item-content
-            >
+            <v-list-item-content class="reply-content ml-1">{{
+              reply.comment
+            }}</v-list-item-content>
           </v-list>
         </v-row>
       </v-card-text>
     </v-card>
     <v-divider></v-divider>
-    <v-card elevation="0" class="reply-card">
-      <v-card-text class="ml-1">
-        <v-row>
-          <v-avatar size="50" class="tweet-card-avatar mb-2">
-            <img
-              src="https://cdn.vuetifyjs.com/images/john.jpg"
-              alt="MasterCard"
-            />
-          </v-avatar>
-          <v-list class="pt-1 ml-1">
-            <v-list-item-title class="ml-1">
-              <span class="tweets-name">MasterCard</span>
-              <span class="ml-1 tweets-account">@MasterCard</span>
-              <span class="ml-1 tweets-account">· 13 小時</span>
-            </v-list-item-title>
-            <v-list-item-subtitle class="ml-1">
-              <span class="tweets-account">回覆</span>
-              <span class="reply-target ml-1">@dkfodko</span>
-            </v-list-item-subtitle>
-            <v-list-item-content class="reply-content ml-1"
-              >Good!</v-list-item-content
-            >
-          </v-list>
-        </v-row>
-      </v-card-text>
-    </v-card>
   </v-card>
 </template>
 
 <script>
+import { fromNowFilter } from "./../utils/mixins";
 export default {
   name: "Replies",
+  props: {
+    reply: {
+      type: Object,
+      default: () => {},
+    },
+    data() {
+      return {
+        reply: this.reply,
+      };
+    },
+  },
+  mixins: [fromNowFilter],
 };
 </script>
 <style lang="scss">
