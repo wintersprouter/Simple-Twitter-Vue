@@ -74,20 +74,21 @@ import { mapState } from "vuex";
 import tweetsAPI from "./../apis/tweets";
 import { Toast } from "./../utils/helpers";
 export default {
-  data: () => {
-    return {
-      repliedContent: " ",
-      tweet: this.initTweet,
-      isProcessing: false,
-      dialog: true,
-    };
-  },
   props: {
     initTweet: {
       type: Object,
       required: true,
     },
   },
+  data: () => {
+    return {
+      repliedContent: " ",
+      initTweet: this.initTweet,
+      isProcessing: false,
+      dialog: true,
+    };
+  },
+
   mixins: [fromNowFilter],
   computed: {
     ...mapState(["currentUser"]),

@@ -48,7 +48,9 @@
           :initial-tweet="tweet"
         />
       </section>
-      <section class="right-section"><FollowRecommendations /></section>
+      <section class="right-section">
+        <FollowRecommendations :initial-top-users="topUsers" />
+      </section>
     </v-row>
   </v-container>
 </template>
@@ -77,7 +79,7 @@ export default {
   },
 
   computed: {
-    ...mapState(["currentUser", "isAuthenticated"]),
+    ...mapState(["currentUser", "isAuthenticated", "topUsers"]),
   },
   created() {
     this.fetchTweets();

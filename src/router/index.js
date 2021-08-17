@@ -39,12 +39,12 @@ const routes = [
     component: () => import('../views/UserProfile.vue')
   },
   {
-    path: '/user/replies',
+    path: '/users/replies',
     name: 'user-replies',
     component: () => import('../views/UserProfileRepied.vue')
   },
   {
-    path: '/user/follower',
+    path: '/users/follower',
     name: 'user-follower',
     component: () => import('../views/Followship.vue')
   },
@@ -77,6 +77,7 @@ const router = new VueRouter({
 })
 router.beforeEach((to, from, next) => {
   store.dispatch('fetchCurrentUser')
+  store.dispatch('fetchTopUsers')
   next()
 })
 
