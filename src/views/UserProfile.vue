@@ -78,7 +78,7 @@ export default {
   methods: {
     async fetchProfileInfo(userId) {
       try {
-        const { data } = await usersAPI.getUserProfileInfo(userId);
+        const { data } = await usersAPI.users.getProfile(userId);
         const {
           account,
           avatar,

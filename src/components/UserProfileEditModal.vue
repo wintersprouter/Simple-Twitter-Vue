@@ -13,8 +13,9 @@
             rounded
             elevation="0"
             type="sumbit"
+            :disabled="isProcessing"
           >
-            回覆
+            {{ isProcessing ? "處理中..." : "儲存" }}
           </v-btn>
         </v-row>
       </v-card-actions>
@@ -30,6 +31,7 @@
           <v-file-input
             hide-input
             :rules="[rules.coverSize]"
+            name="cover"
             accept="image/png, image/jpeg, image/jpg"
             prepend-icon="mdi-camera"
             truncate-length="20"
@@ -50,6 +52,7 @@
           <v-btn class="button-avatar ma-2" plain fab>
             <v-file-input
               class="input-avatar"
+              name="avatar"
               hide-input
               :rules="[rules.avatarSize]"
               accept="image/png, image/jpeg, image/jpg"
@@ -66,6 +69,7 @@
       <v-card-text class="profile-content mt-15">
         <v-text-field
           label="名稱"
+          name="name"
           filled
           dense
           counter
@@ -75,9 +79,9 @@
           maxlength="50"
         ></v-text-field>
         <v-textarea
+          name="introduction"
           filled
           label="自我介紹"
-          autofocus
           auto-grow
           :value="user.introduction"
           counter
@@ -88,11 +92,14 @@
   </v-card>
 </template>
 <script>
+import { Toast } from "./../utils/helpers";
+import usersAPI from "./../apis/users";
+
 export default {
+  name: "UserProfileEditModal",
   data() {
     return {
       user: this.initUser,
-
       rules: {
         required: (value) => !!value || "Required.",
         avatarSize: (value) =>
@@ -106,6 +113,7 @@ export default {
       },
       dialog: true,
       files: [],
+      isProcessing: false,
     };
   },
   props: {
@@ -116,21 +124,66 @@ export default {
   },
   methods: {
     handleCoverChange(e) {
-      console.log("e.target", e.target);
-      console.log("coverthis.files", this.files);
+      console.log("e.targetcover", e.target);
+      console.log("cover.this.files", this.files);
       if (this.files !== null) {
         const CoverimageURL = window.URL.createObjectURL(this.files);
         console.log(" CoverimageUR", CoverimageURL);
         this.user.cover = CoverimageURL;
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: "無法上傳使用者封面，請稍後再試",
+        });
       }
     },
     handleAvatarChange(e) {
       console.log("e.targetAvatar", e.target);
-      console.log("Avatarthis.files", this.files);
+      console.log("avatar.this.files", this.files);
       if (this.files !== null) {
         const avatarimageURL = window.URL.createObjectURL(this.files);
         console.log(" avatarimageUR", avatarimageURL);
         this.user.avatar = avatarimageURL;
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: "無法上傳使用者頭像，請稍後再試",
+        });
+      }
+    },
+    async handleSubmit(e) {
+      try {
+        if (!this.user.name) {
+          Toast.fire({
+            icon: "warning",
+            title: "請填寫使用者名稱",
+          });
+          return;
+        }
+        const form = e.target;
+        console.log(form);
+        const formData = new FormData(form);
+        console.log(formData);
+        console.log("userId", this.user.id);
+        const { data } = await usersAPI.users.updateProfile({
+          userId: this.user.id,
+          formData,
+        });
+        console.log("data", data);
+
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+        Toast.fire({ icon: "success", title: "成功更新使用者資料" });
+        this.dialog = false;
+        // this.$emit("after-submit", formData);
+      } catch (error) {
+        this.isProcessing = false;
+        console.log(error);
+        Toast.fire({
+          icon: "error",
+          title: "無法更新使用者資料，請稍後再試",
+        });
       }
     },
   },

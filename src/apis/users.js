@@ -11,9 +11,17 @@ export default {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
-  getUserProfileInfo(userId) {
-    return apiHelper.get(`/users/${userId}`, {
-      headers: { Authorization: `Bearer ${getToken()}` }
-    })
+  users: {
+    getProfile(userId) {
+      return apiHelper.get(`/users/${userId}`, {
+        headers: { Authorization: `Bearer ${getToken()}` }
+      })
+    },
+    updateProfile({ userId, formData }) {
+      return apiHelper.put(
+        `/users/${userId}`,
+        formData
+      )
+    }
   }
 }
