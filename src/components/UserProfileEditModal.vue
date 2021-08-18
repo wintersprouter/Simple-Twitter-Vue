@@ -28,7 +28,7 @@
       <v-btn class="button-cover ma-2" plain fab>
         <v-file-input
           hide-input
-          :rules="rules"
+          :rules="[rules.coverSize]"
           accept="image/png, image/jpeg, image/jpg"
           prepend-icon="mdi-camera"
           truncate-length="20"
@@ -48,7 +48,7 @@
           <v-file-input
             class="input-avatar"
             hide-input
-            :rules="rules"
+            :rules="[rules.avatarSize]"
             accept="image/png, image/jpeg, image/jpg"
             prepend-icon="mdi-camera"
             truncate-length="20"
@@ -65,6 +65,7 @@
         dense
         counter
         required
+        :rules="[rules.required]"
         :value="user.name"
         maxlength="50"
       ></v-text-field>
@@ -85,12 +86,18 @@ export default {
   data() {
     return {
       user: this.initUser,
-      rules: [
-        (value) =>
+
+      rules: {
+        required: (value) => !!value || "Required.",
+        avatarSize: (value) =>
           !value ||
           value.size < 2000000 ||
           "Avatar size should be less than 2 MB!",
-      ],
+        coverSize: (value) =>
+          !value ||
+          value.size < 2000000 ||
+          "Cover size should be less than 2 MB!",
+      },
       dialog: true,
     };
   },
