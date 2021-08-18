@@ -20,7 +20,7 @@
         </v-card>
         <v-divider></v-divider>
         <UserProfileInfo :initial-user="user" /><UserProfileNav />
-        <router-view></router-view>
+        <router-view />
         <!-- <v-divider></v-divider><UserTweets /> -->
       </section>
       <section class="right-section">
