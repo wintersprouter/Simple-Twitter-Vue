@@ -21,7 +21,8 @@
     <v-card-actions class="edit-images">
       <v-img
         height="200px"
-        src="https://cdn.vuetifyjs.com/images/cards/forest-art.jpg"
+        :src="user.cover"
+        :alt="user.name"
         class="profile-cover-image"
       />
       <v-btn class="button-cover ma-2" plain fab>
@@ -39,8 +40,8 @@
       <v-avatar size="140" class="profile-avatar" fab>
         <v-img
           class="profile-avatar-image"
-          alt="user"
-          src="https://s3-alpha-sig.figma.com/img/7075/8e0a/7c0f47389595381eca543235de212578?Expires=1629676800&Signature=Gl7kltNyWTw0~J6NS5uuY7h8xlKMYqLdS8uw-bwTJq-nlegZL15vZu9dzHtE3d5-O0iks8cb6liwxfA-2Y-Iwduraa4IbCG10zS-hJNVXYzof9I4R3xUtUJ6WMVfeOx6sRko9yyaCHy51WftLXBil7bjiH6UIJFcDH~fW6aIV0jGzYRjTfVioIy7y9nyBBqKoGFAPKaRBsqC6Yb-9lMo5RQki4AA7PsydN-rHQ5Q4bAqI1w-2fzgkZwNMoCmMBXLQbWaDA3EUNYHCmlg1yLWN5Y7-qw4JUu06nIMsV~aDIxcDrY2x9s3jjfwHDD0B4LvRzwACX4EjW28XMAiZj2o9w__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+          :src="user.avatar"
+          :alt="user.avatar"
         />
 
         <v-btn class="button-avatar ma-2" plain fab>
@@ -64,7 +65,7 @@
         dense
         counter
         required
-        value=""
+        :value="user.name"
         maxlength="50"
       ></v-text-field>
       <v-textarea
@@ -72,7 +73,7 @@
         label="自我介紹"
         autofocus
         auto-grow
-        value=""
+        :value="user.introduction"
         counter
         maxlength="160"
       ></v-textarea>
@@ -81,14 +82,24 @@
 </template>
 <script>
 export default {
-  data: () => ({
-    rules: [
-      (value) =>
-        !value ||
-        value.size < 2000000 ||
-        "Avatar size should be less than 2 MB!",
-    ],
-  }),
+  data() {
+    return {
+      user: this.initUser,
+      rules: [
+        (value) =>
+          !value ||
+          value.size < 2000000 ||
+          "Avatar size should be less than 2 MB!",
+      ],
+      dialog: true,
+    };
+  },
+  props: {
+    initUser: {
+      type: Object,
+      required: true,
+    },
+  },
 };
 </script>
 <style lang="scss">

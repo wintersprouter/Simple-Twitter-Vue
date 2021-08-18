@@ -37,7 +37,7 @@
               >
             </template>
             <!-- modal -->
-            <UserProfileEditModal />
+            <UserProfileEditModal :init-user="user" />
           </v-dialog>
 
           <v-btn
@@ -126,9 +126,9 @@ export default {
           title: `${data.message}`,
         });
 
-        (this.user.followerCount += 1),
-          (this.user.isFollowed = true),
-          (this.isProcessing = false);
+        this.user.followerCount += 1;
+        this.user.isFollowed = true;
+        this.isProcessing = false;
       } catch (error) {
         this.isProcessing = false;
         Toast.fire({
@@ -144,9 +144,9 @@ export default {
         if (data.status !== "success") {
           throw new Error(data.message);
         }
-        (this.user.followerCount -= 1),
-          (this.user.isFollowed = false),
-          (this.isProcessing = false);
+        this.user.followerCount -= 1;
+        this.user.isFollowed = false;
+        this.isProcessing = false;
         Toast.fire({ icon: "success", title: `${data.message}` });
         this.isProcessing = false;
       } catch (error) {

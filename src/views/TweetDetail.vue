@@ -222,8 +222,6 @@ export default {
     },
     afterCreateReply(replyComment) {
       this.dialog = false;
-      console.log(replyComment);
-
       const reply = {
         id: replyComment.id,
         UserId: this.currentUser.id,
