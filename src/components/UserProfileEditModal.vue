@@ -2,7 +2,7 @@
   <v-card elevation="0" style="border-radius: 14px" class="profile-card">
     <v-form @submit.stop.prevent="handleSubmit">
       <v-card-actions>
-        <v-btn color="primary" text @click="dialog = false"
+        <v-btn color="primary" icon @click.stop.prevent="handleClick"
           ><span>&#10005;</span>
         </v-btn>
         <v-row class="justify-space-between px-2 mx-0 mt-0" hight="50px">
@@ -185,6 +185,9 @@ export default {
           title: "無法更新使用者資料，請稍後再試",
         });
       }
+    },
+    handleClick() {
+      this.$emit("after-click-close");
     },
   },
 };

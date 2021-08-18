@@ -37,7 +37,10 @@
               >
             </template>
             <!-- modal -->
-            <UserProfileEditModal :init-user="user" />
+            <UserProfileEditModal
+              :init-user="user"
+              @after-click-close="afterClickClose"
+            />
           </v-dialog>
 
           <v-btn
@@ -153,6 +156,9 @@ export default {
         this.isProcessing = false;
         Toast.fire({ icon: "error", title: "無法移除追蹤，請稍後再試" });
       }
+    },
+    afterClickClose() {
+      this.dialog = false;
     },
   },
   computed: {
