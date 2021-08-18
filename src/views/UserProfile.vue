@@ -19,9 +19,34 @@
           </v-container>
         </v-card>
         <v-divider></v-divider>
-        <UserProfileInfo :initial-user="user" /><UserProfileNav />
+        <UserProfileInfo :initial-user="user" />
+        <v-tabs>
+          <v-tab>
+            <router-link
+              :to="`/users/${this.$route.params.id}/tweets`"
+              class="links"
+            >
+              推文
+            </router-link>
+          </v-tab>
+          <v-tab>
+            <router-link
+              :to="`/users/${this.$route.params.id}/repliedTweets`"
+              class="links"
+            >
+              推文與回覆
+            </router-link>
+          </v-tab>
+          <v-tab>
+            <router-link
+              :to="`/users/${this.$route.params.id}/likedTweets`"
+              class="links"
+            >
+              喜歡的內容
+            </router-link>
+          </v-tab>
+        </v-tabs>
         <router-view />
-        <!-- <v-divider></v-divider><UserTweets /> -->
       </section>
       <section class="right-section">
         <FollowRecommendations :initial-top-users="topUsers" />
@@ -33,8 +58,6 @@
 import Navbar from "./../components/Navbar";
 import FollowRecommendations from "./../components/FollowRecommendations";
 import UserProfileInfo from "./../components/UserProfileInfo";
-import UserProfileNav from "./../components/UserProfileNav";
-// import UserTweets from "./../components/UserTweets";
 import { mapState } from "vuex";
 import usersAPI from "./../apis/users.js";
 import { Toast } from "./../utils/helpers";
@@ -63,7 +86,6 @@ export default {
     Navbar,
     FollowRecommendations,
     UserProfileInfo,
-    UserProfileNav,
   },
   computed: {
     ...mapState(["currentUser", "isAuthenticated", "topUsers"]),
