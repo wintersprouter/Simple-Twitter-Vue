@@ -36,7 +36,11 @@ const routes = [
   {
     path: '/users/:id',
     name: 'users',
-    component: () => import('../views/UserProfile.vue')
+    component: () => import('../views/UserProfile.vue'),
+    children: [{
+      path: 'tweets',
+      component: 'userProfileTweet'
+    }]
   },
   {
     path: '/users/replies',
@@ -72,7 +76,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  linkExactActiveClass: 'active',
+  linkExactActiveClass: 'active-class',
   routes
 })
 router.beforeEach((to, from, next) => {

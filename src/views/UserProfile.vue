@@ -5,7 +5,7 @@
       <section class="middle-section">
         <v-card elevation="0" height="55px">
           <v-container class="d-flex pt-1">
-            <v-btn icon onclick="history.back()">
+            <v-btn icon @click="$router.back()">
               <v-icon color="black">mdi-arrow-left</v-icon>
             </v-btn>
             <p class="ml-3">
@@ -20,6 +20,7 @@
         </v-card>
         <v-divider></v-divider>
         <UserProfileInfo :initial-user="user" /><UserProfileNav />
+        <router-view></router-view>
         <!-- <v-divider></v-divider><UserTweets /> -->
       </section>
       <section class="right-section">
