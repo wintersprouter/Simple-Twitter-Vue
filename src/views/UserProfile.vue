@@ -8,14 +8,14 @@
             <v-btn icon onclick="history.back()">
               <v-icon color="black">mdi-arrow-left</v-icon>
             </v-btn>
-            <v-text class="ml-3">
+            <p class="ml-3">
               <v-list-item-title class="header-user-title">{{
                 this.name
               }}</v-list-item-title>
               <v-list-item-subtitle class="header-user-subtitle"
                 >{{ this.tweetCount }} 推文
               </v-list-item-subtitle>
-            </v-text>
+            </p>
           </v-container>
         </v-card>
         <v-divider></v-divider>
