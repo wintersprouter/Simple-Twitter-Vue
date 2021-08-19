@@ -2,7 +2,7 @@
   <section>
     <UserRepliedTweetsCard
       v-for="tweet in tweets"
-      :key="tweet.id"
+      :key="tweet.replyId"
       :initial-tweet="tweet"
     />
   </section>
@@ -29,11 +29,11 @@ export default {
       try {
         const { data } = await userAPI.users.getUserRepliedTweets(userId);
         this.tweets = data;
-        console.log("RepliedTweet", data);
+        console.log(data);
       } catch (error) {
         Toast.fire({
           icon: "error",
-          title: "無法取得推文資料，請稍後再試",
+          title: "無法取得使用者回覆過的推文資料，請稍後再試",
         });
         console.log("error", error);
       }
