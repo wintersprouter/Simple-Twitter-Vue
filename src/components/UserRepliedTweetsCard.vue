@@ -18,7 +18,7 @@
             }}</span>
           </v-list-item-title>
           <v-list-item-subtitle>
-            <span class="tweet-reply-title mr-1">回覆給</span>
+            <span class="tweets-account mr-1">回覆給</span>
             <span class="tweet-reply-target"
               >@{{ tweet.tweetAuthorAccount }}</span
             ></v-list-item-subtitle
@@ -76,5 +76,4 @@ export default {
 </script>
 <style lang="scss">
 @import "../assets/scss/components/_UserRepliedTweets.scss";
-// @import "../assets/scss/components/_UserRepliedTweetsCard";
 </style>

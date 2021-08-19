@@ -5,4 +5,10 @@
   display: flex;
   justify-content: left;
   position: relative;
+  .tweet-reply-target{
+    font-weight: $font-weight-sub-title;
+    font-size: $font-size-root;
+    line-height: $font-line-root;
+    color: $font-color-primary;
+  }
 }
