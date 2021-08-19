@@ -21,29 +21,12 @@
         <v-divider></v-divider>
         <UserProfileInfo :initial-user="user" />
         <v-tabs>
-          <v-tab>
-            <router-link
-              :to="`/users/${this.$route.params.id}/tweets`"
-              class="links"
-            >
-              推文
-            </router-link>
+          <v-tab :to="`/users/${this.$route.params.id}/tweets`"> 推文 </v-tab>
+          <v-tab :to="`/users/${this.$route.params.id}/repliedTweets`">
+            推文與回覆
           </v-tab>
-          <v-tab>
-            <router-link
-              :to="`/users/${this.$route.params.id}/repliedTweets`"
-              class="links"
-            >
-              推文與回覆
-            </router-link>
-          </v-tab>
-          <v-tab>
-            <router-link
-              :to="`/users/${this.$route.params.id}/likedTweets`"
-              class="links"
-            >
-              喜歡的內容
-            </router-link>
+          <v-tab :to="`/users/${this.$route.params.id}/likedTweets`">
+            喜歡的內容
           </v-tab>
         </v-tabs>
         <router-view />
