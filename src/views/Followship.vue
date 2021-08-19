@@ -8,28 +8,22 @@
             <v-btn icon @click="$router.back()">
               <v-icon color="black">mdi-arrow-left</v-icon>
             </v-btn>
-            <v-text class="ml-3">
+            <p class="ml-3">
               <v-list-item-title class="header-user-title">{{
                 name
               }}</v-list-item-title>
               <v-list-item-subtitle class="header-user-subtitle"
                 >{{ tweetCount }} 推文
               </v-list-item-subtitle>
-            </v-text>
+            </p>
           </v-container>
         </v-card>
 
         <v-tabs>
-          <v-tab
-            :to="`/users/${this.$route.params.id}/followship/following`"
-            class="links"
-          >
+          <v-tab :to="`/users/${this.$route.params.id}/followship/following`">
             跟隨者
           </v-tab>
-          <v-tab
-            :to="`/users/${this.$route.params.id}/followship/follower`"
-            class="links"
-          >
+          <v-tab :to="`/users/${this.$route.params.id}/followship/follower`">
             跟隨中
           </v-tab>
         </v-tabs>

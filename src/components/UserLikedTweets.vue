@@ -40,7 +40,6 @@ export default {
   },
   created() {
     const { id } = this.$route.params;
-    console.log(id);
     this.fetchUserLikedTweets(id);
   },
   computed: {
