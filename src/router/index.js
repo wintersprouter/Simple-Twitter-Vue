@@ -55,7 +55,7 @@ const routes = [
     path: '/users/:id/followship',
     name: 'user-followship',
     component: () => import('../views/Followship.vue'),
-    redirect: '/users/:id/following',
+    redirect: '/users/:id/followship/following',
     children: [{
       path: 'following',
       component: () => import('../components/Following.vue')
