@@ -29,7 +29,6 @@ export default {
       try {
         const { data } = await userAPI.users.getUserRepliedTweets(userId);
         this.tweets = data;
-        console.log(data);
       } catch (error) {
         Toast.fire({
           icon: "error",
