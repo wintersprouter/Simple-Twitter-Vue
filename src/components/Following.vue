@@ -1,5 +1,11 @@
 <template>
-  <section><FollowshipCard /></section>
+  <section>
+    <FollowshipCard
+      v-for="following in followings"
+      :key="following.id"
+      :initial-follow="following"
+    />
+  </section>
 </template>
 
 <script>
@@ -22,7 +28,8 @@ export default {
   methods: {
     async fetchUserFollowings(userId) {
       try {
-        const { data } = await userAPI.users.getUserLikedTweets(userId);
+        const { data } = await userAPI.users.getUserFollowings(userId);
+        console.log(data);
         this.followings = data;
       } catch (error) {
         Toast.fire({

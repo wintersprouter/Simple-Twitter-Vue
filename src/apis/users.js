@@ -39,7 +39,7 @@ export default {
       })
     },
     getUserFollowings(userId) {
-      return apiHelper.get(`/users/${userId}/following`, {
+      return apiHelper.get(`/users/${userId}/followings`, {
         headers: { Authorization: `Bearer ${getToken()}` }
       })
     }

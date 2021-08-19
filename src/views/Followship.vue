@@ -20,10 +20,10 @@
         </v-card>
 
         <v-tabs>
-          <v-tab :to="`/users/${this.$route.params.id}/followship/following`">
+          <v-tab :to="`/users/${this.$route.params.id}/followship/follower`">
             跟隨者
           </v-tab>
-          <v-tab :to="`/users/${this.$route.params.id}/followship/follower`">
+          <v-tab :to="`/users/${this.$route.params.id}/followship/following`">
             跟隨中
           </v-tab>
         </v-tabs>
