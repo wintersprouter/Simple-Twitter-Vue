@@ -28,6 +28,11 @@ export default {
         headers: { Authorization: `Bearer ${getToken()}` }
       })
     },
+    getUserRepliedTweets(userId) {
+      return apiHelper.get(`/users/${userId}/replied_tweets`, {
+        headers: { Authorization: `Bearer ${getToken()}` }
+      })
+    },
     getUserLikedTweets(userId) {
       return apiHelper.get(`/users/${userId}/likes`, {
         headers: { Authorization: `Bearer ${getToken()}` }
