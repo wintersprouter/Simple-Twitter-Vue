@@ -4,6 +4,7 @@
       v-for="following in followings"
       :key="following.id"
       :initial-follow="following"
+      :message="message"
     />
   </section>
 </template>
@@ -20,6 +21,7 @@ export default {
     return {
       followings: [],
       isProcessing: false,
+      message: "",
     };
   },
   components: {
@@ -29,7 +31,13 @@ export default {
     async fetchUserFollowings(userId) {
       try {
         const { data } = await userAPI.users.getUserFollowings(userId);
-        console.log(data);
+
+        if (data.message !== undefined) {
+          this.message = data.message;
+          console.log(this.message);
+          this.followings = [];
+          return;
+        }
         this.followings = data;
       } catch (error) {
         Toast.fire({

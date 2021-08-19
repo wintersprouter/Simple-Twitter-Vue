@@ -1,0 +1,56 @@
+<template>
+  <section>
+    <FollowshipCard
+      v-for="follower in followers"
+      :key="follower.id"
+      :initial-follow="follower"
+    />
+  </section>
+</template>
+
+<script>
+import FollowshipCard from "./FollowshipCard.vue";
+import userAPI from "../apis/users";
+import { Toast } from "./../utils/helpers";
+import { mapState } from "vuex";
+
+export default {
+  name: "Follower ",
+  data() {
+    return {
+      followers: [],
+      isProcessing: false,
+      message: "",
+    };
+  },
+  components: {
+    FollowshipCard,
+  },
+  methods: {
+    async fetchUserFollowers(userId) {
+      try {
+        const { data } = await userAPI.users.getUserFollowers(userId);
+
+        this.followers = data;
+      } catch (error) {
+        Toast.fire({
+          icon: "error",
+          title: "無法取得使用者追隨者的名單，請稍後再試",
+        });
+        console.log("error", error);
+      }
+    },
+  },
+  created() {
+    const { id } = this.$route.params;
+    this.fetchUserFollowers(id);
+  },
+  computed: {
+    ...mapState(["currentUser"]),
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.fetchUserFollowers(to.params.id);
+    next();
+  },
+};
+</script>

@@ -47,12 +47,13 @@ export default {
   props: {
     initialFollow: {
       type: Object,
-      require: true,
+      default: () => {},
     },
   },
   data() {
     return {
       follow: this.initialFollow,
+      followMessage: this.message,
       isProcessing: false,
     };
   },
