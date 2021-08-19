@@ -26,5 +26,5 @@
   </v-card>
 </template>
 <style lang="scss">
-@import "../assets/scss/components/_FollowshipList.scss";
+@import "../assets/scss/components/_FollowshipCard.scss";
 </style>

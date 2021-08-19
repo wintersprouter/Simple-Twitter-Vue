@@ -72,12 +72,21 @@
         >
       </v-list>
       <v-card-text class="profile-intro">{{ user.introduction }} </v-card-text>
-      <v-card-subtitle class="profile-followship"
-        ><span class="profile-following-count"
-          >{{ initialUser.followingCount }} 個</span
-        ><span class="profile-following-text mr-1">跟隨中</span
-        ><span class="profile-follower-count">{{ user.followerCount }} 位</span>
-        <span class="profile-follower-text">跟隨者</span></v-card-subtitle
+      <v-card-subtitle class="profile-followship">
+        <router-link :to="`/users/${user.id}/followship`" class="links">
+          <span class="profile-following-count"
+            >{{ initialUser.followingCount }} 個</span
+          ><span class="profile-following-text mr-1">跟隨中</span>
+        </router-link>
+        <router-link
+          :to="`/users/${user.id}/followship/follower`"
+          class="links"
+        >
+          <span class="profile-follower-count"
+            >{{ user.followerCount }} 位</span
+          >
+          <span class="profile-follower-text">跟隨者</span>
+        </router-link></v-card-subtitle
       >
     </v-card-text>
   </v-card>

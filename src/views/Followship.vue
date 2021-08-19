@@ -24,7 +24,7 @@
           <v-tab>跟隨中</v-tab>
         </v-tabs>
         <v-divider></v-divider>
-        <FollowshipList />
+        <router-view></router-view>
       </section>
       <section class="right-section"><FollowRecommendations /></section>
     </v-row>
@@ -33,14 +33,12 @@
 <script>
 import Navbar from "./../components/Navbar";
 import FollowRecommendations from "./../components/FollowRecommendations";
-import FollowshipList from "./../components/FollowshipList";
 
 export default {
   name: "Home",
   components: {
     Navbar,
     FollowRecommendations,
-    FollowshipList,
   },
 };
 </script>

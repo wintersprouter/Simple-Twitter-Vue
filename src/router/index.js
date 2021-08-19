@@ -52,9 +52,19 @@ const routes = [
     }]
   },
   {
-    path: '/users/follower',
-    name: 'user-follower',
-    component: () => import('../views/Followship.vue')
+    path: '/users/:id/followship',
+    name: 'user-followship',
+    component: () => import('../views/Followship.vue'),
+    redirect: '/users/:id/following',
+    children: [{
+      path: 'following',
+      component: () => import('../components/Following.vue')
+    },
+    {
+      path: 'follower',
+      component: () => import('../components/Follower.vue')
+    },
+    ]
   },
   {
     path: '/admin/signin',
