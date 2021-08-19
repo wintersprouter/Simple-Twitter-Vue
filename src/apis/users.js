@@ -22,6 +22,11 @@ export default {
         `/users/${userId}`,
         formData
       )
-    }
+    },
+    getUserTweets(userId) {
+      return apiHelper.get(`/users/${userId}/tweets`, {
+        headers: { Authorization: `Bearer ${getToken()}` }
+      })
+    },
   }
 }
