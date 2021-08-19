@@ -1,6 +1,7 @@
 @import "./../main.scss";
 .profile-card {
    position: relative;
+   margin: 0 auto;
    .profile-card-title {
       font-weight: $font-weight-title;
       font-size: $font-size-medium;

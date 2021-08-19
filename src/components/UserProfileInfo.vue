@@ -2,7 +2,8 @@
   <v-card elevation="0" tile class="profile-card">
     <v-img
       height="200px"
-      src="https://cdn.vuetifyjs.com/images/cards/forest-art.jpg"
+      :src="user.cover"
+      :alt="user.name"
       class="profile-cover-image"
     >
     </v-img>
@@ -14,16 +15,17 @@
       bottom
       fab
     >
-      <img
-        class="profile-avatar-image"
-        alt="user"
-        src="https://s3-alpha-sig.figma.com/img/7075/8e0a/7c0f47389595381eca543235de212578?Expires=1629676800&Signature=Gl7kltNyWTw0~J6NS5uuY7h8xlKMYqLdS8uw-bwTJq-nlegZL15vZu9dzHtE3d5-O0iks8cb6liwxfA-2Y-Iwduraa4IbCG10zS-hJNVXYzof9I4R3xUtUJ6WMVfeOx6sRko9yyaCHy51WftLXBil7bjiH6UIJFcDH~fW6aIV0jGzYRjTfVioIy7y9nyBBqKoGFAPKaRBsqC6Yb-9lMo5RQki4AA7PsydN-rHQ5Q4bAqI1w-2fzgkZwNMoCmMBXLQbWaDA3EUNYHCmlg1yLWN5Y7-qw4JUu06nIMsV~aDIxcDrY2x9s3jjfwHDD0B4LvRzwACX4EjW28XMAiZj2o9w__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-      />
+      <img class="profile-avatar-image" :alt="user.name" :src="user.avatar" />
     </v-avatar>
     <v-card-text class="profile-content">
       <v-card-actions>
         <v-row class="flex-row-reverse">
-          <v-dialog v-model="dialog" max-width="600px" max-hight="300px">
+          <v-dialog
+            v-if="this.currentUser.id === user.id"
+            v-model="dialog"
+            max-width="600px"
+            max-hight="300px"
+          >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 outlined
@@ -35,35 +37,46 @@
               >
             </template>
             <!-- modal -->
-            <UserProfileEditModal />
+            <UserProfileEditModal
+              :init-user="user"
+              @after-click-close="afterClickClose"
+            />
           </v-dialog>
 
           <v-btn
+            v-if="user.isFollowed && currentUser.id !== user.id"
+            @click.stop.prevent="unfollow(user.id)"
             elevation="0"
             color="primary"
             class="text-no-wrap rounded-pill px-4"
+            :disabled="isProcessing"
             >正在跟隨</v-btn
           >
-          <v-btn outlined color="primary" class="text-no-wrap rounded-pill px-4"
+          <v-btn
+            v-if="!user.isFollowed && currentUser.id !== user.id"
+            @click.stop.prevent="follow(user.id)"
+            outlined
+            color="primary"
+            class="text-no-wrap rounded-pill px-4"
+            :disabled="isProcessing"
             >跟隨</v-btn
           >
         </v-row>
       </v-card-actions>
       <v-list class="ml-1" align="start">
-        <v-list-item-title class="profile-name">MasterCard</v-list-item-title>
+        <v-list-item-title class="profile-name">{{
+          user.name
+        }}</v-list-item-title>
         <v-list-item-subtitle class="tweets-account"
-          >@MasterCard</v-list-item-subtitle
+          >@{{ user.account }}</v-list-item-subtitle
         >
       </v-list>
-      <v-card-text class="profile-intro"
-        >Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-        sint.Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-        sint.
-      </v-card-text>
+      <v-card-text class="profile-intro">{{ user.introduction }} </v-card-text>
       <v-card-subtitle class="profile-followship"
-        ><span class="profile-following-count">34 個</span
+        ><span class="profile-following-count"
+          >{{ initialUser.followingCount }} 個</span
         ><span class="profile-following-text mr-1">跟隨中</span
-        ><span class="profile-follower-count">59 位</span>
+        ><span class="profile-follower-count">{{ user.followerCount }} 位</span>
         <span class="profile-follower-text">跟隨者</span></v-card-subtitle
       >
     </v-card-text>
@@ -71,15 +84,86 @@
 </template>
 <script>
 import UserProfileEditModal from "./UserProfileEditModal.vue";
+import { mapState } from "vuex";
+import followshipsAPI from "./../apis/followships";
+import { Toast } from "./../utils/helpers";
+
 export default {
   name: "UserProfileInfo",
   components: {
     UserProfileEditModal,
   },
-  data: () => ({
-    zIndex: 0,
-    dialog: false,
-  }),
+  props: {
+    initialUser: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      user: this.initialUser,
+      zIndex: 0,
+      dialog: false,
+      isProcessing: false,
+    };
+  },
+  watch: {
+    initialUser(newValue) {
+      this.user = {
+        ...this.user,
+        ...newValue,
+      };
+    },
+  },
+  methods: {
+    async follow(followingId) {
+      try {
+        this.isProcessing = true;
+        const { data } = await followshipsAPI.follow({ followingId });
+
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+        Toast.fire({
+          icon: "success",
+          title: `${data.message}`,
+        });
+
+        this.user.followerCount += 1;
+        this.user.isFollowed = true;
+        this.isProcessing = false;
+      } catch (error) {
+        this.isProcessing = false;
+        Toast.fire({
+          icon: "error",
+          title: "無法加入追蹤，請稍後再試",
+        });
+      }
+    },
+    async unfollow(followingId) {
+      try {
+        this.isProcessing = true;
+        const { data } = await followshipsAPI.unfollow({ followingId });
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+        this.user.followerCount -= 1;
+        this.user.isFollowed = false;
+        this.isProcessing = false;
+        Toast.fire({ icon: "success", title: `${data.message}` });
+        this.isProcessing = false;
+      } catch (error) {
+        this.isProcessing = false;
+        Toast.fire({ icon: "error", title: "無法移除追蹤，請稍後再試" });
+      }
+    },
+    afterClickClose() {
+      this.dialog = false;
+    },
+  },
+  computed: {
+    ...mapState(["currentUser", "isAuthenticated"]),
+  },
 };
 </script>
 <style lang="scss">

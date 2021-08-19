@@ -15,10 +15,7 @@
         <v-card elevation="0" tile class="detail-tweet-card">
           <v-card-text class="ml-1">
             <v-row>
-              <router-link
-                :to="{ name: 'users', query: { id: tweet.UserId } }"
-                class="links"
-              >
+              <router-link :to="`/users/${tweet.UserId}`" class="links">
                 <v-avatar size="50" class="tweet-card-avatar mb-2">
                   <img :src="tweet.avatar" :alt="tweet.name" />
                 </v-avatar>
@@ -35,9 +32,9 @@
           </v-card-text>
 
           <v-card-text class="detail-tweet-card-content">
-            <v-card-tilte class="detail-tweet-card-content">
+            <p class="detail-tweet-card-content">
               {{ tweet.description }}
-            </v-card-tilte>
+            </p>
           </v-card-text>
           <v-card-subtitle class="detail-tweet-card-time">{{
             tweet.createdAt | fromNow
@@ -222,8 +219,6 @@ export default {
     },
     afterCreateReply(replyComment) {
       this.dialog = false;
-      console.log(replyComment);
-
       const reply = {
         id: replyComment.id,
         UserId: this.currentUser.id,
@@ -244,9 +239,8 @@ export default {
     },
   },
   beforeRouteUpdate(to, from, next) {
-    this.getTweet(to.params.id);
-    this.getRepies(to.params.id);
-
+    this.fetchTweet(to.params.id);
+    this.fetchReplies(to.params.id);
     next();
   },
 };

@@ -36,12 +36,20 @@ const routes = [
   {
     path: '/users/:id',
     name: 'users',
-    component: () => import('../views/UserProfile.vue')
-  },
-  {
-    path: '/users/replies',
-    name: 'user-replies',
-    component: () => import('../views/UserProfileRepied.vue')
+    component: () => import('../views/UserProfile.vue'),
+    redirect: '/users/:id/tweets',
+    children: [{
+      path: 'tweets',
+      component: () => import('../components/UserProfileTweets.vue')
+    },
+    {
+      path: 'repliedTweets',
+      component: () => import('../components/UserRepliedTweets.vue')
+    },
+    {
+      path: 'likedTweets',
+      component: () => import('../components/UserLikedTweets.vue')
+    }]
   },
   {
     path: '/users/follower',
@@ -72,7 +80,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  linkExactActiveClass: 'active',
+  linkExactActiveClass: 'active-class',
   routes
 })
 router.beforeEach((to, from, next) => {

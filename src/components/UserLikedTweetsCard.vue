@@ -1,21 +1,21 @@
 <template>
   <v-card elevation="0" tile class="tweet-list">
     <v-card elevation="0" class="tweet-card">
-      <router-link :to="`/users/${tweet.UserId}`" class="links">
+      <router-link :to="`/users/${tweet.likedTweetUserId}`" class="links">
         <v-avatar size="50" class="tweet-card-avatar">
           <img :src="tweet.avatar" :alt="tweet.name" />
         </v-avatar>
       </router-link>
       <v-list class="tweet-card-list">
         <v-card-text class="py-0">
-          <router-link :to="`/tweets/${tweet.id}`" class="links">
+          <router-link :to="`/tweets/${tweet.TweetId}`" class="links">
             <v-list-item-group>
               <v-list-item-title>
                 <span class="mr-2 tweets-name">{{ tweet.name }}</span>
                 <span class="tweets-account">@{{ tweet.account }}</span>
                 <span class="tweets-account"> · </span>
                 <span class="tweets-account"
-                  >{{ tweet.createdAt | fromNow }}
+                  >{{ tweet.tweetCreatedAt | fromNow }}
                 </span>
               </v-list-item-title>
               <v-list-item-action-text class="pt-2 pb-0 tweet-card-description">
@@ -33,7 +33,7 @@
               </v-btn>
             </template>
             <!-- modal -->
-            <ReplyTweetModal
+            <ReplyLikedTweetModal
               :init-tweet="tweet"
               @after-create-reply="afterCreateReply(tweet)"
               @after-click-close="afterClickClose"
@@ -67,10 +67,11 @@
   </v-card>
 </template>
 <script>
-import ReplyTweetModal from "./../components/ReplyTweetModal";
-import tweetsAPI from "./../apis/tweets";
-import { Toast } from "./../utils/helpers";
-import { fromNowFilter } from "./../utils/mixins";
+import ReplyLikedTweetModal from "./../components/ReplyLikedTweetModal";
+import tweetsAPI from "../apis/tweets";
+import { Toast } from "../utils/helpers";
+import { fromNowFilter } from "../utils/mixins";
+import { mapState } from "vuex";
 
 export default {
   name: "UserTweets",
@@ -88,7 +89,7 @@ export default {
     };
   },
   components: {
-    ReplyTweetModal,
+    ReplyLikedTweetModal,
   },
   watch: {
     initialTweet(newValue) {
@@ -104,7 +105,7 @@ export default {
     async postLike(tweet) {
       try {
         this.isProcessing = true;
-        const { data } = await tweetsAPI.postLike(tweet.id);
+        const { data } = await tweetsAPI.postLike(tweet.TweetId);
         if (data.status !== "success") {
           throw new Error(data.message);
         }
@@ -127,7 +128,7 @@ export default {
     async postUnlike(tweet) {
       try {
         this.isProcessing = true;
-        const { data } = await tweetsAPI.postUnlike(tweet.id);
+        const { data } = await tweetsAPI.postUnlike(tweet.TweetId);
         if (data.status !== "success") {
           throw new Error(data.message);
         }
@@ -148,7 +149,7 @@ export default {
       }
     },
     afterCreateReply(comment) {
-      if (this.tweet.id === comment.id) {
+      if (this.tweet.TweetId === comment.TweetId) {
         this.tweet.repliedCount += 1;
         this.dialog = false;
       }
@@ -156,6 +157,9 @@ export default {
     afterClickClose() {
       this.dialog = false;
     },
+  },
+  computed: {
+    ...mapState(["currentUser"]),
   },
 };
 </script>
