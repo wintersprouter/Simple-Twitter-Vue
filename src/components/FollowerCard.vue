@@ -29,7 +29,7 @@
       >
       <v-btn
         v-if="!follow.isFollowed && follow.followerId !== currentUser.id"
-        @click.stop.prevent="follow(follow.followerId)"
+        @click.stop.prevent="addFollow(follow.followerId)"
         outlined
         color="primary"
         class="text-no-wrap rounded-pill px-4"
@@ -42,6 +42,9 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import followshipsAPI from "./../apis/followships";
+import { Toast } from "./../utils/helpers";
+
 export default {
   name: "FollowerCard",
   props: {
@@ -59,6 +62,47 @@ export default {
   },
   computed: {
     ...mapState(["currentUser", "isAuthenticated"]),
+  },
+  methods: {
+    async addFollow(followingId) {
+      try {
+        this.isProcessing = true;
+        const { data } = await followshipsAPI.follow({ followingId });
+
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+        Toast.fire({
+          icon: "success",
+          title: `${data.message}`,
+        });
+
+        this.follow.isFollowed = true;
+        this.isProcessing = false;
+      } catch (error) {
+        this.isProcessing = false;
+        Toast.fire({
+          icon: "error",
+          title: "無法加入追蹤，請稍後再試",
+        });
+      }
+    },
+    async unfollow(followingId) {
+      try {
+        this.isProcessing = true;
+        const { data } = await followshipsAPI.unfollow({ followingId });
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+        this.follow.isFollowed = false;
+        this.isProcessing = false;
+        Toast.fire({ icon: "success", title: `${data.message}` });
+        this.isProcessing = false;
+      } catch (error) {
+        this.isProcessing = false;
+        Toast.fire({ icon: "error", title: "無法移除追蹤，請稍後再試" });
+      }
+    },
   },
 };
 </script>
