@@ -1,21 +1,21 @@
 <template>
   <section>
-    <FollowshipCard
+    <FollowerCard
       v-for="follower in followers"
-      :key="follower.id"
+      :key="follower.followerId"
       :initial-follow="follower"
     />
   </section>
 </template>
 
 <script>
-import FollowshipCard from "./FollowshipCard.vue";
+import FollowerCard from "./FollowerCard.vue";
 import userAPI from "../apis/users";
 import { Toast } from "./../utils/helpers";
 import { mapState } from "vuex";
 
 export default {
-  name: "Follower ",
+  name: "Follower",
   data() {
     return {
       followers: [],
@@ -24,7 +24,7 @@ export default {
     };
   },
   components: {
-    FollowshipCard,
+    FollowerCard,
   },
   methods: {
     async fetchUserFollowers(userId) {

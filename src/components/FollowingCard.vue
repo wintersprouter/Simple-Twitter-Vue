@@ -19,8 +19,8 @@
         </v-list-item-content>
       </v-card-text>
       <v-btn
-        v-if="follow.isFollowed && follow.id !== currentUser.id"
-        @click.stop.prevent="unfollow(follow.id)"
+        v-if="follow.isFollowed && follow.followingId !== currentUser.id"
+        @click.stop.prevent="unfollow(follow.followingId)"
         elevation="0"
         color="primary"
         class="text-no-wrap rounded-pill px-4"
@@ -28,8 +28,8 @@
         >正在跟隨</v-btn
       >
       <v-btn
-        v-if="!follow.isFollowed && follow.id !== currentUser.id"
-        @click.stop.prevent="follow(follow.id)"
+        v-if="!follow.isFollowed && follow.followingId !== currentUser.id"
+        @click.stop.prevent="follow(follow.followingId)"
         outlined
         color="primary"
         class="text-no-wrap rounded-pill px-4"
@@ -43,7 +43,7 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  name: "FollowshipCard",
+  name: "FollowingCard",
   props: {
     initialFollow: {
       type: Object,

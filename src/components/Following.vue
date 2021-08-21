@@ -1,8 +1,8 @@
 <template>
   <section>
-    <FollowshipCard
+    <FollowingCard
       v-for="following in followings"
-      :key="following.id"
+      :key="following.followingId"
       :initial-follow="following"
       :message="message"
     />
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import FollowshipCard from "./FollowshipCard.vue";
+import FollowingCard from "./FollowingCard.vue";
 import userAPI from "../apis/users";
 import { Toast } from "./../utils/helpers";
 import { mapState } from "vuex";
@@ -25,7 +25,7 @@ export default {
     };
   },
   components: {
-    FollowshipCard,
+    FollowingCard,
   },
   methods: {
     async fetchUserFollowings(userId) {
