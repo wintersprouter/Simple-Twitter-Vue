@@ -41,6 +41,11 @@ export default new Vuex.Store({
     },
     setTopUsers(state, topUsers) {
       state.topUsers = topUsers
+    },
+    revokeAuthentication(state) {
+      state.currentUser = {}
+      state.isAuthenticated = false
+      localStorage.removeItem('token')
     }
   },
   actions: {
