@@ -82,6 +82,7 @@ export default {
             icon: "warning",
             title: "管理員不可登入!",
           });
+          this.loading = false;
           return;
         }
 

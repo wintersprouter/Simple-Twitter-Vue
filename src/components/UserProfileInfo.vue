@@ -72,12 +72,21 @@
         >
       </v-list>
       <v-card-text class="profile-intro">{{ user.introduction }} </v-card-text>
-      <v-card-subtitle class="profile-followship"
-        ><span class="profile-following-count"
-          >{{ initialUser.followingCount }} 個</span
-        ><span class="profile-following-text mr-1">跟隨中</span
-        ><span class="profile-follower-count">{{ user.followerCount }} 位</span>
-        <span class="profile-follower-text">跟隨者</span></v-card-subtitle
+      <v-card-subtitle class="profile-followship">
+        <router-link :to="`/users/${user.id}/followship`" class="links">
+          <span class="profile-following-count"
+            >{{ initialUser.followingCount }} 個</span
+          ><span class="profile-following-text mr-1">跟隨中</span>
+        </router-link>
+        <router-link
+          :to="`/users/${user.id}/followship/follower`"
+          class="links"
+        >
+          <span class="profile-follower-count"
+            >{{ user.followerCount }} 位</span
+          >
+          <span class="profile-follower-text">跟隨者</span>
+        </router-link></v-card-subtitle
       >
     </v-card-text>
   </v-card>
@@ -132,6 +141,7 @@ export default {
         this.user.followerCount += 1;
         this.user.isFollowed = true;
         this.isProcessing = false;
+        this.$emit("after-build-followship");
       } catch (error) {
         this.isProcessing = false;
         Toast.fire({
@@ -152,6 +162,8 @@ export default {
         this.isProcessing = false;
         Toast.fire({ icon: "success", title: `${data.message}` });
         this.isProcessing = false;
+
+        this.$emit("after-build-followship");
       } catch (error) {
         this.isProcessing = false;
         Toast.fire({ icon: "error", title: "無法移除追蹤，請稍後再試" });

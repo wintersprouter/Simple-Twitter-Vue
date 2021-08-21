@@ -46,6 +46,9 @@
   .links, .nav-link {
     text-decoration: none;
   }
+  .links {
+    color:$font-color-account;
+  }
   
   font-family: $font-family, sans-serif !important;
   color:$font-color-root;

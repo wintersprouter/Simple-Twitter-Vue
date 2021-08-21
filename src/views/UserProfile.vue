@@ -19,31 +19,17 @@
           </v-container>
         </v-card>
         <v-divider></v-divider>
-        <UserProfileInfo :initial-user="user" />
+        <UserProfileInfo
+          :initial-user="user"
+          @after-build-followship="afterBuildFollowship"
+        />
         <v-tabs>
-          <v-tab>
-            <router-link
-              :to="`/users/${this.$route.params.id}/tweets`"
-              class="links"
-            >
-              推文
-            </router-link>
+          <v-tab :to="`/users/${this.$route.params.id}/tweets`"> 推文 </v-tab>
+          <v-tab :to="`/users/${this.$route.params.id}/repliedTweets`">
+            推文與回覆
           </v-tab>
-          <v-tab>
-            <router-link
-              :to="`/users/${this.$route.params.id}/repliedTweets`"
-              class="links"
-            >
-              推文與回覆
-            </router-link>
-          </v-tab>
-          <v-tab>
-            <router-link
-              :to="`/users/${this.$route.params.id}/likedTweets`"
-              class="links"
-            >
-              喜歡的內容
-            </router-link>
+          <v-tab :to="`/users/${this.$route.params.id}/likedTweets`">
+            喜歡的內容
           </v-tab>
         </v-tabs>
         <router-view />
@@ -136,6 +122,9 @@ export default {
         });
         console.log("error", error);
       }
+    },
+    afterBuildFollowship() {
+      this.$store.dispatch("fetchTopUsers");
     },
   },
 };
