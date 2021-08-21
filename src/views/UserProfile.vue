@@ -19,7 +19,10 @@
           </v-container>
         </v-card>
         <v-divider></v-divider>
-        <UserProfileInfo :initial-user="user" />
+        <UserProfileInfo
+          :initial-user="user"
+          @after-build-followship="afterBuildFollowship"
+        />
         <v-tabs>
           <v-tab :to="`/users/${this.$route.params.id}/tweets`"> 推文 </v-tab>
           <v-tab :to="`/users/${this.$route.params.id}/repliedTweets`">
@@ -119,6 +122,9 @@ export default {
         });
         console.log("error", error);
       }
+    },
+    afterBuildFollowship() {
+      this.$store.dispatch("fetchTopUsers");
     },
   },
 };

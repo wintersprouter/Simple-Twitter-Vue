@@ -5,6 +5,7 @@
       :key="following.followingId"
       :initial-follow="following"
       :message="message"
+      @after-build-followship="afterBuildFollowship"
     />
   </section>
 </template>
@@ -46,6 +47,9 @@ export default {
         });
         console.log("error", error);
       }
+    },
+    afterBuildFollowship() {
+      this.$store.dispatch("fetchTopUsers");
     },
   },
   created() {

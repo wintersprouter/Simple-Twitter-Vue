@@ -4,6 +4,7 @@
       v-for="follower in followers"
       :key="follower.followerId"
       :initial-follow="follower"
+      @after-build-followship="afterBuildFollowship"
     />
   </section>
 </template>
@@ -39,6 +40,9 @@ export default {
         });
         console.log("error", error);
       }
+    },
+    afterBuildFollowship() {
+      this.$store.dispatch("fetchTopUsers");
     },
   },
   created() {

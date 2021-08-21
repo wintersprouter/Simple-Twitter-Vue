@@ -141,6 +141,7 @@ export default {
         this.user.followerCount += 1;
         this.user.isFollowed = true;
         this.isProcessing = false;
+        this.$emit("after-build-followship");
       } catch (error) {
         this.isProcessing = false;
         Toast.fire({
@@ -161,6 +162,8 @@ export default {
         this.isProcessing = false;
         Toast.fire({ icon: "success", title: `${data.message}` });
         this.isProcessing = false;
+
+        this.$emit("after-build-followship");
       } catch (error) {
         this.isProcessing = false;
         Toast.fire({ icon: "error", title: "無法移除追蹤，請稍後再試" });
