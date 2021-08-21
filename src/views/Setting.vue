@@ -2,7 +2,13 @@
   <v-container>
     <v-row>
       <section class="left-section"><Navbar /></section>
-      <section class="main-section"><UserForm /></section>
+      <section class="main-section">
+        <v-card elevation="0" height="55px"
+          ><v-card-title class="header-title">帳戶設定</v-card-title>
+        </v-card>
+        <v-divider></v-divider>
+        <UserForm />
+      </section>
     </v-row>
   </v-container>
 </template>
@@ -21,5 +27,9 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+@import "./../assets/scss/layout/TwoColumn.scss";
+</style>
+
 
 

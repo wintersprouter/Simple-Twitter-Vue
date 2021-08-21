@@ -1,5 +1,5 @@
 <template>
-  <v-card tile elevation="0" max-width="540px" class="mx-auto mt-15" ref="form">
+  <v-card tile elevation="0" max-width="540px" ref="form">
     <v-card-text>
       <v-text-field
         label="帳號"
