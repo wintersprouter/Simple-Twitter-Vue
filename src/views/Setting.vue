@@ -7,7 +7,7 @@
           ><v-card-title class="header-title">帳戶設定</v-card-title>
         </v-card>
         <v-divider></v-divider>
-        <UserForm />
+        <UserForm :initial-current-user="currentUser" />
       </section>
     </v-row>
   </v-container>
@@ -30,6 +30,3 @@ export default {
 <style lang="scss">
 @import "./../assets/scss/layout/TwoColumn.scss";
 </style>
-
-
-
