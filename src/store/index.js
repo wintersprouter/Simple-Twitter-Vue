@@ -45,6 +45,7 @@ export default new Vuex.Store({
     revokeAuthentication(state) {
       state.currentUser = {}
       state.isAuthenticated = false
+      state.token = ''
       localStorage.removeItem('token')
     }
   },
@@ -64,9 +65,12 @@ export default new Vuex.Store({
           account,
           introduction
         })
+        return true
       } catch (error) {
         console.log('error', error)
         console.error(error.message)
+        commit('revokeAuthentication')
+        return false
       }
     },
     async fetchTopUsers({ commit }) {

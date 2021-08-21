@@ -10,7 +10,7 @@
         <!-- user -->
         <v-list-item-group color="primary">
           <!-- logo -->
-          <router-link to="/tweets">
+          <router-link to="/">
             <v-btn
               icon
               color="primary"
@@ -190,7 +190,7 @@ export default {
           id: 1,
           icon: home,
           title: "首頁",
-          path: "/tweets",
+          path: "/",
         },
         {
           id: 2,

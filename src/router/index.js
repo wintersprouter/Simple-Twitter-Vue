@@ -7,6 +7,15 @@ import store from './../store'
 
 Vue.use(VueRouter)
 
+const authorizeIsUser = (to, from, next) => {
+  const currentUser = store.state.currentUser
+  if (currentUser && currentUser.role === 'admin') {
+    next('/404')
+    return
+  }
+  next()
+}
+
 const routes = [
   {
     path: '/',
@@ -26,18 +35,21 @@ const routes = [
   {
     path: '/tweets',
     name: 'tweets',
-    component: Home
+    component: Home,
+    beforeEnter: authorizeIsUser
   },
   {
     path: '/tweets/:id',
     name: 'tweets-detail',
-    component: () => import('../views/TweetDetail.vue')
+    component: () => import('../views/TweetDetail.vue'),
+    beforeEnter: authorizeIsUser
   },
   {
     path: '/users/:id',
     name: 'users',
     component: () => import('../views/UserProfile.vue'),
     redirect: '/users/:id/tweets',
+    beforeEnter: authorizeIsUser,
     children: [{
       path: 'tweets',
       component: () => import('../components/UserProfileTweets.vue')
@@ -55,6 +67,7 @@ const routes = [
     path: '/users/:id/followship',
     name: 'user-followship',
     component: () => import('../views/Followship.vue'),
+    beforeEnter: authorizeIsUser,
     redirect: '/users/:id/followship/following',
     children: [{
       path: 'following',
@@ -94,8 +107,22 @@ const router = new VueRouter({
   routes
 })
 router.beforeEach((to, from, next) => {
-  store.dispatch('fetchCurrentUser')
-  store.dispatch('fetchTopUsers')
+  const token = localStorage.getItem('token')
+  let isAuthenticated = false
+  if (token) {
+    isAuthenticated = store.dispatch('fetchCurrentUser')
+    store.dispatch('fetchTopUsers')
+  }
+  const pathsWithoutAuthentication = ['sign-up', 'sign-in', 'admin']
+  if (!isAuthenticated && !pathsWithoutAuthentication.includes(to.name)) {
+    next('/signin')
+    return
+  }
+  if (isAuthenticated && pathsWithoutAuthentication.includes(to.name)) {
+    next('/tweets')
+    return
+  }
+
   next()
 })
 
