@@ -1,7 +1,9 @@
 <template>
   <v-container>
     <v-row>
-      <section class="left-section"><Navbar /></section>
+      <section class="left-section">
+        <Navbar @after-post-tweet="updateTweet(tweet)" />
+      </section>
       <section class="middle-section">
         <v-card elevation="0" height="55px"
           ><v-card-title class="header-title">首頁</v-card-title></v-card
@@ -71,7 +73,13 @@ export default {
       tweets: [],
       text: "",
       isProcessing: false,
+      newTweet: {},
     };
+  },
+  watch: {
+    initialTweets(newValue) {
+      this.tweets = [...newValue];
+    },
   },
   components: {
     Navbar,
@@ -129,6 +137,18 @@ export default {
         this.isProcessing = false;
         Toast.fire({ icon: "error", title: "無法新增推文，請稍後再試" });
       }
+    },
+    updateTweet(tweet) {
+      const { id, avatar, name, account } = this.currentUser;
+      const newTweet = {
+        UserId: id,
+        avatar,
+        name,
+        account,
+        createdAt: tweet.createdAt,
+        description: tweet.description,
+      };
+      this.tweets.unshift(newTweet);
     },
   },
 };

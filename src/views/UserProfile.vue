@@ -1,7 +1,9 @@
 <template>
   <v-container>
     <v-row>
-      <section class="left-section"><Navbar /></section>
+      <section class="left-section">
+        <Navbar @after-post-tweet="updateTweet" />
+      </section>
       <section class="middle-section">
         <v-card elevation="0" height="55px">
           <v-container class="d-flex pt-1">
@@ -132,7 +134,7 @@ export default {
     },
     afterBuildTopFollowship(topUserId) {
       const { id } = this.$route.params;
-      if (parseInt(id) == this.currentUser.id) {
+      if (parseInt(id) === this.currentUser.id) {
         this.user.followingCount += 1;
       } else if (topUserId === parseInt(id)) {
         this.user.isFollowed = true;
@@ -141,11 +143,17 @@ export default {
     },
     afterRemoveTopFollowship(topUserId) {
       const { id } = this.$route.params;
-      if (parseInt(id) == this.currentUser.id) {
+      if (parseInt(id) === this.currentUser.id) {
         this.user.followingCount -= 1;
       } else if (topUserId === parseInt(id)) {
         this.user.isFollowed = false;
         this.user.followerCount -= 1;
+      }
+    },
+    updateTweet() {
+      const { id } = this.$route.params;
+      if (parseInt(id) === this.currentUser.id) {
+        this.tweetCount += 1;
       }
     },
   },
