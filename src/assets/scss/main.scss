@@ -2,6 +2,9 @@
 @import "./utility/variables.scss";
 
 .v-application {
+  font-family: $font-family, sans-serif !important;
+  color:$font-color-root;
+  font-size:$font-size-root;
   [class*='text-'] {
     font-family: $font-family, sans-serif !important;
     font-style: $font-style-title;
@@ -52,7 +55,4 @@
   .image {
     object-fit: cover;
   } 
-  font-family: $font-family, sans-serif !important;
-  color:$font-color-root;
-  font-size:$font-size-root;
 }

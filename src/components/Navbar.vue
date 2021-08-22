@@ -3,7 +3,7 @@
     height="100vh"
     elevation="0"
     width="210px"
-    class="nav-list d-flex align-start flex-column pa-2 mb-auto"
+    class="nav-list d-flex align-start flex-column pa-2 mx-auto"
   >
     <div>
       <v-list rounded nav>
@@ -43,20 +43,24 @@
               ></v-img>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>{{ option.title }}</v-list-item-title>
+              <v-list-item-title class="nav-title">{{
+                option.title
+              }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item class="mt-3" v-if="currentUser.role === 'user'">
+          <v-list-item class="mt-5" v-if="currentUser.role === 'user'">
             <v-dialog v-model="dialog" max-width="600px" max-hight="300px">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
-                  block
                   rounded
+                  block
                   color="primary"
                   dark
                   v-bind="attrs"
                   v-on="on"
                   depressed
+                  x-large
+                  class="nav-button"
                 >
                   推文
                 </v-btn>
@@ -98,7 +102,7 @@
                       rounded
                       depressed
                       type="submit"
-                      mb-5
+                      class="mb-5"
                       :disabled="isProcessing"
                     >
                       推文
@@ -116,12 +120,19 @@
     <div>
       <v-list flat rounded nav>
         <v-list-item>
-          <v-list-item-icon class="mx-4">
-            <v-btn text rounded class="ml-1" @click="logout">
-              <v-img src="../assets/img/logout.svg" max-width="20"></v-img>
-              登出
-            </v-btn>
-          </v-list-item-icon>
+          <v-btn text rounded @click="logout" x-large>
+            <v-list-item-icon>
+              <v-img
+                src="../assets/img/logout.svg"
+                width="2rem"
+                height="2rem"
+                class="ml-2"
+              ></v-img>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title class="nav-title"> 登出</v-list-item-title>
+            </v-list-item-content>
+          </v-btn>
         </v-list-item>
       </v-list>
     </div>

@@ -3,4 +3,14 @@
 .nav-list {
   margin: 0 auto;
   justify-content:space-between;
+  .nav-title {
+    font-weight: $font-weight-title;
+    font-size: $font-size-title;
+    line-height:$font-line-title;
+  }
+  .nav-button {
+    margin: 0 auto;
+    width: 150px;
+    height: 45px;
+  }
 }
