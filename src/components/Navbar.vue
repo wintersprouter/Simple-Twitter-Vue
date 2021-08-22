@@ -187,6 +187,11 @@ export default {
           throw new Error(data.message);
         }
 
+        const tweet = {
+          createdAt: new Date(),
+          description: this.text,
+        };
+        this.$emit("after-post-tweet", tweet);
         this.text = "";
         this.isProcessing = false;
         this.dialog = false;
@@ -195,7 +200,6 @@ export default {
           icon: "success",
           title: "新增推文成功",
         });
-        this.$router.push("/tweets");
       } catch (error) {
         this.text = "";
         this.isProcessing = false;
@@ -273,6 +277,7 @@ export default {
   created() {
     this.fetchCurrentUser(this.currentUser);
     const { name } = this.$route;
+    console.log(this.$route);
     this.activeIcon(name);
   },
   computed: {

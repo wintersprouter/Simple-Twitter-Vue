@@ -52,7 +52,6 @@ const routes = [
   },
   {
     path: '/users/:id',
-
     component: () => import('../views/UserProfile.vue'),
     redirect: '/users/:id/tweets',
     beforeEnter: authorizeIsUser,

@@ -113,10 +113,7 @@ export default {
   },
   watch: {
     initialUser(newValue) {
-      this.user = {
-        ...this.user,
-        ...newValue,
-      };
+      this.user = newValue;
     },
   },
   methods: {
