@@ -1,0 +1,33 @@
+<template>
+  <v-container>
+    <v-row>
+      <section class="left-section"><Navbar /></section>
+      <section class="main-section">
+        <v-card elevation="0" height="55px"
+          ><v-card-title class="header-title">帳戶設定</v-card-title>
+        </v-card>
+        <v-divider></v-divider>
+        <UserForm />
+      </section>
+    </v-row>
+  </v-container>
+</template>
+<script>
+import Navbar from "./../components/Navbar";
+import UserForm from "./../components/UserForm.vue";
+import { mapState } from "vuex";
+
+export default {
+  name: "Setting",
+  components: {
+    Navbar,
+    UserForm,
+  },
+  computed: {
+    ...mapState(["currentUser", "isAuthenticated"]),
+  },
+};
+</script>
+<style lang="scss">
+@import "./../assets/scss/layout/TwoColumn.scss";
+</style>

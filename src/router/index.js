@@ -33,6 +33,12 @@ const routes = [
     component: () => import('../views/UserSignUp.vue')
   },
   {
+    path: '/setting',
+    name: 'setting',
+    component: () => import('../views/Setting.vue'),
+    beforeEnter: authorizeIsUser
+  },
+  {
     path: '/tweets',
     name: 'tweets',
     component: Home,

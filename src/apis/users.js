@@ -18,10 +18,14 @@ export default {
       })
     },
     updateProfile({ userId, formData }) {
-      return apiHelper.put(
-        `/users/${userId}`,
-        formData
-      )
+      return apiHelper.put(`/users/${userId}`, formData, {
+        headers: { Authorization: `Bearer ${getToken()}` }
+      })
+    },
+    updateAccount(userId, payload) {
+      return apiHelper.put(`/users/${userId}/account`, payload, {
+        headers: { Authorization: `Bearer ${getToken()}` }
+      })
     },
     getUserTweets(userId) {
       return apiHelper.get(`/users/${userId}/tweets`, {
