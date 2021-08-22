@@ -1,11 +1,6 @@
 <template>
   <v-card elevation="0" tile class="profile-card">
-    <v-img
-      height="200px"
-      :src="user.cover"
-      :alt="user.name"
-      class="profile-cover-image"
-    >
+    <v-img height="200px" :src="user.cover" :alt="user.name" class="image">
     </v-img>
     <v-avatar
       size="140"
@@ -15,7 +10,7 @@
       bottom
       fab
     >
-      <img class="profile-avatar-image" :alt="user.name" :src="user.avatar" />
+      <img class="image" :alt="user.name" :src="user.avatar" />
     </v-avatar>
     <v-card-text class="profile-content">
       <v-card-actions>

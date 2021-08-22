@@ -25,7 +25,7 @@
           height="200px"
           :src="user.cover"
           :alt="user.name"
-          class="profile-cover-image"
+          class="image"
         />
         <v-btn class="button-cover ma-2" plain fab>
           <v-file-input
@@ -43,11 +43,7 @@
         </v-btn>
 
         <v-avatar size="140" class="profile-avatar" fab>
-          <v-img
-            class="profile-avatar-image"
-            :src="user.avatar"
-            :alt="user.avatar"
-          />
+          <v-img class="image" :src="user.avatar" :alt="user.avatar" />
 
           <v-btn class="button-avatar ma-2" plain fab>
             <v-file-input

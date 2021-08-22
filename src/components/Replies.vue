@@ -5,7 +5,7 @@
         <v-row>
           <router-link :to="`/users/${reply.UserId}`" class="links">
             <v-avatar size="50" class="tweet-card-avatar mb-2">
-              <img :src="reply.avatar" :alt="reply.name" />
+              <img :src="reply.avatar" :alt="reply.name" class="image" />
             </v-avatar>
           </router-link>
           <v-list class="pt-1 ml-1">

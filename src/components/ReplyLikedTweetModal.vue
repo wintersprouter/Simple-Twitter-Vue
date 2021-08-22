@@ -10,7 +10,7 @@
     <v-card-actions>
       <v-container class="d-flex justify-space-between modal-top">
         <v-avatar size="50" class="tweet-card-avatar">
-          <img :src="initTweet.avatar" :alt="initTweet.name" />
+          <img :src="initTweet.avatar" :alt="initTweet.name" class="image" />
         </v-avatar>
         <v-divider vertical inset class="my-1" id="connect-line"></v-divider>
 
@@ -39,7 +39,11 @@
       <v-card-actions>
         <v-container class="d-flex justify-space-between">
           <v-avatar size="50" class="ml-2 mr-5">
-            <img :src="currentUser.avatar" :alt="currentUser.name" />
+            <img
+              :src="currentUser.avatar"
+              :alt="currentUser.name"
+              class="image"
+            />
           </v-avatar>
           <v-textarea
             v-model="repliedContent"

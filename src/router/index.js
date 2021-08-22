@@ -52,13 +52,14 @@ const routes = [
   },
   {
     path: '/users/:id',
-    name: 'users',
+
     component: () => import('../views/UserProfile.vue'),
     redirect: '/users/:id/tweets',
     beforeEnter: authorizeIsUser,
     children: [{
       path: 'tweets',
-      component: () => import('../components/UserProfileTweets.vue')
+      component: () => import('../components/UserProfileTweets.vue'),
+      name: 'users'
     },
     {
       path: 'repliedTweets',
@@ -92,12 +93,12 @@ const routes = [
   },
   {
     path: '/admin/tweets',
-    name: 'admin-tweets',
+    name: 'adminTweets',
     component: () => import('../views/AdminTweetsList.vue')
   },
   {
     path: '/admin/users',
-    name: 'admin-users',
+    name: 'adminUsers',
     component: () => import('../views/AdminUsersList.vue')
   },
 

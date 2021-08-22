@@ -14,6 +14,7 @@
                 <img
                   :src="currentUser.avatar"
                   :alt="'@' + currentUser.account"
+                  class="image"
                 />
               </v-avatar>
               <v-textarea
@@ -31,7 +32,7 @@
               <v-btn
                 color="primary"
                 rounded
-                elevation="0"
+                depressed
                 type="submit"
                 class="mt-0 mb-2 mr-3"
                 :disabled="isProcessing"

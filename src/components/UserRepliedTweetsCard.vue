@@ -4,7 +4,11 @@
       <v-container class="profile-reply-card">
         <router-link :to="`/users/${tweet.replyUserId}`" class="links">
           <v-avatar size="50" class="pt-0">
-            <img :src="tweet.replyAvatar" :alt="tweet.replyName" />
+            <img
+              :src="tweet.replyAvatar"
+              :alt="tweet.replyName"
+              class="image"
+            />
           </v-avatar>
         </router-link>
 
@@ -31,7 +35,11 @@
       <v-container class="profile-reply-card">
         <router-link :to="`/users/${tweet.tweetAuthorId}`" class="links">
           <v-avatar size="50" class="tweet-card-avatar">
-            <img :src="tweet.tweetAuthorAvatar" :alt="tweet.tweetAuthorName" />
+            <img
+              :src="tweet.tweetAuthorAvatar"
+              :alt="tweet.tweetAuthorName"
+              class="image"
+            />
           </v-avatar>
         </router-link>
         <router-link :to="`/tweets/${tweet.tweetId}`" class="links">
