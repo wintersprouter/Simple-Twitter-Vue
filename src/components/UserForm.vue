@@ -79,10 +79,11 @@
       ></v-text-field>
     </v-card-text>
     <v-card-actions class="button-section">
-      <!-- <v-btn block rounded color="primary" dark @click="submit" elevation="0"
+      <!-- <v-btn block rounded color="primary" dark @click="submit" depressed
         >註冊</v-btn
       > -->
       <v-btn
+        v-if="!isSaved"
         rounded
         color="primary"
         dark
@@ -92,6 +93,8 @@
         :loading="isloading"
         class="button-save"
         >儲存</v-btn
+      ><v-btn v-else rounded color="primary" dark depressed class="button-save"
+        >已儲存</v-btn
       >
     </v-card-actions>
   </v-form>
@@ -139,6 +142,7 @@ export default {
       show: false,
       checkShow: false,
       isloading: false,
+      isSaved: false,
     };
   },
   computed: {
@@ -238,6 +242,7 @@ export default {
         this.form.password = "";
         this.form.checkPassword = "";
         this.isloading = false;
+        this.isSaved = true;
       } catch (error) {
         console.log(error.message);
         this.isloading = false;
