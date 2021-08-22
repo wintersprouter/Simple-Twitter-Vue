@@ -6,9 +6,9 @@
     class="nav-list d-flex align-start flex-column pa-2 mb-auto"
   >
     <div>
-      <v-list flat rounded nav>
+      <v-list rounded nav>
         <!-- user -->
-        <v-list-item-group color="primary">
+        <v-list-item-group v-model="model" color="primary">
           <!-- logo -->
           <router-link to="/">
             <v-btn
@@ -31,22 +31,20 @@
           <v-list-item
             v-for="option in options"
             :key="option.id"
-            link
             class="mt-5 pr-5"
+            :to="option.path"
           >
-            <router-link
-              :to="option.path"
-              class="nav-link font-weight-bold text-left"
-            >
-              <v-list-item class="nav-option">
-                <v-list-item-icon class="ml-3 nav-icon">
-                  <v-img :src="option.icon" :alt="option.name"></v-img>
-                </v-list-item-icon>
-                <v-list-item-title>
-                  {{ option.title }}
-                </v-list-item-title>
-              </v-list-item>
-            </router-link>
+            <v-list-item-icon class="ml-3 nav-icon">
+              <v-img
+                :class="option.name"
+                :src="option.icon"
+                max-width="2rem"
+                max-height="2rem"
+              ></v-img>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>{{ option.title }}</v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
           <v-list-item class="mt-3" v-if="currentUser.role === 'user'">
             <v-dialog v-model="dialog" max-width="600px" max-hight="300px">
@@ -132,8 +130,11 @@
 </template>
 <script>
 import home from "./../assets/img/home.svg";
+import atHome from "./../assets/img/at_home.svg";
 import user from "./../assets/img/user.svg";
+import atUser from "./../assets/img/at_user.svg";
 import setting from "./../assets/img/setting.svg";
+import atSetting from "./../assets/img/at_setting.svg";
 import { mapState } from "vuex";
 import tweetsAPI from "../apis/tweets";
 import { Toast } from "./../utils/helpers";
@@ -142,6 +143,7 @@ export default {
   data: () => {
     return {
       dialog: false,
+      model: 1,
       rules: [(v) => v.length <= 150 || "Max 150 characters"],
       userId: -1,
       isProcessing: false,
@@ -192,25 +194,28 @@ export default {
     fetchCurrentUser(newVal) {
       const { id } = newVal;
       this.userId = id;
-      if (this.currentUser.role === "user") {
+      if (this.currentUser.role !== "admin") {
         this.options = [
           {
             id: 1,
             icon: home,
             title: "首頁",
-            path: "/",
+            path: "/tweets",
+            name: "tweets",
           },
           {
             id: 2,
             icon: user,
             title: "個人首頁",
             path: { name: "users", params: { id: this.userId } },
+            name: "users",
           },
           {
             id: 3,
             icon: setting,
             title: "設定",
             path: "/setting",
+            name: "setting",
           },
         ];
       } else {
@@ -220,19 +225,44 @@ export default {
             icon: home,
             title: "推文清單",
             path: "/admin/tweets",
+            name: "adminTweets",
           },
           {
             id: 2,
             icon: user,
             title: "使用者列表",
             path: "/admin/users",
+            name: "adminUsers",
           },
         ];
+      }
+    },
+    activeIcon(name) {
+      const optionName = [
+        "tweets",
+        "users",
+        "setting",
+        "adminTweets",
+        "adminUsers",
+      ];
+      const activeIcons = [atHome, atUser, atSetting, atHome, atUser];
+      for (let i = 0; i <= optionName.length; i++) {
+        if (name === optionName[i]) {
+          this.options.map((option) => {
+            if (option.name === optionName[i]) {
+              option.icon = activeIcons[i];
+              return;
+            }
+            return;
+          });
+        }
       }
     },
   },
   created() {
     this.fetchCurrentUser(this.currentUser);
+    const { name } = this.$route;
+    this.activeIcon(name);
   },
   computed: {
     ...mapState(["currentUser", "isAuthenticated"]),
