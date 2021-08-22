@@ -14,6 +14,7 @@
                 <img
                   :src="currentUser.avatar"
                   :alt="'@' + currentUser.account"
+                  class="image"
                 />
               </v-avatar>
               <v-textarea

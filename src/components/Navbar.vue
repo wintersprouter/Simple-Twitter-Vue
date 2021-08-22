@@ -23,6 +23,7 @@
                 src="../assets/img/logo.svg"
                 max-width="40px"
                 max-height="40px"
+                class="avatar-image"
               ></v-img>
             </v-btn>
           </router-link>
@@ -58,7 +59,7 @@
                   dark
                   v-bind="attrs"
                   v-on="on"
-                  elevation="0"
+                  depressed
                 >
                   推文
                 </v-btn>
@@ -74,8 +75,9 @@
                   <v-container class="d-flex justify-space-between">
                     <v-avatar size="50" class="mr-5">
                       <img
-                        src="https://cdn.vuetifyjs.com/images/john.jpg"
-                        alt="MasterCard"
+                        :src="currentUser.avatar"
+                        :alt="currentUser.name"
+                        class="image"
                       />
                     </v-avatar>
 

@@ -16,12 +16,8 @@
       <v-row align="center" justify="space-around">
         <v-list-item two-line class="ma-2" width="100%">
           <router-link :to="`/users/${user.id}`" class="links">
-            <v-list-item-avatar
-              class="user-info-avatar"
-              color="warning lighten-2"
-              size="50"
-            >
-              <img :src="user.avatar" :alt="user.name" />
+            <v-list-item-avatar class="user-info-avatar" color="gary" size="50">
+              <img :src="user.avatar" :alt="user.name" class="image" />
             </v-list-item-avatar>
           </router-link>
           <v-list-item-content class="user-info-text">
