@@ -7,7 +7,7 @@
           ><v-card-title class="header-title">帳戶設定</v-card-title>
         </v-card>
         <v-divider></v-divider>
-        <UserForm :initial-current-user="currentUser" />
+        <UserForm />
       </section>
     </v-row>
   </v-container>
@@ -16,6 +16,7 @@
 import Navbar from "./../components/Navbar";
 import UserForm from "./../components/UserForm.vue";
 import { mapState } from "vuex";
+
 export default {
   name: "Setting",
   components: {
