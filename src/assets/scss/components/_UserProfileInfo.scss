@@ -24,7 +24,6 @@
   }
   .profile-followship{
     padding:1rem 0.2rem;
-    cursor:pointer;
     .profile-following-count,.profile-following-text,.profile-follower-count,.profile-follower-text{
       font-weight: $font-weight-sub-title;
       font-size: $font-size-intro;
@@ -34,5 +33,4 @@
       color: $font-color-black;
     }
   }
-  // "https://assets.dryicons.com/uploads/icon/svg/12631/d3fab4d2-3a88-4439-9a83-3bea496ed86b.svg"
 }
