@@ -71,41 +71,44 @@
                   </v-btn>
                 </v-card-actions>
                 <v-divider></v-divider>
-                <v-card-actions>
-                  <v-container class="d-flex justify-space-between">
-                    <v-avatar size="50" class="mr-5">
-                      <img
-                        :src="currentUser.avatar"
-                        :alt="currentUser.name"
-                        class="image"
-                      />
-                    </v-avatar>
+                <v-form @submit.stop.prevent="handleSubmit">
+                  <v-card-actions>
+                    <v-container class="d-flex justify-space-between">
+                      <v-avatar size="50" class="mr-5">
+                        <img
+                          :src="currentUser.avatar"
+                          :alt="currentUser.name"
+                          class="image"
+                        />
+                      </v-avatar>
 
-                    <v-textarea
-                      :rules="rules"
-                      :value="value"
-                      counter
-                      maxlength="150"
-                      auto-grow
-                      autofocus
-                      row-height="15"
-                      placeholder="有什麼新鮮事？"
-                    ></v-textarea>
-                  </v-container>
-                </v-card-actions>
+                      <v-textarea
+                        v-model="text"
+                        :rules="rules"
+                        counter
+                        maxlength="140"
+                        auto-grow
+                        autofocus
+                        row-height="15"
+                        placeholder="有什麼新鮮事？"
+                      ></v-textarea>
+                    </v-container>
+                  </v-card-actions>
 
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn
-                    color="primary"
-                    rounded
-                    elevation="0"
-                    @click="dialog = false"
-                    mb-5
-                  >
-                    推文
-                  </v-btn>
-                </v-card-actions>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="primary"
+                      rounded
+                      depressed
+                      type="submit"
+                      mb-5
+                      :disabled="isProcessing"
+                    >
+                      推文
+                    </v-btn>
+                  </v-card-actions>
+                </v-form>
               </v-card>
             </v-dialog>
           </v-list-item>
@@ -180,13 +183,17 @@ import home from "./../assets/img/home.svg";
 import user from "./../assets/img/user.svg";
 import setting from "./../assets/img/setting.svg";
 import { mapState } from "vuex";
+import tweetsAPI from "../apis/tweets";
+import { Toast } from "./../utils/helpers";
 export default {
   name: "Navbar",
   data: () => {
     return {
       dialog: false,
       rules: [(v) => v.length <= 150 || "Max 150 characters"],
-      value: "",
+
+      isProcessing: false,
+      text: "",
       userOptions: [
         {
           id: 1,
@@ -227,6 +234,41 @@ export default {
     logout() {
       this.$store.commit("revokeAuthentication");
       this.$router.push("/signin");
+    },
+    async handleSubmit() {
+      try {
+        if (!this.text) {
+          Toast.fire({ icon: "warning", title: "您尚未填寫任何內容" });
+          return;
+        }
+        if (this.text.trim().length > 140) {
+          Toast.fire({ icon: "warning", title: "推文內容不得超過 140 字" });
+          return;
+        }
+        this.isProcessing = true;
+
+        const { data } = await tweetsAPI.postTweet({
+          description: this.text,
+        });
+        console.log(data);
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+
+        this.text = "";
+        this.isProcessing = false;
+        this.dialog = false;
+
+        Toast.fire({
+          icon: "success",
+          title: "新增推文成功",
+        });
+        this.$router.push("/tweets");
+      } catch (error) {
+        this.text = "";
+        this.isProcessing = false;
+        Toast.fire({ icon: "error", title: "無法新增推文，請稍後再試" });
+      }
     },
   },
   computed: {
