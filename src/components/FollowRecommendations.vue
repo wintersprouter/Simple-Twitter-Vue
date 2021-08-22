@@ -189,6 +189,8 @@ export default {
             };
           }
         });
+        const topUserId = followingId;
+        this.$emit("after-build-top-followhip", topUserId);
         this.isProcessing = false;
       } catch (error) {
         this.isProcessing = false;
@@ -216,6 +218,8 @@ export default {
             };
           }
         });
+        const topUserId = followingId;
+        this.$emit("after-remove-top-followhip", topUserId);
         Toast.fire({ icon: "success", title: `${data.message}` });
         this.isProcessing = false;
       } catch (error) {

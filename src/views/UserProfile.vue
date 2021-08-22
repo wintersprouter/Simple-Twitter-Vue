@@ -35,7 +35,11 @@
         <router-view />
       </section>
       <section class="right-section">
-        <FollowRecommendations :initial-top-users="topUsers" />
+        <FollowRecommendations
+          :initial-top-users="topUsers"
+          @after-build-top-followhip="afterBuildTopFollowship"
+          @after-remove-top-followhip="afterRemoveTopFollowship"
+        />
       </section>
     </v-row>
   </v-container>
@@ -125,6 +129,24 @@ export default {
     },
     afterBuildFollowship() {
       this.$store.dispatch("fetchTopUsers");
+    },
+    afterBuildTopFollowship(topUserId) {
+      const { id } = this.$route.params;
+      if (parseInt(id) == this.currentUser.id) {
+        this.user.followingCount += 1;
+      } else if (topUserId === parseInt(id)) {
+        this.user.isFollowed = true;
+        this.user.followerCount += 1;
+      }
+    },
+    afterRemoveTopFollowship(topUserId) {
+      const { id } = this.$route.params;
+      if (parseInt(id) == this.currentUser.id) {
+        this.user.followingCount -= 1;
+      } else if (topUserId === parseInt(id)) {
+        this.user.isFollowed = false;
+        this.user.followerCount -= 1;
+      }
     },
   },
 };

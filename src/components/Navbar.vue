@@ -273,6 +273,7 @@ export default {
   created() {
     this.fetchCurrentUser(this.currentUser);
     const { name } = this.$route;
+    console.log(this.$route);
     this.activeIcon(name);
   },
   computed: {
