@@ -29,27 +29,26 @@
           </router-link>
           <!-- logo-end -->
           <v-list-item
-            v-for="userOption in userOptions"
-            :key="userOption.id"
+            v-for="option in options"
+            :key="option.id"
             link
             class="mt-5 pr-5"
           >
             <router-link
-              :to="userOption.path"
+              :to="option.path"
               class="nav-link font-weight-bold text-left"
             >
               <v-list-item class="nav-option">
                 <v-list-item-icon class="ml-3 nav-icon">
-                  <v-img :src="userOption.icon" :alt="userOption.name"></v-img>
+                  <v-img :src="option.icon" :alt="option.name"></v-img>
                 </v-list-item-icon>
                 <v-list-item-title>
-                  {{ userOption.title }}
+                  {{ option.title }}
                 </v-list-item-title>
               </v-list-item>
             </router-link>
           </v-list-item>
-
-          <v-list-item class="mt-3">
+          <v-list-item class="mt-3" v-if="currentUser.role === 'user'">
             <v-dialog v-model="dialog" max-width="600px" max-hight="300px">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -81,7 +80,6 @@
                           class="image"
                         />
                       </v-avatar>
-
                       <v-textarea
                         v-model="text"
                         :rules="rules"
@@ -114,52 +112,6 @@
           </v-list-item>
         </v-list-item-group>
         <!-- user-end -->
-        <!-- admin -->
-        <v-list-item-group v-if="currentUser.role === 'admin'" color="primary">
-          <!-- logo -->
-          <router-link to="/admin/tweets">
-            <v-btn
-              icon
-              color="primary"
-              rounded
-              class="ml-1"
-              width="70px"
-              height="45px"
-            >
-              <v-img
-                src="../assets/img/logo.svg"
-                max-width="40px"
-                max-height="40px"
-              ></v-img>
-            </v-btn>
-          </router-link>
-          <!-- logo-end -->
-
-          <v-list-item
-            v-for="adminOption in adminOptions"
-            :key="adminOption.id"
-            link
-            class="mt-5 pr-5"
-          >
-            <router-link
-              :to="adminOption.path"
-              class="nav-link font-weight-bold text-left"
-            >
-              <v-list-item>
-                <v-list-item-icon class="ml-3 nav-icon">
-                  <v-img
-                    :src="adminOption.icon"
-                    :alt="adminOption.name"
-                  ></v-img>
-                </v-list-item-icon>
-                <v-list-item-title>
-                  {{ adminOption.title }}
-                </v-list-item-title>
-              </v-list-item>
-            </router-link>
-          </v-list-item>
-        </v-list-item-group>
-        <!-- admin-end -->
       </v-list>
     </div>
     <!-- logout -->
@@ -191,43 +143,10 @@ export default {
     return {
       dialog: false,
       rules: [(v) => v.length <= 150 || "Max 150 characters"],
-
+      userId: -1,
       isProcessing: false,
       text: "",
-      userOptions: [
-        {
-          id: 1,
-          icon: home,
-          title: "首頁",
-          path: "/",
-        },
-        {
-          id: 2,
-          icon: user,
-          title: "個人首頁",
-          path: { name: "users", params: { id: 1 } },
-        },
-        {
-          id: 3,
-          icon: setting,
-          title: "設定",
-          path: "/setting",
-        },
-      ],
-      adminOptions: [
-        {
-          id: 1,
-          icon: home,
-          title: "推文清單",
-          path: "/admin/tweets",
-        },
-        {
-          id: 2,
-          icon: user,
-          title: "使用者列表",
-          path: "/admin/users",
-        },
-      ],
+      options: [],
     };
   },
   methods: {
@@ -270,6 +189,50 @@ export default {
         Toast.fire({ icon: "error", title: "無法新增推文，請稍後再試" });
       }
     },
+    fetchCurrentUser(newVal) {
+      const { id } = newVal;
+      this.userId = id;
+      if (this.currentUser.role === "user") {
+        this.options = [
+          {
+            id: 1,
+            icon: home,
+            title: "首頁",
+            path: "/",
+          },
+          {
+            id: 2,
+            icon: user,
+            title: "個人首頁",
+            path: { name: "users", params: { id: this.userId } },
+          },
+          {
+            id: 3,
+            icon: setting,
+            title: "設定",
+            path: "/setting",
+          },
+        ];
+      } else {
+        this.options = [
+          {
+            id: 1,
+            icon: home,
+            title: "推文清單",
+            path: "/admin/tweets",
+          },
+          {
+            id: 2,
+            icon: user,
+            title: "使用者列表",
+            path: "/admin/users",
+          },
+        ];
+      }
+    },
+  },
+  created() {
+    this.fetchCurrentUser(this.currentUser);
   },
   computed: {
     ...mapState(["currentUser", "isAuthenticated"]),
