@@ -125,11 +125,11 @@ const router = new VueRouter({
   linkExactActiveClass: 'active-class',
   routes
 })
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const token = localStorage.getItem('token')
-  let isAuthenticated = false
+  let isAuthenticated
   if (token) {
-    isAuthenticated = store.dispatch('fetchCurrentUser')
+    isAuthenticated = await store.dispatch('fetchCurrentUser')
     store.dispatch('fetchTopUsers')
   }
   const userPathsWithoutAuthentication = ['sign-up', 'sign-in', 'admin', 'dashboard']
@@ -139,11 +139,11 @@ router.beforeEach((to, from, next) => {
     next('/signin')
     return
   }
-  if (isAuthenticated && userPathsWithoutAuthentication.includes(to.name)) {
+  if (isAuthenticated === 'user' && userPathsWithoutAuthentication.includes(to.name)) {
     next('/tweets')
     return
   }
-  if (isAuthenticated && adminPathsWithoutAuthentication.includes(to.name)) {
+  if (isAuthenticated === 'admin' && adminPathsWithoutAuthentication.includes(to.name)) {
     next('/dashboard')
     return
   }

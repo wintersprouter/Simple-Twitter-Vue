@@ -65,7 +65,7 @@ export default new Vuex.Store({
           account,
           introduction
         })
-        return true
+        return data.role
       } catch (error) {
         console.log('error', error)
         console.error(error.message)

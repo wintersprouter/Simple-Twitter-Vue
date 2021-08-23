@@ -10,26 +10,24 @@
     <v-card-actions>
       <v-container class="d-flex justify-space-between modal-top">
         <v-avatar size="50" class="tweet-card-avatar">
-          <img :src="initTweet.avatar" :alt="initTweet.name" class="image" />
+          <img :src="tweet.avatar" :alt="tweet.name" class="image" />
         </v-avatar>
         <v-divider vertical inset class="my-1" id="connect-line"></v-divider>
 
         <v-card-text class="py-0">
           <v-list-item-title>
-            <span class="mr-2 tweets-name">{{ initTweet.name }}</span>
-            <span class="tweets-account">@{{ initTweet.account }}</span>
+            <span class="mr-2 tweets-name">{{ tweet.name }}</span>
+            <span class="tweets-account">@{{ tweet.account }}</span>
             <span class="tweets-account"> · </span>
-            <span class="tweets-account">
-              {{ initTweet.createdAt | fromNow }}</span
-            >
+            <span class="tweets-account"> {{ tweet.createdAt | fromNow }}</span>
           </v-list-item-title>
           <p class="pt-2 pb-1 pr-0 tweet-description">
-            {{ initTweet.description }}
+            {{ tweet.description }}
           </p>
           <v-list-item-subtitle>
             <span class="tweet-reply-title mr-1">回覆給</span>
             <span class="tweet-reply-target"
-              >@{{ initTweet.account }}</span
+              >@{{ tweet.account }}</span
             ></v-list-item-subtitle
           >
         </v-card-text>
@@ -84,10 +82,10 @@ export default {
       required: true,
     },
   },
-  data: () => {
+  data() {
     return {
       repliedContent: " ",
-      initTweet: this.initTweet,
+      tweet: this.initTweet,
       isProcessing: false,
       dialog: true,
     };
@@ -117,7 +115,7 @@ export default {
           throw new Error(data.message);
         }
         const replyComment = {
-          id: this.initTweet.id,
+          id: this.tweet.id,
           content: content.comment,
           nowTime,
         };
@@ -127,7 +125,7 @@ export default {
 
         Toast.fire({
           icon: "success",
-          title: `回覆 @${this.initTweet.account} 的推文成功`,
+          title: `回覆 @${this.tweet.account} 的推文成功`,
         });
       } catch (error) {
         this.repliedContent = "";

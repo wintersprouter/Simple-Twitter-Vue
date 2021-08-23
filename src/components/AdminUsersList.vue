@@ -1,15 +1,17 @@
 <template>
-  <AdminUsers />
+  <v-card elevation="0">
+    <AdminUserCard v-for="user in users" :key="user.id" :initial-user="user" />
+  </v-card>
 </template>
 
 <script>
-import AdminUsers from "./AdminUsers.vue";
+import AdminUserCard from "./AdminUserCard.vue";
 import adminAPI from "./../apis/admin";
 import { Toast } from "./../utils/helpers";
 export default {
   name: "AdminUsersList",
   components: {
-    AdminUsers,
+    AdminUserCard,
   },
   data() {
     return {
@@ -20,7 +22,7 @@ export default {
     async fetchUsers() {
       try {
         const { data } = await adminAPI.getUsers();
-        this.user = data;
+        this.users = data;
       } catch (error) {
         Toast.fire({
           icon: "error",
@@ -35,3 +37,5 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+</style>

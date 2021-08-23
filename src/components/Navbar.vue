@@ -151,7 +151,7 @@ import tweetsAPI from "../apis/tweets";
 import { Toast } from "./../utils/helpers";
 export default {
   name: "Navbar",
-  data: () => {
+  data() {
     return {
       dialog: false,
       model: 1,
