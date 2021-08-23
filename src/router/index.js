@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import NotFound from '../views/NotFound.vue'
 import UserSignIn from '../views/UserSignIn.vue'
 import store from './../store'
+import AdminMain from './../views/AdminMain.vue'
 import AdminSignIn from './../views/AdminSignIn.vue'
 
 Vue.use(VueRouter)
@@ -11,6 +12,14 @@ Vue.use(VueRouter)
 const authorizeIsUser = (to, from, next) => {
   const currentUser = store.state.currentUser
   if (currentUser && currentUser.role === 'admin') {
+    next('/404')
+    return
+  }
+  next()
+}
+const authorizeIsAdmin = (to, from, next) => {
+  const currentUser = store.state.currentUser
+  if (currentUser && currentUser.role === 'user') {
     next('/404')
     return
   }
@@ -29,6 +38,11 @@ const routes = [
     component: UserSignIn
   },
   {
+    path: '/setting',
+    name: 'setting',
+    component: () => import('../views/Setting.vue')
+  },
+  {
     path: '/signup',
     name: 'sign-up',
     component: () => import('../views/UserSignUp.vue')
@@ -37,6 +51,25 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: AdminSignIn
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: AdminMain,
+    beforeEnter: authorizeIsAdmin,
+    redirect: '/dashboard/tweets',
+    children: [
+      {
+        path: 'tweets',
+        name: 'adminTweets',
+        component: () => import('../components/AdminTweetsList.vue')
+      },
+      {
+        path: 'users',
+        name: 'adminUsers',
+        component: () => import('../components/AdminUsersList.vue')
+      }
+    ]
   },
   {
     path: '/tweets',
@@ -82,18 +115,8 @@ const routes = [
     {
       path: 'follower',
       component: () => import('../components/Follower.vue')
-    },
+    }
     ]
-  },
-  {
-    path: '/admin/tweets',
-    name: 'adminTweets',
-    component: () => import('../views/AdminTweetsList.vue')
-  },
-  {
-    path: '/admin/users',
-    name: 'adminUsers',
-    component: () => import('../views/AdminUsersList.vue')
   },
 
   {
@@ -107,23 +130,28 @@ const router = new VueRouter({
   linkExactActiveClass: 'active-class',
   routes
 })
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const token = localStorage.getItem('token')
-  let isAuthenticated = false
+  let isAuthenticated
   if (token) {
-    isAuthenticated = store.dispatch('fetchCurrentUser')
+    isAuthenticated = await store.dispatch('fetchCurrentUser')
     store.dispatch('fetchTopUsers')
   }
-  const pathsWithoutAuthentication = ['sign-up', 'sign-in', 'admin']
-  if (!isAuthenticated && !pathsWithoutAuthentication.includes(to.name)) {
+  const userPathsWithoutAuthentication = ['sign-up', 'sign-in', 'admin', 'dashboard']
+  const adminPathsWithoutAuthentication = ['sign-up', 'sign-in', 'admin', 'tweets']
+
+  if (!isAuthenticated && !userPathsWithoutAuthentication.includes(to.name) && !adminPathsWithoutAuthentication.includes(to.name)) {
     next('/signin')
     return
   }
-  if (isAuthenticated && pathsWithoutAuthentication.includes(to.name)) {
+  if (isAuthenticated === 'user' && userPathsWithoutAuthentication.includes(to.name)) {
     next('/tweets')
     return
   }
-
+  if (isAuthenticated === 'admin' && adminPathsWithoutAuthentication.includes(to.name)) {
+    next('/dashboard')
+    return
+  }
   next()
 })
 
