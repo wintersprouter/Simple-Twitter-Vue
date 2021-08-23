@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import NotFound from '../views/NotFound.vue'
 import UserSignIn from '../views/UserSignIn.vue'
 import store from './../store'
+import AdminSignIn from './../views/AdminSignIn.vue'
 
 Vue.use(VueRouter)
 
@@ -33,10 +34,9 @@ const routes = [
     component: () => import('../views/UserSignUp.vue')
   },
   {
-    path: '/setting',
-    name: 'setting',
-    component: () => import('../views/Setting.vue'),
-    beforeEnter: authorizeIsUser
+    path: '/admin',
+    name: 'admin',
+    component: AdminSignIn
   },
   {
     path: '/tweets',
@@ -84,11 +84,6 @@ const routes = [
       component: () => import('../components/Follower.vue')
     },
     ]
-  },
-  {
-    path: '/admin/signin',
-    name: 'admin-sign-in',
-    component: () => import('../views/AdminSignIn.vue')
   },
   {
     path: '/admin/tweets',
