@@ -13,7 +13,7 @@
       ><v-spacer></v-spacer>
       <v-btn text :to="'/signup'" class="sign-link">註冊Twitter</v-btn
       ><span class="sign-link">·</span
-      ><v-btn text :to="'/admin/signin'" class="sign-link"
+      ><v-btn text :to="'/admin'" class="sign-link"
         >後台登入</v-btn
       ></v-card-actions
     >
