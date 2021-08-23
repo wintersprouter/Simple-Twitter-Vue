@@ -1,6 +1,14 @@
 <template>
   <v-card elevation="0">
-    <AdminUserCard v-for="user in users" :key="user.id" :initial-user="user" />
+    <v-container>
+      <v-row class="mb-6" no-gutters>
+        <AdminUserCard
+          v-for="user in users"
+          :key="user.id"
+          :initial-user="user"
+        />
+      </v-row>
+    </v-container>
   </v-card>
 </template>
 

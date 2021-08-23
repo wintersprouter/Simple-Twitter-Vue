@@ -3,7 +3,7 @@
     <v-row>
       <section class="left-section"><Navbar /></section>
       <section class="main-section">
-        <v-card elevation="0" height="55px">
+        <v-card elevation="0" height="55px" class="header-card">
           <v-card-title class="header-title">使用者列表</v-card-title>
         </v-card>
         <v-divider></v-divider>
@@ -28,4 +28,7 @@ export default {
 </script>
 <style lang="scss">
 @import "./../assets/scss/layout/TwoColumn.scss";
+.header-card {
+  width: 100%;
+}
 </style>

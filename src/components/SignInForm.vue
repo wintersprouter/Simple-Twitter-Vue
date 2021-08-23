@@ -103,11 +103,14 @@ export default {
           }
           localStorage.setItem("token", data.token);
           this.$store.commit("setCurrentUser", data.user);
+          this.loading = false;
           this.$router.push("/dashboard");
           Toast.fire({
             icon: "success",
             title: `Hi ${data.user.name} 歡迎回來`,
           });
+
+          return;
         } else {
           if (data.user.role !== "user") {
             Toast.fire({

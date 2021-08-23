@@ -38,6 +38,11 @@ const routes = [
     component: UserSignIn
   },
   {
+    path: '/setting',
+    name: 'setting',
+    component: () => import('../views/Setting.vue')
+  },
+  {
     path: '/signup',
     name: 'sign-up',
     component: () => import('../views/UserSignUp.vue')
@@ -46,6 +51,25 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: AdminSignIn
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: AdminMain,
+    beforeEnter: authorizeIsAdmin,
+    redirect: '/dashboard/tweets',
+    children: [
+      {
+        path: 'tweets',
+        name: 'adminTweets',
+        component: () => import('../components/AdminTweetsList.vue')
+      },
+      {
+        path: 'users',
+        name: 'adminUsers',
+        component: () => import('../components/AdminUsersList.vue')
+      }
+    ]
   },
   {
     path: '/tweets',
@@ -92,25 +116,6 @@ const routes = [
       path: 'follower',
       component: () => import('../components/Follower.vue')
     }
-    ]
-  },
-  {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: AdminMain,
-    beforeEnter: authorizeIsAdmin,
-    redirect: '/dashboard/tweets',
-    children: [
-      {
-        path: 'tweets',
-        name: 'adminTweets',
-        component: () => import('../components/AdminTweetsList.vue')
-      },
-      {
-        path: 'users',
-        name: 'adminUsers',
-        component: () => import('../components/AdminUsersList.vue')
-      }
     ]
   },
 
