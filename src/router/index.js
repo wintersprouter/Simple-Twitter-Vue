@@ -16,6 +16,14 @@ const authorizeIsUser = (to, from, next) => {
   }
   next()
 }
+const authorizeIsAdmin = (to, from, next) => {
+  const currentUser = store.state.currentUser
+  if (currentUser && currentUser.role === 'user') {
+    next('/404')
+    return
+  }
+  next()
+}
 
 const routes = [
   {
@@ -82,18 +90,20 @@ const routes = [
     {
       path: 'follower',
       component: () => import('../components/Follower.vue')
-    },
+    }
     ]
   },
   {
     path: '/admin/tweets',
     name: 'adminTweets',
-    component: () => import('../views/AdminTweetsList.vue')
+    component: () => import('../views/AdminTweetsList.vue'),
+    beforeEnter: authorizeIsAdmin
   },
   {
     path: '/admin/users',
     name: 'adminUsers',
-    component: () => import('../views/AdminUsersList.vue')
+    component: () => import('../views/AdminUsersList.vue'),
+    beforeEnter: authorizeIsAdmin
   },
 
   {
