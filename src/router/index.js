@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import NotFound from '../views/NotFound.vue'
 import UserSignIn from '../views/UserSignIn.vue'
 import store from './../store'
+import AdminMain from './../views/AdminMain.vue'
 import AdminSignIn from './../views/AdminSignIn.vue'
 
 Vue.use(VueRouter)
@@ -94,16 +95,23 @@ const routes = [
     ]
   },
   {
-    path: '/admin/tweets',
-    name: 'adminTweets',
-    component: () => import('../views/AdminTweetsList.vue'),
-    beforeEnter: authorizeIsAdmin
-  },
-  {
-    path: '/admin/users',
-    name: 'adminUsers',
-    component: () => import('../views/AdminUsersList.vue'),
-    beforeEnter: authorizeIsAdmin
+    path: '/dashboard',
+    name: 'dashboard',
+    component: AdminMain,
+    beforeEnter: authorizeIsAdmin,
+    redirect: '/dashboard/tweets',
+    children: [
+      {
+        path: 'tweets',
+        name: 'adminTweets',
+        component: () => import('../components/AdminTweetsList.vue')
+      },
+      {
+        path: 'users',
+        name: 'adminUsers',
+        component: () => import('../components/AdminUsersList.vue')
+      }
+    ]
   },
 
   {
@@ -124,16 +132,21 @@ router.beforeEach((to, from, next) => {
     isAuthenticated = store.dispatch('fetchCurrentUser')
     store.dispatch('fetchTopUsers')
   }
-  const pathsWithoutAuthentication = ['sign-up', 'sign-in', 'admin']
-  if (!isAuthenticated && !pathsWithoutAuthentication.includes(to.name)) {
+  const userPathsWithoutAuthentication = ['sign-up', 'sign-in', 'admin', 'dashboard']
+  const adminPathsWithoutAuthentication = ['sign-up', 'sign-in', 'admin', 'tweets']
+
+  if (!isAuthenticated && !userPathsWithoutAuthentication.includes(to.name) && !adminPathsWithoutAuthentication.includes(to.name)) {
     next('/signin')
     return
   }
-  if (isAuthenticated && pathsWithoutAuthentication.includes(to.name)) {
+  if (isAuthenticated && userPathsWithoutAuthentication.includes(to.name)) {
     next('/tweets')
     return
   }
-
+  if (isAuthenticated && adminPathsWithoutAuthentication.includes(to.name)) {
+    next('/dashboard')
+    return
+  }
   next()
 })
 

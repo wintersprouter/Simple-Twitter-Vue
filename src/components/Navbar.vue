@@ -239,14 +239,14 @@ export default {
             id: 1,
             icon: home,
             title: "推文清單",
-            path: "/admin/tweets",
+            path: "/dashboard/tweets",
             name: "adminTweets",
           },
           {
             id: 2,
             icon: user,
             title: "使用者列表",
-            path: "/admin/users",
+            path: "/dashboard/users",
             name: "adminUsers",
           },
         ];

@@ -103,7 +103,7 @@ export default {
           }
           localStorage.setItem("token", data.token);
           this.$store.commit("setCurrentUser", data.user);
-          this.$router.push("/admin/tweets");
+          this.$router.push("/dashboard");
           Toast.fire({
             icon: "success",
             title: `Hi ${data.user.name} 歡迎回來`,
