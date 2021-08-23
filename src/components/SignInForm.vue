@@ -6,37 +6,42 @@
     class="mx-auto mt-0"
     @submit.stop.prevent="handleSubmit()"
   >
-    <v-text-field
-      label="帳號"
-      v-model="account"
-      name="account"
-      :rules="[rules.required]"
-      autofocus
-      filled
-      dense
-    ></v-text-field>
-    <v-text-field
-      label="密碼"
-      v-model="password"
-      name="password"
-      :rules="[rules.required, rules.min]"
-      counter
-      filled
-      dense
-      :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-      @click:append="show = !show"
-      :type="show ? 'text' : 'password'"
-    ></v-text-field>
-    <v-btn
-      block
-      elevation="0"
-      rounded
-      color="primary"
-      dark
-      type="submit"
-      :loading="loading"
-      >登入
-    </v-btn>
+    <v-card-text>
+      <v-text-field
+        label="帳號"
+        v-model="account"
+        name="account"
+        :rules="[rules.required]"
+        autofocus
+        filled
+        dense
+      ></v-text-field>
+      <v-text-field
+        label="密碼"
+        v-model="password"
+        name="password"
+        :rules="[rules.required, rules.min]"
+        counter
+        filled
+        dense
+        :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+        @click:append="show = !show"
+        :type="show ? 'text' : 'password'"
+      ></v-text-field>
+    </v-card-text>
+    <v-card-actions class="button-section">
+      <v-btn
+        block
+        depressed
+        rounded
+        color="primary"
+        dark
+        type="submit"
+        :loading="loading"
+        class="button-signin"
+        >登入
+      </v-btn>
+    </v-card-actions>
   </v-form>
 </template>
 <script>
@@ -105,3 +110,14 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+@import "../assets/scss/utility/variables.scss";
+.button-section {
+  position: relative;
+  .button-signin {
+    font-weight: $font-weight-sub-title;
+    font-size: $font-size-title;
+    line-height: $font-line-title;
+  }
+}
+</style>

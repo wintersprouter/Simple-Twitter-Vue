@@ -9,12 +9,12 @@
     </v-card-actions>
     <v-card-title class="sign-title">登入Twitter</v-card-title>
     <SignInForm />
-    <v-card-actions class="pt-5"
+    <v-card-actions class="pt-5 justify-content-center"
       ><v-spacer></v-spacer>
-      <router-link :to="'/signup'" class="sign-link">註冊Twitter</router-link
+      <v-btn text :to="'/signup'" class="sign-link">註冊Twitter</v-btn
       ><span class="sign-link">·</span
-      ><router-link :to="'/admin/signin'" class="sign-link"
-        >後台登入</router-link
+      ><v-btn text :to="'/admin/signin'" class="sign-link"
+        >後台登入</v-btn
       ></v-card-actions
     >
   </v-sheet>

@@ -1,0 +1,13 @@
+@import "./../main.scss";
+.button-section {
+  position: relative;
+  .button-signup {
+    font-weight: $font-weight-title;
+    font-size: $font-size-title;
+    line-height: $font-line-title;
+  }
+  .button-save {
+    position: absolute;
+    right: 16px;
+  }
+}
