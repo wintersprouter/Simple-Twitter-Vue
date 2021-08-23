@@ -15,6 +15,7 @@
         filled
         dense
         required
+        :autofocus="isSignUp"
         :error-messages="accountErrors"
         @input="$v.form.account.$touch()"
         @blur="$v.form.account.$touch()"
@@ -79,23 +80,41 @@
       ></v-text-field>
     </v-card-text>
     <v-card-actions class="button-section">
-      <!-- <v-btn block rounded color="primary" dark @click="submit" depressed
-        >註冊</v-btn
-      > -->
-      <v-btn
-        v-if="!isSaved"
-        rounded
-        color="primary"
-        dark
-        @click="submit()"
-        type="submit"
-        depressed
-        :loading="isloading"
-        class="button-save"
-        >儲存</v-btn
-      ><v-btn v-else rounded color="primary" dark depressed class="button-save"
-        >已儲存</v-btn
+      <template v-if="isSignUp">
+        <v-btn
+          block
+          rounded
+          color="primary"
+          dark
+          @click="submit()"
+          depressed
+          class="button-signup"
+          type="submit"
+          >註冊</v-btn
+        ></template
       >
+      <template v-else>
+        <v-btn
+          v-if="!isSaved"
+          rounded
+          color="primary"
+          dark
+          @click="submit()"
+          type="submit"
+          depressed
+          :loading="isloading"
+          class="button-save"
+          >儲存</v-btn
+        ><v-btn
+          v-else
+          rounded
+          color="primary"
+          dark
+          depressed
+          class="button-save"
+          >已儲存</v-btn
+        >
+      </template>
     </v-card-actions>
   </v-form>
 </template>
@@ -143,7 +162,14 @@ export default {
       checkShow: false,
       isloading: false,
       isSaved: false,
+      isSignUp: this.inIsSignUp,
     };
+  },
+  props: {
+    inIsSignUp: {
+      type: Boolean,
+      default: () => false,
+    },
   },
   computed: {
     nameErrors() {
@@ -256,11 +282,5 @@ export default {
 };
 </script>
 <style lang="scss">
-.button-section {
-  position: relative;
-  .button-save {
-    position: absolute;
-    right: 16px;
-  }
-}
+@import "../assets/scss/components/_UserForm.scss";
 </style>
