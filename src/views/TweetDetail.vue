@@ -95,7 +95,11 @@
           </v-card-actions>
         </v-card>
         <v-divider></v-divider
-        ><Replies :reply="reply" v-for="reply in replies" :key="reply.id" />
+        ><Replies
+          :init-reply="reply"
+          v-for="reply in replies"
+          :key="reply.id"
+        />
       </section>
       <section class="right-section">
         <FollowRecommendations :initial-top-users="topUsers" />

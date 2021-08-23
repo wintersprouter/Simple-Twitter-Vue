@@ -40,15 +40,15 @@ import { fromNowFilter } from "./../utils/mixins";
 export default {
   name: "Replies",
   props: {
-    reply: {
+    initReply: {
       type: Object,
       default: () => {},
     },
-    data() {
-      return {
-        reply: this.reply,
-      };
-    },
+  },
+  data() {
+    return {
+      Reply: this.initReply,
+    };
   },
   mixins: [fromNowFilter],
   watch: {
