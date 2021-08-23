@@ -90,6 +90,7 @@
           depressed
           class="button-signup"
           type="submit"
+          :loading="isloading"
           >註冊</v-btn
         ></template
       >
@@ -129,6 +130,7 @@ import {
 import { mapState } from "vuex";
 import { Toast } from "./../utils/helpers";
 import usersAPI from "./../apis/users";
+import authorizationAPI from "./../apis/authorization";
 export default {
   name: "UserForm",
   mixins: [validationMixin],
@@ -146,7 +148,9 @@ export default {
     },
   },
   created() {
-    this.fetchCurrentUser(this.currentUser);
+    if (this.isSignUp === false) {
+      this.fetchCurrentUser(this.currentUser);
+    }
   },
 
   data() {
@@ -259,16 +263,24 @@ export default {
         }
         this.isloading = true;
         const userId = this.currentUser.id;
-        const { data } = await usersAPI.users.updateAccount(userId, formData);
-
-        if (data.status !== "success") {
-          throw new Error(data.message);
+        if (this.isSignUp === true) {
+          const { data } = await authorizationAPI.signUp(formData);
+          if (data.status !== "success") {
+            throw new Error(data.message);
+          }
+          Toast.fire({ icon: "success", title: data.message });
+          this.$router.push("/signin");
+        } else {
+          const { data } = await usersAPI.users.updateAccount(userId, formData);
+          if (data.status !== "success") {
+            throw new Error(data.message);
+          }
+          Toast.fire({ icon: "success", title: data.message });
+          this.form.password = "";
+          this.form.checkPassword = "";
+          this.isloading = false;
+          this.isSaved = true;
         }
-        Toast.fire({ icon: "success", title: data.message });
-        this.form.password = "";
-        this.form.checkPassword = "";
-        this.isloading = false;
-        this.isSaved = true;
       } catch (error) {
         console.log(error.message);
         this.isloading = false;
@@ -281,6 +293,6 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../assets/scss/components/_UserForm.scss";
 </style>

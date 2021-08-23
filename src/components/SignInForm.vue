@@ -115,8 +115,7 @@ export default {
 .button-section {
   position: relative;
   .button-signin {
-    height: 50px;
-    font-weight: $font-weight-title;
+    font-weight: $font-weight-sub-title;
     font-size: $font-size-title;
     line-height: $font-line-title;
   }

@@ -6,5 +6,8 @@ export default {
       account,
       password
     })
+  },
+  signUp(payload) {
+    return apiHelper.post('/users', payload)
   }
 }
