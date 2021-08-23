@@ -1,5 +1,5 @@
-<template>
-  <v-card elevation="0" class="admin-tweets-card">
+<template></template>
+  <!-- <v-card elevation="0" class="admin-tweets-card">
     <v-avatar size="50" class="tweet-card-avatar mt-3">
       <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="MasterCard" />
     </v-avatar>
@@ -24,8 +24,23 @@
     <v-card-actions class="pt-0 mt-0 align-start justify-end">
       <v-btn text><span>&#10005;</span> </v-btn>
     </v-card-actions>
-  </v-card>
+  </v-card> -->
 </template>
+<script>
+export default {
+  props: {
+    initialTweet: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      tweet: this.initialTweet,
+    };
+  },
+};
+</script>
 <style lang="scss">
 @import "../assets/scss/components/_AdminTweets.scss";
 </style>
