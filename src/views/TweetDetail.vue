@@ -97,7 +97,8 @@
             </v-card-actions>
           </v-card>
         </template>
-        <v-divider></v-divider><Replies :init-replies="replies" />
+        <v-divider></v-divider> <TweetsLoading v-if="isLoading" />
+        <template v-else><Replies :init-replies="replies" /></template>
       </section>
       <section class="right-section">
         <FollowRecommendations :initial-top-users="topUsers" />
@@ -115,6 +116,7 @@ import { mapState } from "vuex";
 import tweetsAPI from "../apis/tweets";
 import { Toast } from "./../utils/helpers";
 import TweetLoading from "../components/TweetLoading.vue";
+import TweetsLoading from "../components/TweetsLoading.vue";
 
 export default {
   name: "TweetDetail",
@@ -124,6 +126,7 @@ export default {
     FollowRecommendations,
     ReplyTweetModal,
     TweetLoading,
+    TweetsLoading,
   },
   data() {
     return {
@@ -173,9 +176,12 @@ export default {
     },
     async fetchReplies(tweetId) {
       try {
+        this.isLoading = true;
         const { data } = await tweetsAPI.getReplies(tweetId);
         this.replies = data;
+        this.isLoading = false;
       } catch (error) {
+        this.isLoading = false;
         Toast.fire({
           icon: "error",
           title: "無法取得回文資料，請稍後再試",
