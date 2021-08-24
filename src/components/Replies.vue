@@ -1,6 +1,12 @@
 <template>
   <v-card elevation="0" tile class="reply-list">
-    <v-card elevation="0" class="reply-card">
+    <v-card
+      tile
+      v-for="reply in replies"
+      :key="reply.id"
+      elevation="0"
+      class="reply-card"
+    >
       <v-card-text class="ml-1">
         <v-row>
           <router-link :to="`/users/${reply.UserId}`" class="links">
@@ -31,7 +37,6 @@
         </v-row>
       </v-card-text>
     </v-card>
-    <v-divider></v-divider>
   </v-card>
 </template>
 
@@ -40,14 +45,14 @@ import { fromNowFilter } from "./../utils/mixins";
 export default {
   name: "Replies",
   props: {
-    initReply: {
-      type: Object,
-      default: () => {},
+    initReplies: {
+      type: Array,
+      default: () => [],
     },
   },
   data() {
     return {
-      Reply: this.initReply,
+      replies: this.initReplies,
     };
   },
   mixins: [fromNowFilter],
