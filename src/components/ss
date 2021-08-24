@@ -1,0 +1,28 @@
+<template v-slot:default>
+          <thead>
+            <tr>
+              <th class="text-left">推文Id</th>
+              <th class="text-left">作者Id</th>
+              <th class="text-left">作者帳號</th>
+              <th class="text-left">推文內容</th>
+              <th class="text-left">推文時間</th>
+              <th class="text-left">推文讚數</th>
+              <th class="text-left">推文回文數</th>
+              <th class="text-left">推文刪除</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="tweet in tweets" :key="tweet.id" :initial-tweet="tweet">
+              <td>{{ tweet.id }}</td>
+              <td>{{ tweet.UserId }}</td>
+              <td>@{{ tweet.account }}</td>
+              <td>{{ tweet.description | preview }}</td>
+              <td>{{ tweet.createdAt | format }}</td>
+              <td>{{ tweet.likedCount }}</td>
+              <td>{{ tweet.repliedCount }}</td>
+              <td>
+                <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+              </td>
+            </tr>
+          </tbody>
+        </template>
