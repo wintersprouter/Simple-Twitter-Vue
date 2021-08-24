@@ -10,3 +10,14 @@ export const fromNowFilter = {
     }
   }
 }
+export const tweetFilter = {
+  filters: {
+    preview(tweet) {
+      if (tweet.length > 50) {
+        return tweet.substring(0, 50) + '...'
+      } else {
+        return tweet
+      }
+    }
+  }
+}

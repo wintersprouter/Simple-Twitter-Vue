@@ -24,7 +24,7 @@
               <td>{{ tweet.id }}</td>
               <td>{{ tweet.UserId }}</td>
               <td>@{{ tweet.account }}</td>
-              <td>{{ tweet.description }}</td>
+              <td>{{ tweet.description | preview }}</td>
               <td>{{ tweet.createdAt | format }}</td>
               <td>{{ tweet.likedCount }}</td>
               <td>{{ tweet.repliedCount }}</td>
@@ -42,13 +42,13 @@
 import tweetsAPI from "../apis/tweets";
 import { Toast } from "./../utils/helpers";
 // import AdminTweets from "../components/AdminTweets";
-import { fromNowFilter } from "./../utils/mixins";
+import { fromNowFilter, tweetFilter } from "./../utils/mixins";
 export default {
   name: "AdminTweetsList",
   // components: {
   //   AdminTweets,
   // },
-  mixins: [fromNowFilter],
+  mixins: [fromNowFilter, tweetFilter],
   data() {
     return {
       tweets: [],
