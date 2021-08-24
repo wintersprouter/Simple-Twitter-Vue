@@ -5,26 +5,30 @@
         <Navbar @after-post-tweet="updateTweet" />
       </section>
       <section class="middle-section">
-        <v-card elevation="0" height="55px">
-          <v-container class="d-flex pt-1">
-            <v-btn icon @click="$router.back()">
-              <v-icon color="black">mdi-arrow-left</v-icon>
-            </v-btn>
-            <p class="ml-3">
-              <v-list-item-title class="header-user-title">{{
-                this.name
-              }}</v-list-item-title>
-              <v-list-item-subtitle class="header-user-subtitle"
-                >{{ this.tweetCount }} 推文
-              </v-list-item-subtitle>
-            </p>
-          </v-container>
-        </v-card>
-        <v-divider></v-divider>
-        <UserProfileInfo
-          :initial-user="user"
-          @after-build-followship="afterBuildFollowship"
-        />
+        <ProfileLoading v-if="!isLoading" />
+        <template v-else>
+          <v-card elevation="0" height="55px">
+            <v-container class="d-flex pt-1">
+              <v-btn icon @click="$router.back()">
+                <v-icon color="black">mdi-arrow-left</v-icon>
+              </v-btn>
+              <p class="ml-3">
+                <v-list-item-title class="header-user-title">{{
+                  this.name
+                }}</v-list-item-title>
+                <v-list-item-subtitle class="header-user-subtitle"
+                  >{{ this.tweetCount }} 推文
+                </v-list-item-subtitle>
+              </p>
+            </v-container>
+          </v-card>
+
+          <v-divider></v-divider>
+          <UserProfileInfo
+            :initial-user="user"
+            @after-build-followship="afterBuildFollowship"
+          />
+        </template>
         <v-tabs>
           <v-tab :to="`/users/${this.$route.params.id}/tweets`"> 推文 </v-tab>
           <v-tab :to="`/users/${this.$route.params.id}/repliedTweets`">
@@ -53,6 +57,7 @@ import UserProfileInfo from "./../components/UserProfileInfo";
 import { mapState } from "vuex";
 import usersAPI from "./../apis/users.js";
 import { Toast } from "./../utils/helpers";
+import ProfileLoading from "./../components/ProfileLoading.vue";
 
 export default {
   name: "UserProfile",
@@ -72,12 +77,14 @@ export default {
       },
       name: "",
       tweetCount: 0,
+      isLoading: false,
     };
   },
   components: {
     Navbar,
     FollowRecommendations,
     UserProfileInfo,
+    ProfileLoading,
   },
   computed: {
     ...mapState(["currentUser", "isAuthenticated", "topUsers"]),
@@ -93,6 +100,7 @@ export default {
   methods: {
     async fetchProfileInfo(userId) {
       try {
+        this.isLoading = true;
         const { data } = await usersAPI.users.getProfile(userId);
         if (data.status !== "success") {
           throw new Error(data.message);
@@ -124,7 +132,9 @@ export default {
         };
         this.name = name;
         this.tweetCount = tweetCount;
+        this.isLoading = false;
       } catch (error) {
+        this.isLoading = false;
         Toast.fire({
           icon: "error",
           title: "無法取得使用者資料，請稍後再試",
