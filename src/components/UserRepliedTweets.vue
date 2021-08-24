@@ -1,6 +1,6 @@
 <template>
   <section>
-    <RepliedTweetsLoading v-if="!isLoading" />
+    <RepliedTweetsLoading v-if="isLoading" />
     <UserRepliedTweetsCard
       v-else
       v-for="tweet in tweets"
