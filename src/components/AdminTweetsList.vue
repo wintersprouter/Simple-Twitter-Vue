@@ -19,6 +19,8 @@
         :search="search"
         :headers="headers"
         :items="tweets"
+        :loading="isLoading"
+        loading-text="Loading... Please wait"
       >
         <template v-slot:item.actions="{ item }">
           <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
@@ -43,8 +45,8 @@ export default {
     return {
       tweets: [
         {
-          id: -1,
-          UserId: -1,
+          id: "",
+          UserId: "",
           account: "",
           description: "",
           createdAt: "",
@@ -71,6 +73,7 @@ export default {
         { text: "推文回文數", value: "repliedCount" },
         { text: "Action", value: "action", sortable: false },
       ],
+      isLoading: false,
     };
   },
   watch: {
@@ -84,6 +87,7 @@ export default {
   methods: {
     async fetchTweets() {
       try {
+        this.isLoading = true;
         const { data } = await tweetsAPI.getTweets();
         this.tweets = data.map((t) => {
           return {
@@ -96,7 +100,9 @@ export default {
                 : t.description,
           };
         });
+        this.isLoading = false;
       } catch (error) {
+        this.isLoading = false;
         Toast.fire({
           icon: "error",
           title: "無法取得推文資料，請稍後再試",
