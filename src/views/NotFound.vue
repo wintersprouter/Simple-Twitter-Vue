@@ -13,7 +13,7 @@
     ></v-img>
     <v-card-actions
       ><v-spacer></v-spacer
-      ><v-btn elevation="2" x-large color="primary" @click="$router.back()">
+      ><v-btn elevation="2" x-large color="primary" @click="$router.go(-2)">
         Back
       </v-btn></v-card-actions
     >

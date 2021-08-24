@@ -94,6 +94,9 @@ export default {
     async fetchProfileInfo(userId) {
       try {
         const { data } = await usersAPI.users.getProfile(userId);
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
         const {
           account,
           avatar,
@@ -126,6 +129,7 @@ export default {
           icon: "error",
           title: "無法取得使用者資料，請稍後再試",
         });
+        this.$router.push("/404");
         console.log("error", error);
       }
     },
