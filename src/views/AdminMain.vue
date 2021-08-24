@@ -3,10 +3,6 @@
     <v-row>
       <section class="left-section"><Navbar /></section>
       <section class="main-section">
-        <v-card elevation="0" height="55px" class="header-card">
-          <v-card-title class="header-title">使用者列表</v-card-title>
-        </v-card>
-        <v-divider></v-divider>
         <router-view></router-view>
       </section>
     </v-row>
@@ -20,6 +16,11 @@ export default {
   name: "AdminMain",
   components: {
     Navbar,
+  },
+  data() {
+    return {
+      page: "",
+    };
   },
   computed: {
     ...mapState(["currentUser", "isAuthenticated"]),
