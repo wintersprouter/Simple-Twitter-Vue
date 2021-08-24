@@ -5,7 +5,7 @@
         <Navbar @after-post-tweet="updateTweet" />
       </section>
       <section class="middle-section">
-        <ProfileLoading v-if="!isLoading" />
+        <ProfileLoading v-if="isLoading" />
         <template v-else>
           <v-card elevation="0" height="55px">
             <v-container class="d-flex pt-1">
@@ -30,12 +30,8 @@
           />
         </template>
         <v-tabs>
-          <v-tab :to="`/users/${this.$route.params.id}/tweets`"> 推文 </v-tab>
-          <v-tab :to="`/users/${this.$route.params.id}/repliedTweets`">
-            推文與回覆
-          </v-tab>
-          <v-tab :to="`/users/${this.$route.params.id}/likedTweets`">
-            喜歡的內容
+          <v-tab v-for="tab in tabs" :key="tab.id" :to="tab.path">
+            {{ tab.name }}
           </v-tab>
         </v-tabs>
         <router-view />
@@ -78,6 +74,13 @@ export default {
       name: "",
       tweetCount: 0,
       isLoading: false,
+      tabs: [
+        {
+          id: -1,
+          path: "",
+          name: "",
+        },
+      ],
     };
   },
   components: {
@@ -92,6 +95,7 @@ export default {
   created() {
     const { id } = this.$route.params;
     this.fetchProfileInfo(id);
+    this.createTabs(id);
   },
   beforeRouteUpdate(to, from, next) {
     this.fetchProfileInfo(to.params.id);
@@ -142,6 +146,25 @@ export default {
         this.$router.push("/404");
         console.log("error", error);
       }
+    },
+    createTabs(id) {
+      this.tabs = [
+        {
+          id: 1,
+          path: `/users/${id}/tweets`,
+          name: "推文",
+        },
+        {
+          id: 2,
+          path: `/users/${id}/repliedTweets`,
+          name: "推文與回覆",
+        },
+        {
+          id: 3,
+          path: `/users/${this.id}/likedTweets`,
+          name: "喜歡的內容",
+        },
+      ];
     },
     afterBuildFollowship() {
       this.$store.dispatch("fetchTopUsers");
