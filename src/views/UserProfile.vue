@@ -161,7 +161,7 @@ export default {
         },
         {
           id: 3,
-          path: `/users/${this.id}/likedTweets`,
+          path: `/users/${id}/likedTweets`,
           name: "喜歡的內容",
         },
       ];

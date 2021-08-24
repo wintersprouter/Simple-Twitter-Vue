@@ -18,3 +18,13 @@
     ></v-skeleton-loader>
   </section>
 </template>
+<script>
+export default {
+  data: () => ({
+    attrs: {
+      boilerplate: true,
+      elevation: 0,
+    },
+  }),
+};
+</script>

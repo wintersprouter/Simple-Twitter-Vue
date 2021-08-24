@@ -1,6 +1,8 @@
 <template>
   <section>
+    <TweetsLoading v-if="isLoading" />
     <UserTweets
+      v-else
       v-for="tweet in tweets"
       :key="tweet.id"
       :initial-tweet="tweet"
@@ -12,6 +14,7 @@
 import UserTweets from "./../components/UserTweets";
 import userAPI from "../apis/users";
 import { Toast } from "./../utils/helpers";
+import TweetsLoading from "./../components/TweetsLoading";
 
 import { mapState } from "vuex";
 export default {
@@ -20,18 +23,23 @@ export default {
     return {
       tweets: [],
       isProcessing: false,
+      isLoading: false,
     };
   },
   components: {
     UserTweets,
+    TweetsLoading,
   },
 
   methods: {
     async fetchUserTweets(userId) {
       try {
+        this.isLoading = true;
         const { data } = await userAPI.users.getUserTweets(userId);
         this.tweets = data;
+        this.isLoading = false;
       } catch (error) {
+        this.isLoading = false;
         Toast.fire({
           icon: "error",
           title: "無法取得推文資料，請稍後再試",
