@@ -49,6 +49,13 @@ import authorizationAPI from "../apis/authorization";
 import { Toast } from "./../utils/helpers";
 export default {
   name: "SignInForm",
+  props: {
+    inIsAdminSignPage: {
+      type: Boolean,
+      default: () => false,
+    },
+  },
+
   data() {
     return {
       account: "",
@@ -60,6 +67,7 @@ export default {
       },
       loading: false,
       isProcessing: false,
+      isAdminSignPage: this.inIsAdminSignPage,
     };
   },
   methods: {
@@ -82,22 +90,46 @@ export default {
         if (data.status !== "success") {
           throw new Error(data.message);
         }
-        if (data.user.role !== "user") {
-          Toast.fire({
-            icon: "warning",
-            title: "管理員不可登入!",
-          });
+        if (this.isAdminSignPage === true) {
+          if (data.user.role !== "admin") {
+            Toast.fire({
+              icon: "warning",
+              title: "一般使用者不可登入!",
+            });
+            this.loading = false;
+            this.account = "";
+            this.password = "";
+            return;
+          }
+          localStorage.setItem("token", data.token);
+          this.$store.commit("setCurrentUser", data.user);
           this.loading = false;
-          return;
-        }
+          this.$router.push("/dashboard");
+          Toast.fire({
+            icon: "success",
+            title: `Hi ${data.user.name} 歡迎回來`,
+          });
 
-        localStorage.setItem("token", data.token);
-        this.$store.commit("setCurrentUser", data.user);
-        this.$router.push("/tweets");
-        Toast.fire({
-          icon: "success",
-          title: `Hi ${data.user.name} 歡迎回來`,
-        });
+          return;
+        } else {
+          if (data.user.role !== "user") {
+            Toast.fire({
+              icon: "warning",
+              title: "管理員不可登入!",
+            });
+            this.loading = false;
+            this.account = "";
+            this.password = "";
+            return;
+          }
+          localStorage.setItem("token", data.token);
+          this.$store.commit("setCurrentUser", data.user);
+          this.$router.push("/tweets");
+          Toast.fire({
+            icon: "success",
+            title: `Hi ${data.user.name} 歡迎回來`,
+          });
+        }
       } catch (error) {
         this.loading = false;
         this.password = "";

@@ -151,7 +151,7 @@ import tweetsAPI from "../apis/tweets";
 import { Toast } from "./../utils/helpers";
 export default {
   name: "Navbar",
-  data: () => {
+  data() {
     return {
       dialog: false,
       model: 1,
@@ -239,14 +239,14 @@ export default {
             id: 1,
             icon: home,
             title: "推文清單",
-            path: "/admin/tweets",
+            path: "/dashboard/tweets",
             name: "adminTweets",
           },
           {
             id: 2,
             icon: user,
             title: "使用者列表",
-            path: "/admin/users",
+            path: "/dashboard/users",
             name: "adminUsers",
           },
         ];

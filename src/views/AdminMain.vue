@@ -3,27 +3,24 @@
     <v-row>
       <section class="left-section"><Navbar /></section>
       <section class="main-section">
-        <v-card elevation="0" height="55px"
-          ><v-card-title class="header-title">帳戶設定</v-card-title>
-        </v-card>
-        <v-divider></v-divider>
-        <v-col cols="6">
-          <UserForm />
-        </v-col>
+        <router-view></router-view>
       </section>
     </v-row>
   </v-container>
 </template>
 <script>
 import Navbar from "./../components/Navbar";
-import UserForm from "./../components/UserForm.vue";
 import { mapState } from "vuex";
 
 export default {
-  name: "Setting",
+  name: "AdminMain",
   components: {
     Navbar,
-    UserForm,
+  },
+  data() {
+    return {
+      page: "",
+    };
   },
   computed: {
     ...mapState(["currentUser", "isAuthenticated"]),
@@ -32,4 +29,7 @@ export default {
 </script>
 <style lang="scss">
 @import "./../assets/scss/layout/TwoColumn.scss";
+.header-card {
+  width: 100%;
+}
 </style>

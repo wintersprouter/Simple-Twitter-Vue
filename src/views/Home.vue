@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <section class="left-section">
-        <Navbar @after-post-tweet="updateTweet(tweet)" />
+        <Navbar @after-post-tweet="updateTweet" />
       </section>
       <section class="middle-section">
         <v-card elevation="0" height="55px"
@@ -124,7 +124,12 @@ export default {
         if (data.status !== "success") {
           throw new Error(data.message);
         }
-        this.fetchTweets();
+        const tweet = {
+          createdAt: new Date(),
+          description: this.text,
+        };
+        this.updateTweet(tweet);
+
         this.text = "";
         this.isProcessing = false;
 
@@ -147,6 +152,9 @@ export default {
         account,
         createdAt: tweet.createdAt,
         description: tweet.description,
+        isLike: false,
+        likedCount: 0,
+        repliedCount: 0,
       };
       this.tweets.unshift(newTweet);
     },

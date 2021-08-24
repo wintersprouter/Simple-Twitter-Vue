@@ -32,10 +32,8 @@ export default {
     async fetchUserFollowings(userId) {
       try {
         const { data } = await userAPI.users.getUserFollowings(userId);
-
         if (data.message !== undefined) {
           this.message = data.message;
-          console.log(this.message);
           this.followings = [];
           return;
         }

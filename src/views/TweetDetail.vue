@@ -94,8 +94,7 @@
             </v-list-item>
           </v-card-actions>
         </v-card>
-        <v-divider></v-divider
-        ><Replies :reply="reply" v-for="reply in replies" :key="reply.id" />
+        <v-divider></v-divider><Replies :init-replies="replies" />
       </section>
       <section class="right-section">
         <FollowRecommendations :initial-top-users="topUsers" />
@@ -151,11 +150,15 @@ export default {
       try {
         const { data } = await tweetsAPI.getTweet(tweetId);
         this.tweet = data;
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
       } catch (error) {
         Toast.fire({
           icon: "error",
           title: "無法取得推文資料，請稍後再試",
         });
+        this.$router.push("/404");
         console.log("error", error);
       }
     },
