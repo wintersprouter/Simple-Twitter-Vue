@@ -7,7 +7,9 @@
           ><v-card-title class="header-title">帳戶設定</v-card-title>
         </v-card>
         <v-divider></v-divider>
-        <UserForm />
+        <v-col cols="6">
+          <UserForm />
+        </v-col>
       </section>
     </v-row>
   </v-container>
