@@ -4,8 +4,8 @@
     elevation="0"
     width="210px"
     class="nav-list d-flex align-start flex-column pa-2 mx-auto"
-  >
-    <div>
+    ><Spinner v-if="isLoading" />
+    <template v-else>
       <v-list rounded nav>
         <!-- user -->
         <v-list-item-group v-model="model" color="primary">
@@ -115,7 +115,7 @@
         </v-list-item-group>
         <!-- user-end -->
       </v-list>
-    </div>
+    </template>
     <!-- logout -->
     <div>
       <v-list flat rounded nav>
@@ -139,6 +139,7 @@
     <!-- logout -->
   </v-card>
 </template>
+
 <script>
 import home from "./../assets/img/home.svg";
 import atHome from "./../assets/img/at_home.svg";
@@ -149,8 +150,12 @@ import atSetting from "./../assets/img/at_setting.svg";
 import { mapState } from "vuex";
 import tweetsAPI from "../apis/tweets";
 import { Toast } from "./../utils/helpers";
+import Spinner from "./Spinner.vue";
 export default {
   name: "Navbar",
+  components: {
+    Spinner,
+  },
   data() {
     return {
       dialog: false,
@@ -160,6 +165,7 @@ export default {
       isProcessing: false,
       text: "",
       options: [],
+      isLoading: false,
     };
   },
   methods: {
@@ -207,6 +213,7 @@ export default {
       }
     },
     fetchCurrentUser(newVal) {
+      this.isLoading = true;
       const { id } = newVal;
       this.userId = id;
       if (this.currentUser.role !== "admin") {
@@ -272,12 +279,12 @@ export default {
           });
         }
       }
+      this.isLoading = false;
     },
   },
   created() {
     this.fetchCurrentUser(this.currentUser);
     const { name } = this.$route;
-    console.log(this.$route);
     this.activeIcon(name);
   },
   computed: {
