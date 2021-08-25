@@ -56,7 +56,6 @@ export default {
   data() {
     return {
       follow: this.initialFollow,
-      followMessage: this.message,
       isProcessing: false,
     };
   },
