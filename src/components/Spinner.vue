@@ -17,7 +17,7 @@ export default {
 .spinner {
   height: 100vh;
   .v-progress-circular {
-    margin-top: 40vh;
+    margin-top: 30vh;
   }
 }
 </style>

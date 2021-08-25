@@ -1,123 +1,128 @@
 <template>
-  <v-form
-    tile
-    elevation="0"
-    max-width="540px"
-    @submit.stop.prevent="handleSaving($event)"
-  >
-    <v-card-text>
-      <v-text-field
-        label="帳號"
-        v-model="form.account"
-        name="account"
-        maxlength="20"
-        counter
-        filled
-        dense
-        required
-        :autofocus="isSignUp"
-        :error-messages="accountErrors"
-        @input="$v.form.account.$touch()"
-        @blur="$v.form.account.$touch()"
-      ></v-text-field>
-      <v-text-field
-        label="名稱"
-        v-model="form.name"
-        name="name"
-        maxlength="20"
-        counter
-        filled
-        dense
-        required
-        :error-messages="nameErrors"
-        @input="$v.form.name.$touch()"
-        @blur="$v.form.name.$touch()"
-      ></v-text-field>
-      <v-text-field
-        label="Email"
-        v-model="form.email"
-        name="email"
-        maxlength="50"
-        filled
-        dense
-        required
-        :error-messages="emailErrors"
-        @input="$v.form.email.$touch()"
-        @blur="$v.form.email.$touch()"
-      ></v-text-field>
-      <v-text-field
-        label="密碼"
-        v-model="form.password"
-        name="password"
-        email
-        required
-        :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-        :type="show ? 'text' : 'password'"
-        counter
-        maxlength="15"
-        @click:append="show = !show"
-        filled
-        dense
-        :error-messages="passwordErrors"
-        @input="$v.form.password.$touch()"
-        @blur="$v.form.password.$touch()"
-      ></v-text-field>
-      <v-text-field
-        label="密碼確認"
-        required
-        v-model="form.checkPassword"
-        name="checkPassword"
-        :append-icon="checkShow ? 'mdi-eye' : 'mdi-eye-off'"
-        :type="checkShow ? 'text' : 'password'"
-        counter
-        maxlength="15"
-        @click:append="checkShow = !checkShow"
-        filled
-        dense
-        :error-messages="checkPasswordErrors"
-        @input="$v.form.checkPassword.$touch()"
-        @blur="$v.form.checkPassword.$touch()"
-      ></v-text-field>
-    </v-card-text>
-    <v-card-actions class="button-section">
-      <template v-if="isSignUp">
-        <v-btn
-          block
-          rounded
-          color="primary"
-          dark
-          @click="submit()"
-          depressed
-          class="button-signup"
-          type="submit"
-          :loading="isloading"
-          >註冊</v-btn
-        ></template
+  <section>
+    <Spinner v-if="isLoading" />
+    <template v-else>
+      <v-form
+        tile
+        elevation="0"
+        max-width="540px"
+        @submit.stop.prevent="handleSaving($event)"
       >
-      <template v-else>
-        <v-btn
-          v-if="!isSaved"
-          rounded
-          color="primary"
-          dark
-          @click="submit()"
-          type="submit"
-          depressed
-          :loading="isloading"
-          class="button-save"
-          >儲存</v-btn
-        ><v-btn
-          v-else
-          rounded
-          color="primary"
-          dark
-          depressed
-          class="button-save"
-          >已儲存</v-btn
-        >
-      </template>
-    </v-card-actions>
-  </v-form>
+        <v-card-text>
+          <v-text-field
+            label="帳號"
+            v-model="form.account"
+            name="account"
+            maxlength="20"
+            counter
+            filled
+            dense
+            required
+            :autofocus="isSignUp"
+            :error-messages="accountErrors"
+            @input="$v.form.account.$touch()"
+            @blur="$v.form.account.$touch()"
+          ></v-text-field>
+          <v-text-field
+            label="名稱"
+            v-model="form.name"
+            name="name"
+            maxlength="20"
+            counter
+            filled
+            dense
+            required
+            :error-messages="nameErrors"
+            @input="$v.form.name.$touch()"
+            @blur="$v.form.name.$touch()"
+          ></v-text-field>
+          <v-text-field
+            label="Email"
+            v-model="form.email"
+            name="email"
+            maxlength="50"
+            filled
+            dense
+            required
+            :error-messages="emailErrors"
+            @input="$v.form.email.$touch()"
+            @blur="$v.form.email.$touch()"
+          ></v-text-field>
+          <v-text-field
+            label="密碼"
+            v-model="form.password"
+            name="password"
+            email
+            required
+            :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="show ? 'text' : 'password'"
+            counter
+            maxlength="15"
+            @click:append="show = !show"
+            filled
+            dense
+            :error-messages="passwordErrors"
+            @input="$v.form.password.$touch()"
+            @blur="$v.form.password.$touch()"
+          ></v-text-field>
+          <v-text-field
+            label="密碼確認"
+            required
+            v-model="form.checkPassword"
+            name="checkPassword"
+            :append-icon="checkShow ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="checkShow ? 'text' : 'password'"
+            counter
+            maxlength="15"
+            @click:append="checkShow = !checkShow"
+            filled
+            dense
+            :error-messages="checkPasswordErrors"
+            @input="$v.form.checkPassword.$touch()"
+            @blur="$v.form.checkPassword.$touch()"
+          ></v-text-field>
+        </v-card-text>
+        <v-card-actions class="button-section">
+          <template v-if="isSignUp">
+            <v-btn
+              block
+              rounded
+              color="primary"
+              dark
+              @click="submit()"
+              depressed
+              class="button-signup"
+              type="submit"
+              :loading="isloading"
+              >註冊</v-btn
+            ></template
+          >
+          <template v-else>
+            <v-btn
+              v-if="!isSaved"
+              rounded
+              color="primary"
+              dark
+              @click="submit()"
+              type="submit"
+              depressed
+              :loading="isProcessing"
+              class="button-save"
+              >儲存</v-btn
+            ><v-btn
+              v-else
+              rounded
+              color="primary"
+              dark
+              depressed
+              class="button-save"
+              >已儲存</v-btn
+            >
+          </template>
+        </v-card-actions>
+      </v-form>
+    </template>
+  </section>
 </template>
 <script>
 import { validationMixin } from "vuelidate";
@@ -131,6 +136,7 @@ import { mapState } from "vuex";
 import { Toast } from "./../utils/helpers";
 import usersAPI from "./../apis/users";
 import authorizationAPI from "./../apis/authorization";
+import Spinner from "./../components/Spinner.vue";
 export default {
   name: "UserForm",
   mixins: [validationMixin],
@@ -164,9 +170,10 @@ export default {
       },
       show: false,
       checkShow: false,
-      isloading: false,
+      isLoading: false,
       isSaved: false,
       isSignUp: this.inIsSignUp,
+      isProcessing: false,
     };
   },
   props: {
@@ -174,6 +181,9 @@ export default {
       type: Boolean,
       default: () => false,
     },
+  },
+  components: {
+    Spinner,
   },
   computed: {
     nameErrors() {
@@ -224,6 +234,7 @@ export default {
   },
   methods: {
     fetchCurrentUser(newVal) {
+      this.isLoading = true;
       const { name, email, account } = newVal;
       this.form = {
         ...this.form,
@@ -231,6 +242,7 @@ export default {
         email,
         account,
       };
+      this.isLoading = false;
     },
     submit() {
       this.$v.$touch();
@@ -261,7 +273,7 @@ export default {
           this.form.checkPassword = "";
           return;
         }
-        this.isloading = true;
+        this.isProcessing = true;
         const userId = this.currentUser.id;
         if (this.isSignUp === true) {
           const { data } = await authorizationAPI.signUp(formData);
@@ -278,12 +290,12 @@ export default {
           Toast.fire({ icon: "success", title: data.message });
           this.form.password = "";
           this.form.checkPassword = "";
-          this.isloading = false;
+          this.isProcessing = false;
           this.isSaved = true;
         }
       } catch (error) {
         console.log(error.message);
-        this.isloading = false;
+        this.isProcessing = false;
         Toast.fire({
           icon: "error",
           title: error.response.data.message,
