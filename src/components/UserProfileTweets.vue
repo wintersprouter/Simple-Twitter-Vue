@@ -1,12 +1,16 @@
 <template>
   <section>
     <TweetsLoading v-if="isLoading" />
-    <UserTweets
-      v-else
-      v-for="tweet in tweets"
-      :key="tweet.id"
-      :initial-tweet="tweet"
-    />
+    <template v-else>
+      <UserTweets
+        v-for="tweet in tweets"
+        :key="tweet.id"
+        :initial-tweet="tweet"
+      />
+      <v-card elevation="0" v-if="!tweets.length" class="message-card">
+        <v-card-title>This account haven’t Tweeted. </v-card-title>
+      </v-card>
+    </template>
   </section>
 </template>
 
@@ -61,6 +65,9 @@ export default {
   },
 };
 </script>
-<style lang="scss" >
+<style lang="scss" scoped >
+.message-card {
+  border-bottom: 1px solid #e6ecf0;
+}
 @import "./../assets/scss/components/_UserTweets.scss";
 </style>

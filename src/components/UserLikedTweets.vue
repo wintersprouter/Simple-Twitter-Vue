@@ -1,12 +1,16 @@
 <template>
   <section>
     <TweetsLoading v-if="isLoading" />
-    <UserLikedTweetsCard
-      v-else
-      v-for="tweet in tweets"
-      :key="tweet.id"
-      :initial-tweet="tweet"
-    />
+    <template v-else>
+      <UserLikedTweetsCard
+        v-for="tweet in tweets"
+        :key="tweet.id"
+        :initial-tweet="tweet"
+      />
+      <v-card elevation="0" v-if="!tweets.length" class="message-card">
+        <v-card-title>This account haven’t any liked Tweets. </v-card-title>
+      </v-card>
+    </template>
   </section>
 </template>
 <script>
@@ -59,4 +63,9 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped >
+.message-card {
+  border-bottom: 1px solid #e6ecf0;
+}
+</style>
 

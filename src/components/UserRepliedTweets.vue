@@ -1,12 +1,16 @@
 <template>
   <section>
     <RepliedTweetsLoading v-if="isLoading" />
-    <UserRepliedTweetsCard
-      v-else
-      v-for="tweet in tweets"
-      :key="tweet.replyId"
-      :initial-tweet="tweet"
-    />
+    <template v-else>
+      <UserRepliedTweetsCard
+        v-for="tweet in tweets"
+        :key="tweet.replyId"
+        :initial-tweet="tweet"
+      />
+      <v-card elevation="0" v-if="!tweets.length" class="message-card">
+        <v-card-title>This account haven’t any replies. </v-card-title>
+      </v-card>
+    </template>
   </section>
 </template>
 <script>
@@ -59,3 +63,8 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped >
+.message-card {
+  border-bottom: 1px solid #e6ecf0;
+}
+</style>
