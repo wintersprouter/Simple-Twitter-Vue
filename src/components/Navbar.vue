@@ -31,16 +31,11 @@
           <v-list-item
             v-for="option in options"
             :key="option.id"
-            class="mt-5 pr-5"
+            class="mt-5 pr-3 option-item"
             :to="option.path"
           >
-            <v-list-item-icon class="ml-3 nav-icon">
-              <v-img
-                :class="option.name"
-                :src="option.icon"
-                max-width="2rem"
-                max-height="2rem"
-              ></v-img>
+            <v-list-item-icon class="ml-2 pr-0 nav-icon">
+              <v-icon class="option-icon">{{ option.icon }}</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title class="nav-title">{{
@@ -118,19 +113,19 @@
     </template>
     <!-- logout -->
     <div>
-      <v-list flat rounded nav>
-        <v-list-item>
-          <v-btn text rounded @click="logout" x-large>
-            <v-list-item-icon>
+      <v-list flat rounded nav class="p-0">
+        <v-list-item class="pl-0">
+          <v-btn text rounded @click="logout" x-large class="pl-0">
+            <v-list-item-icon class="ml-2 pr-0">
               <v-img
                 src="../assets/img/logout.svg"
-                width="2rem"
-                height="2rem"
+                width="1.5rem"
+                height="1.5rem"
                 class="ml-2"
               ></v-img>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title class="nav-title"> 登出</v-list-item-title>
+              <v-list-item-title class="nav-title">登出</v-list-item-title>
             </v-list-item-content>
           </v-btn>
         </v-list-item>
@@ -141,12 +136,6 @@
 </template>
 
 <script>
-import home from "./../assets/img/home.svg";
-import atHome from "./../assets/img/at_home.svg";
-import user from "./../assets/img/user.svg";
-import atUser from "./../assets/img/at_user.svg";
-import setting from "./../assets/img/setting.svg";
-import atSetting from "./../assets/img/at_setting.svg";
 import { mapState } from "vuex";
 import tweetsAPI from "../apis/tweets";
 import { Toast } from "./../utils/helpers";
@@ -220,21 +209,21 @@ export default {
         this.options = [
           {
             id: 1,
-            icon: home,
+            icon: "mdi-home",
             title: "首頁",
             path: "/tweets",
             name: "tweets",
           },
           {
             id: 2,
-            icon: user,
-            title: "個人首頁",
+            icon: "mdi-account-outline",
+            title: "個人資料",
             path: { name: "users", params: { id: this.userId } },
             name: "users",
           },
           {
             id: 3,
-            icon: setting,
+            icon: "mdi-cog-outline ",
             title: "設定",
             path: "/setting",
             name: "setting",
@@ -244,54 +233,34 @@ export default {
         this.options = [
           {
             id: 1,
-            icon: home,
+            icon: "mdi-home",
             title: "推文清單",
             path: "/dashboard/tweets",
             name: "adminTweets",
           },
           {
             id: 2,
-            icon: user,
+            icon: "mdi-account-outline",
             title: "使用者列表",
             path: "/dashboard/users",
             name: "adminUsers",
           },
         ];
       }
-    },
-    activeIcon(name) {
-      const optionName = [
-        "tweets",
-        "users",
-        "setting",
-        "adminTweets",
-        "adminUsers",
-      ];
-      const activeIcons = [atHome, atUser, atSetting, atHome, atUser];
-      for (let i = 0; i <= optionName.length; i++) {
-        if (name === optionName[i]) {
-          this.options.map((option) => {
-            if (option.name === optionName[i]) {
-              option.icon = activeIcons[i];
-              return;
-            }
-            return;
-          });
-        }
-      }
       this.isLoading = false;
     },
   },
   created() {
     this.fetchCurrentUser(this.currentUser);
-    const { name } = this.$route;
-    this.activeIcon(name);
   },
   computed: {
     ...mapState(["currentUser", "isAuthenticated"]),
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scpoed>
 @import "./../assets/scss/components/_Navbar.scss";
+.option-icon {
+  color: red;
+}
 </style>
