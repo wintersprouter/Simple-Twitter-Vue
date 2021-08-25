@@ -87,6 +87,7 @@ import { mapState } from "vuex";
 
 export default {
   name: "UserProfileEditModal",
+  inject: ["reload"],
   data() {
     return {
       id: 0,
@@ -166,6 +167,7 @@ export default {
           throw new Error(data.message);
         }
         Toast.fire({ icon: "success", title: "成功更新使用者資料" });
+        this.reload();
         this.$emit("after-click-close");
         this.isProcessing = false;
       } catch (error) {
