@@ -21,41 +21,34 @@
       </v-card-actions>
       <v-divider></v-divider>
       <v-card-actions class="edit-images">
-        <v-img
-          height="200px"
-          :src="user.cover"
-          :alt="user.name"
-          class="image"
-        />
+        <v-img height="200px" :src="cover" :alt="name" class="image" />
         <v-btn class="button-cover ma-2" plain fab>
           <v-file-input
             hide-input
-            :rules="[rules.coverSize]"
             name="cover"
             accept="image/png, image/jpeg, image/jpg"
             prepend-icon="mdi-camera"
             truncate-length="20"
             label="Cover"
             class="input-cover"
-            v-model="files"
+            v-model="newCover"
             @change="handleCoverChange"
           ></v-file-input>
         </v-btn>
 
         <v-avatar size="140" class="profile-avatar" fab>
-          <v-img class="image" :src="user.avatar" :alt="user.avatar" />
+          <v-img class="image" :src="avatar" :alt="name" />
 
           <v-btn class="button-avatar ma-2" plain fab>
             <v-file-input
               class="input-avatar"
               name="avatar"
               hide-input
-              :rules="[rules.avatarSize]"
               accept="image/png, image/jpeg, image/jpg"
               prepend-icon="mdi-camera"
               truncate-length="20"
               label="Avatar"
-              v-model="files"
+              v-model="newAvatar"
               @change="handleAvatarChange"
             ></v-file-input>
           </v-btn>
@@ -71,7 +64,7 @@
           counter
           required
           :rules="[rules.required]"
-          :value="user.name"
+          v-model.trim="name"
           maxlength="50"
         ></v-text-field>
         <v-textarea
@@ -79,7 +72,7 @@
           filled
           label="自我介紹"
           auto-grow
-          :value="user.introduction"
+          v-model.trim="introduction"
           counter
           maxlength="160"
         ></v-textarea>
@@ -90,89 +83,91 @@
 <script>
 import { Toast } from "./../utils/helpers";
 import usersAPI from "./../apis/users";
+import { mapState } from "vuex";
 
 export default {
   name: "UserProfileEditModal",
   data() {
     return {
-      user: this.initUser,
+      id: 0,
+      name: "",
+      introduction: null,
+      avatar: "",
+      cover: "",
+      newAvatar: "",
+      newCover: "",
       rules: {
         required: (value) => !!value || "Required.",
-        avatarSize: (value) =>
-          !value ||
-          value.size < 2000000 ||
-          "Avatar size should be less than 2 MB!",
-        coverSize: (value) =>
-          !value ||
-          value.size < 2000000 ||
-          "Cover size should be less than 2 MB!",
       },
       dialog: true,
       files: [],
       isProcessing: false,
     };
   },
-  props: {
-    initUser: {
-      type: Object,
-      required: true,
-    },
+  async created() {
+    try {
+      this.$store.dispatch("fetchCurrentUser");
+      const { id, avatar, cover, name, introduction } = this.currentUser;
+      this.id = id;
+      this.avatar = avatar;
+      this.cover = cover;
+      this.name = name;
+      this.introduction = introduction;
+    } catch (error) {
+      console.log("error", error);
+    }
   },
   methods: {
-    handleCoverChange(e) {
-      console.log("e.targetcover", e.target);
-      console.log("cover.this.files", this.files);
-      if (this.files !== null) {
-        const CoverimageURL = window.URL.createObjectURL(this.files);
-        console.log(" CoverimageUR", CoverimageURL);
-        this.user.cover = CoverimageURL;
+    handleCoverChange() {
+      if (this.newCover !== null) {
+        const coverImageURL = window.URL.createObjectURL(this.newCover);
+        this.cover = coverImageURL;
       } else {
-        Toast.fire({
-          icon: "error",
-          title: "無法上傳使用者封面，請稍後再試",
-        });
+        this.cover = this.currentUser.cover;
       }
     },
-    handleAvatarChange(e) {
-      console.log("e.targetAvatar", e.target);
-      console.log("avatar.this.files", this.files);
-      if (this.files !== null) {
-        const avatarimageURL = window.URL.createObjectURL(this.files);
-        console.log(" avatarimageUR", avatarimageURL);
-        this.user.avatar = avatarimageURL;
+    handleAvatarChange() {
+      if (this.newAvatar !== null) {
+        const avatarimageURL = window.URL.createObjectURL(this.newAvatar);
+        this.avatar = avatarimageURL;
       } else {
-        Toast.fire({
-          icon: "error",
-          title: "無法上傳使用者頭像，請稍後再試",
-        });
+        this.avatar = this.currentUser.avatar;
       }
     },
-    async handleSubmit(e) {
+    async handleSubmit() {
       try {
-        if (!this.user.name) {
+        if (!this.name) {
           Toast.fire({
             icon: "warning",
             title: "請填寫使用者名稱",
           });
           return;
         }
-        const form = e.target;
-        console.log(form);
-        const formData = new FormData(form);
-        console.log(formData);
-        console.log("userId", this.user.id);
+        this.isProcessing = true;
+
+        let formData = new FormData();
+        formData.append("name", this.name);
+        if (this.introduction !== null) {
+          formData.append("introduction", this.introduction);
+        }
+
+        if (this.newCover !== null) {
+          formData.append("cover", this.newCover);
+        }
+        if (this.newAvatar !== null) {
+          formData.append("avatar", this.newAvatar);
+        }
         const { data } = await usersAPI.users.updateProfile({
-          userId: this.user.id,
+          userId: this.id,
           formData,
         });
-        console.log("data", data);
 
         if (data.status !== "success") {
           throw new Error(data.message);
         }
         Toast.fire({ icon: "success", title: "成功更新使用者資料" });
-        this.dialog = false;
-        // this.$emit("after-submit", formData);
+        this.$emit("after-click-close");
+        this.isProcessing = false;
       } catch (error) {
         this.isProcessing = false;
         console.log(error);
@@ -185,6 +180,11 @@ export default {
     handleClick() {
       this.$emit("after-click-close");
     },
+  },
+  computed: {
+    ...mapState({
+      currentUser: (state) => state.currentUser,
+    }),
   },
 };
 </script>

@@ -93,7 +93,7 @@
               depressed
               class="button-signup"
               type="submit"
-              :loading="isloading"
+              :loading="isProcessing"
               >註冊</v-btn
             ></template
           >

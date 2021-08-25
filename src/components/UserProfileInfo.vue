@@ -32,10 +32,7 @@
               >
             </template>
             <!-- modal -->
-            <UserProfileEditModal
-              :init-user="user"
-              @after-click-close="afterClickClose"
-            />
+            <UserProfileEditModal @after-click-close="afterClickClose" />
           </v-dialog>
 
           <v-btn
