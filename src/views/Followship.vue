@@ -5,7 +5,8 @@
         <Navbar @after-post-tweet="updateTweet" />
       </section>
       <section class="middle-section">
-        <v-card elevation="0" height="55px">
+        <HeaderLoading v-if="isLoading" />
+        <v-card v-else elevation="0" height="55px">
           <v-container class="d-flex pt-1">
             <v-btn icon @click="$router.back()">
               <v-icon color="black">mdi-arrow-left</v-icon>
@@ -44,17 +45,20 @@ import FollowRecommendations from "./../components/FollowRecommendations";
 import { mapState } from "vuex";
 import usersAPI from "./../apis/users.js";
 import { Toast } from "./../utils/helpers";
+import HeaderLoading from "./../components/HeaderLoading";
 
 export default {
   name: "Followship",
   components: {
     Navbar,
     FollowRecommendations,
+    HeaderLoading,
   },
   data() {
     return {
       name: "",
       tweetCount: 0,
+      isLoading: false,
     };
   },
   computed: {
@@ -71,6 +75,7 @@ export default {
   methods: {
     async fetchProfileInfo(userId) {
       try {
+        this.isLoading = true;
         const { data } = await usersAPI.users.getProfile(userId);
         if (data.status !== "success") {
           throw new Error(data.message);
@@ -79,7 +84,9 @@ export default {
 
         this.name = name;
         this.tweetCount = tweetCount;
+        this.isLoading = false;
       } catch (error) {
+        this.isLoading = false;
         Toast.fire({
           icon: "error",
           title: "無法取得使用者資料，請稍後再試",
