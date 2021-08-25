@@ -1,0 +1,70 @@
+<template>
+  <v-row no-gutters>
+    <v-col>
+      <v-skeleton-loader
+        v-bind="attrs"
+        type="card,list-item-three-line"
+        width="245px"
+      ></v-skeleton-loader>
+    </v-col>
+    <v-col>
+      <v-skeleton-loader
+        v-bind="attrs"
+        type="card,list-item-three-line"
+        width="245px"
+      ></v-skeleton-loader>
+    </v-col>
+    <v-col>
+      <v-skeleton-loader
+        v-bind="attrs"
+        type="card,list-item-three-line"
+        width="245px"
+      ></v-skeleton-loader>
+    </v-col>
+    <v-col>
+      <v-skeleton-loader
+        v-bind="attrs"
+        type="card,list-item-three-line"
+        width="245px"
+      ></v-skeleton-loader>
+    </v-col>
+    <v-col>
+      <v-skeleton-loader
+        v-bind="attrs"
+        type="card,list-item-three-line"
+        width="245px"
+      ></v-skeleton-loader>
+    </v-col>
+    <v-col>
+      <v-skeleton-loader
+        v-bind="attrs"
+        type="card,list-item-three-line"
+        width="245px"
+      ></v-skeleton-loader>
+    </v-col>
+    <v-col>
+      <v-skeleton-loader
+        v-bind="attrs"
+        type="card,list-item-three-line"
+        width="245px"
+      ></v-skeleton-loader>
+    </v-col>
+    <v-col>
+      <v-skeleton-loader
+        v-bind="attrs"
+        type="card,list-item-three-line"
+        width="245px"
+      ></v-skeleton-loader>
+    </v-col>
+  </v-row>
+</template>
+<script>
+export default {
+  data: () => ({
+    attrs: {
+      boilerplate: true,
+      elevation: 0,
+    },
+  }),
+};
+</script>
