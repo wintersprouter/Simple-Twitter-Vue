@@ -180,6 +180,10 @@ export default {
       }
     },
     handleClick() {
+      this.avatar = this.currentUser.avatar;
+      this.cover = this.currentUser.cover;
+      this.name = this.currentUser.name;
+      this.introduction = this.currentUser.introduction;
       this.$emit("after-click-close");
     },
   },
