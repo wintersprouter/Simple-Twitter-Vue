@@ -92,13 +92,14 @@ export default {
   computed: {
     ...mapState(["currentUser", "isAuthenticated", "topUsers"]),
   },
-  created() {
+  async created() {
     const { id } = this.$route.params;
-    this.fetchProfileInfo(id);
-    this.createTabs(id);
+    await this.fetchProfileInfo(id);
+    await this.createTabs(id);
   },
-  beforeRouteUpdate(to, from, next) {
-    this.fetchProfileInfo(to.params.id);
+  async beforeRouteUpdate(to, from, next) {
+    await this.fetchProfileInfo(to.params.id);
+    await this.createTabs(to.params.id);
     next();
   },
   methods: {
