@@ -305,3 +305,13 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.button-section {
+  position: relative;
+  .button-signup {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 26px;
+  }
+}
+</style>

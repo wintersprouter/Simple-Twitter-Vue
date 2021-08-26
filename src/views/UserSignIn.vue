@@ -9,7 +9,7 @@
     </v-card-actions>
     <v-card-title class="sign-title">登入Twitter</v-card-title>
     <SignInForm />
-    <v-card-actions class="pt-5 justify-content-center"
+    <v-card-actions class="sign-actions pt-5 justify-content-center"
       ><v-spacer></v-spacer>
       <v-btn text :to="'/signup'" class="sign-link">註冊Twitter</v-btn
       ><span class="sign-link">·</span

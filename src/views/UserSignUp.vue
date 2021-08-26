@@ -9,7 +9,7 @@
     </v-card-actions>
     <v-card-title class="sign-title">建立你的帳號</v-card-title>
     <UserForm :in-is-sign-up="isSignUp" />
-    <v-card-actions class="pt-5 cancel-link justify-center">
+    <v-card-actions class="pt-5 cancel-link justify-center sign-actions">
       <v-btn text :to="'/signin'" class="sign-link">取消</v-btn></v-card-actions
     >
   </v-sheet>

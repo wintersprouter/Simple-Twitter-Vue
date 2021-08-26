@@ -143,12 +143,12 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-// .button-section {
-//   position: relative;
-//   .button-signin {
-//     font-weight: $font-weight-sub-title;
-//     font-size: $font-size-title;
-//     line-height: $font-line-title;
-//   }
-// }
+.button-section {
+  position: relative;
+  .button-signin {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 26px;
+  }
+}
 </style>

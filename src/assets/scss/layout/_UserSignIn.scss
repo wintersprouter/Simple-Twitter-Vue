@@ -1,4 +1,3 @@
-
 .v-sheet {
   margin: 3rem auto 0;
   .sign-logo {
@@ -11,10 +10,13 @@
     line-height: $font-line-ml;
     color: $font-color-root;
   }
-  .sign-link {
-    font-weight: $font-weight-sub-title;
-    font-size: $font-size-title;
-    line-height: $font-line-title;
-    color: $font-color-link;
+  .sign-actions {
+    .sign-link {
+      font-weight: $font-weight-sub-title;
+      font-size: $font-size-title;
+      line-height: $font-line-title;
+      color: $font-color-link;
+    }
   }
+  
 }
