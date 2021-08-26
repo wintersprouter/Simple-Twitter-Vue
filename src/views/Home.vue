@@ -7,11 +7,11 @@
       <section class="middle-section">
         <Spinner v-if="isLoading" />
         <template v-else>
-          <v-card elevation="0" height="55px"
+          <v-card elevation="0" height="55px" class="mt-0"
             ><v-card-title class="header-title">首頁</v-card-title></v-card
           >
           <v-divider></v-divider>
-          <v-card elevation="0">
+          <v-card elevation="0" class="mt-0">
             <v-form @submit.stop.prevent="handleSubmit()">
               <v-container class="d-flex justify-space-between px-4 pt-4 pb-0">
                 <v-avatar size="50" class="mr-5">
