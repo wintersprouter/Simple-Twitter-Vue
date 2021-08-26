@@ -74,10 +74,13 @@
 
 
 //首頁title //推文清單title //使用者列表//推文title
-// font-weight: bold;
-// font-size: 18px;
-// line-height: 26px;
-// color: #1C1C1C;
+.header-title {
+  font-weight: $font-weight-title;
+  font-size: $font-size-title;
+  line-height: $font-line-title;
+  color: $font-color-root;
+}
+
 
 //推文btn
 //background: #000000;
