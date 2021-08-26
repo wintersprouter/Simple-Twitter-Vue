@@ -258,9 +258,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scpoed>
-@import "./../assets/scss/components/_Navbar.scss";
-.option-icon {
-  color: red;
-}
-</style>

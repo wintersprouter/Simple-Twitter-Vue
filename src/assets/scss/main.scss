@@ -1,5 +1,7 @@
-@import "./utility/reset.scss";
-@import "./utility/variables.scss";
+@import "./utility/_reset.scss";
+@import "./utility/_variables.scss";
+@import"./components/AdminUsers";
+@import"./layout/ThreeColumn";
 
 .v-application {
   font-family: $font-family, sans-serif !important;

@@ -263,8 +263,3 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-@import "./../assets/scss/layout/ThreeColumn.scss";
-@import "./../assets/scss/components/_UserTweet.scss";
-@import "./../assets/scss/components/_UserTweets.scss";
-</style>

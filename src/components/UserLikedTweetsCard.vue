@@ -163,6 +163,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-@import "./../assets/scss/components/_UserTweets.scss";
-</style>

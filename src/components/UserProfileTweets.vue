@@ -69,5 +69,4 @@ export default {
 .message-card {
   border-bottom: 1px solid #e6ecf0;
 }
-@import "./../assets/scss/components/_UserTweets.scss";
 </style>

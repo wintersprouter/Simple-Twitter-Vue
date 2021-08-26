@@ -167,7 +167,3 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-@import "./../assets/scss/components/_UserProfileInfo.scss";
-</style>
-

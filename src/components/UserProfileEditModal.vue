@@ -194,7 +194,3 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-@import "../assets/scss/components/_UserProfileInfo.scss";
-@import "../assets/scss/components/_UserProfileEditModal.scss";
-</style>

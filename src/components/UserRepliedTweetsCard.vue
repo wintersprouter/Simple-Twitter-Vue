@@ -82,6 +82,3 @@ export default {
   mixins: [fromNowFilter],
 };
 </script>
-<style lang="scss">
-@import "../assets/scss/components/_UserRepliedTweets.scss";
-</style>

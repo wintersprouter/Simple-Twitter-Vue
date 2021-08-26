@@ -29,6 +29,3 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-@import "../assets/scss/components/_UserSignIn.scss";
-</style>

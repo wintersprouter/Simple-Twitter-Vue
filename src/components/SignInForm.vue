@@ -142,14 +142,13 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-@import "../assets/scss/utility/variables.scss";
-.button-section {
-  position: relative;
-  .button-signin {
-    font-weight: $font-weight-sub-title;
-    font-size: $font-size-title;
-    line-height: $font-line-title;
-  }
-}
+<style lang="scss" scoped>
+// .button-section {
+//   position: relative;
+//   .button-signin {
+//     font-weight: $font-weight-sub-title;
+//     font-size: $font-size-title;
+//     line-height: $font-line-title;
+//   }
+// }
 </style>

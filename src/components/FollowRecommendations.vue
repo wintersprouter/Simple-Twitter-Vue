@@ -254,7 +254,3 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-@import "./../assets/scss/components/_FollowRecommendations.scss";
-</style>
-

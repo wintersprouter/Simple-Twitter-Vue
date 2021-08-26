@@ -197,6 +197,3 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-@import "./../assets/scss/layout/ThreeColumn.scss";
-</style>
