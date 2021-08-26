@@ -11,20 +11,22 @@
   @extend %top-card-style;
   color:$font-color-account;
 }
+//tweetsCard//tweetCard//replyCard//replyModal
+.tweets-user-name {
+  font-weight: $font-weight-title;
+  font-size: $font-size-root;
+  line-height:$font-line-root;
+  color:$font-color-root
+}
+.tweets-user-account {
+  font-weight: $font-weight-sub-title;
+  font-size: $font-size-root;
+  line-height:$font-line-root;
+  color:$font-color-account;
+}
 
 //name----------------
-//tweetsCard//tweetCard//replyCard//replyModal
-// font-weight: bold;
-// font-size: 15px;
-// line-height: 22px;
-// color: #1C1C1C;
 
-
-//topCard
-// font-weight: bold;
-// font-size: 15px;
-// line-height: 15px;
-// color: #1C1C1C;
 
 //profile
 // font-weight: 900;
@@ -43,12 +45,6 @@
 
 //account------------------
 
-//topCard
-// font-weight: bold;
-// font-size: 15px;
-// line-height: 15px;
-// color: #657786;
-
 
 //followCard
 // font-weight: 500;
@@ -56,16 +52,10 @@
 // line-height: 15px;
 // color: #657786;
 
-//tweetsCard//tweetCard//replyCard//replyModal//profile
-// font-style: normal;
-// font-weight: 500;
-// font-size: 15px;
-// line-height: 22px;
-// color: #657786;
 
 
 
-// header
+// header---------------------
 //帳戶設定title
 //font-weight: bold;700
 //font-size: 19px;
@@ -95,4 +85,80 @@
 // font-weight: 500;
 // font-size: 13px;
 // line-height: 19px;
+// color: #657786;
+
+//description --------------------
+%descriptions-style {
+  font-size: $font-size-root;
+  line-height: $font-line-root;
+  color: $font-color-root;
+}
+
+//tweets card//follow-card
+.tweets-description {
+  font-weight:$font-weight-sub-title;
+  @extend %descriptions-style;
+}
+
+//reply card//reply modal
+.reply-description {
+  font-weight:$font-weight-content;
+  @extend %descriptions-style;
+}
+
+//tweet card
+// font-weight: 500;
+// font-size: 23px;
+// line-height: 34px;
+// color: #1C1C1C;
+
+
+//profile-intro
+// font-weight: 400;
+// font-size: 14px;
+// line-height: 20px;
+// color: #000000;
+
+
+.tweets-count {
+  font-size: $font-size-small;
+  line-height: $font-line-small;
+  color: $font-color-account;
+  font-weight: $font-weight-sub-title;
+}
+
+
+//count--------------------
+
+//tweets card
+.tweets-count {
+  font-size: $font-size-small;
+  line-height: $font-line-small;
+  color: $font-color-account;
+  font-weight: $font-weight-sub-title;
+}
+
+
+//tweet card
+//number
+// font-weight: 700;
+// font-size: 19px;
+// line-height: 28px;
+// color: #000000;
+//text
+// font-weight: 700;
+// font-size: 19px;
+// line-height: 28px;
+// color: #657786;
+
+//profile
+//number
+// font-weight: 500;
+// font-size: 14px;
+// line-height: 20px;
+// color: #000000;
+//text
+// font-weight: 500;
+// font-size: 14px;
+// line-height: 20px;
 // color: #657786;

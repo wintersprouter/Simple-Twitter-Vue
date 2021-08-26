@@ -16,10 +16,12 @@
 
         <v-card-text class="py-0">
           <v-list-item-title>
-            <span class="mr-2 tweets-name">{{ tweet.name }}</span>
-            <span class="tweets-account">@{{ tweet.account }}</span>
-            <span class="tweets-account"> · </span>
-            <span class="tweets-account"> {{ tweet.createdAt | fromNow }}</span>
+            <span class="mr-2 tweets-user-name">{{ tweet.name }}</span>
+            <span class="tweets-user-account">@{{ tweet.account }}</span>
+            <span class="tweets-user-account"> · </span>
+            <span class="tweets-user-account">
+              {{ tweet.createdAt | fromNow }}</span
+            >
           </v-list-item-title>
           <p class="pt-2 pb-1 pr-0 tweet-description">
             {{ tweet.description }}
