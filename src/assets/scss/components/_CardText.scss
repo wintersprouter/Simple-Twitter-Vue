@@ -1,0 +1,95 @@
+%top-card-style {
+  font-weight: $font-weight-title;
+  font-size: $font-size-root;
+  line-height: $font-line-sub-title;
+}
+.top-user-name {
+  @extend %top-card-style;
+  color:$font-color-root;
+}
+.top-user-account {
+  @extend %top-card-style;
+  color:$font-color-account;
+}
+
+//name----------------
+//tweetsCard//tweetCard//replyCard//replyModal
+// font-weight: bold;
+// font-size: 15px;
+// line-height: 22px;
+// color: #1C1C1C;
+
+
+//topCard
+// font-weight: bold;
+// font-size: 15px;
+// line-height: 15px;
+// color: #1C1C1C;
+
+//profile
+// font-weight: 900;
+// font-size: 19px;
+// line-height: 28px;
+// color: #1C1C1C;
+
+//followcard
+//font-weight: bold;
+// font-size: 15px;
+// line-height: 15px;
+// color: #1C1C1C;
+
+
+
+
+//account------------------
+
+//topCard
+// font-weight: bold;
+// font-size: 15px;
+// line-height: 15px;
+// color: #657786;
+
+
+//followCard
+// font-weight: 500;
+// font-size: 15px;
+// line-height: 15px;
+// color: #657786;
+
+//tweetsCard//tweetCard//replyCard//replyModal//profile
+// font-style: normal;
+// font-weight: 500;
+// font-size: 15px;
+// line-height: 22px;
+// color: #657786;
+
+
+
+// header
+//帳戶設定title
+//font-weight: bold;700
+//font-size: 19px;
+//line-height: 28px;
+//color: #1C1C1C;
+
+
+//首頁title //推文清單title //使用者列表//推文title
+// font-weight: bold;
+// font-size: 18px;
+// line-height: 26px;
+// color: #1C1C1C;
+
+//推文btn
+//background: #000000;
+
+//user title
+// font-weight: 900;
+// font-size: 19px;
+// line-height: 28px;
+// color: #1C1C1C;
+
+//user tweet
+// font-weight: 500;
+// font-size: 13px;
+// line-height: 19px;
+// color: #657786;
