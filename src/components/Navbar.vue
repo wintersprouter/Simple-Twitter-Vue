@@ -3,30 +3,29 @@
     height="100vh"
     elevation="0"
     width="210px"
-    class="nav-list d-flex align-start flex-column pa-2 mx-auto"
+    class="nav-list d-flex align-start flex-column pa-2"
     ><Spinner v-if="isLoading" />
     <template v-else>
       <v-list rounded nav>
         <!-- user -->
         <v-list-item-group v-model="model" color="primary">
           <!-- logo -->
-          <router-link to="/">
-            <v-btn
-              icon
-              color="primary"
-              rounded
-              class="ml-1"
-              width="70px"
-              height="45px"
-            >
-              <v-img
-                src="../assets/img/logo.svg"
-                max-width="40px"
-                max-height="40px"
-                class="avatar-image"
-              ></v-img>
-            </v-btn>
-          </router-link>
+          <v-btn
+            icon
+            color="primary"
+            rounded
+            class="ml-1"
+            width="70px"
+            height="45px"
+            :to="'/'"
+          >
+            <v-img
+              src="../assets/img/logo.svg"
+              max-width="40px"
+              max-height="40px"
+              class="avatar-image"
+            ></v-img>
+          </v-btn>
           <!-- logo-end -->
           <v-list-item
             v-for="option in options"

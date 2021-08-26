@@ -5,11 +5,22 @@
 @import './_basic';
 
 @import"./layout/_UserSignIn";
-@import"./components/_AdminUsers";
+@import"./components/_Navbar";
+@import"./layout/_ThreeColumn";
 
 
 .v-application {
   font-family: $font-family !important;
+  color:$font-color-root;
+  font-size:$font-size-root;
+  [class*='text-'] {
+    font-family: $font-family, sans-serif !important;
+    font-style: normal;
+    color: $font-color-root
+  }
+  // .links {
+  //   color:$font-color-account;
+  // }
   // .tweets-name ,.tweets-content {
   //   font-size: $font-size-root;
   //   line-height: $font-line-root;
