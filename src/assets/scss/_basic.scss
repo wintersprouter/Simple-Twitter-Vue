@@ -11,8 +11,12 @@ body {
 }
 a {
   text-decoration: none;
-  text-decoration-color: none;
 }
 img {
   object-fit: cover;
+}
+main {
+  margin: 0 auto ;
+  height: 100%;
+  width: 100%;
 }
