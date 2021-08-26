@@ -3,7 +3,7 @@
     <v-container class="d-flex justify-space-between">
       <router-link :to="`/users/${follow.followingId}`" class="links">
         <v-avatar size="50" class="tweet-card-avatar">
-          <img :src="follow.avatar" :alt="follow.name" class="image" />
+          <img :src="follow.avatar" :alt="follow.name" />
         </v-avatar>
       </router-link>
 

@@ -19,7 +19,7 @@
               <v-row>
                 <router-link :to="`/users/${tweet.UserId}`" class="links">
                   <v-avatar size="50" class="tweet-card-avatar mb-2">
-                    <img :src="tweet.avatar" :alt="tweet.name" class="image" />
+                    <img :src="tweet.avatar" :alt="tweet.name" />
                   </v-avatar>
                 </router-link>
                 <v-list class="pt-1 ml-2">

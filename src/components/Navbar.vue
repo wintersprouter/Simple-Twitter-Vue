@@ -74,7 +74,6 @@
                         <img
                           :src="currentUser.avatar"
                           :alt="currentUser.name"
-                          class="image"
                         />
                       </v-avatar>
                       <v-textarea

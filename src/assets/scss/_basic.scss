@@ -1,0 +1,18 @@
+html {
+  font-size: $font-size-root;
+  height: 100%;
+  font-family: $font-family;
+}
+body {
+  height: 100%;
+  font-family: $font-family;
+  font-style: normal;
+  color: $font-color-root;
+}
+a {
+  text-decoration: none;
+  text-decoration-color: none;
+}
+img {
+  object-fit: cover;
+}

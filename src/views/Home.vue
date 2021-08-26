@@ -15,10 +15,9 @@
             <v-form @submit.stop.prevent="handleSubmit()">
               <v-container class="d-flex justify-space-between px-4 pt-4 pb-0">
                 <v-avatar size="50" class="mr-5">
-                  <img
+                  <v-img
                     :src="currentUser.avatar"
                     :alt="'@' + currentUser.account"
-                    class="image"
                   />
                 </v-avatar>
                 <v-textarea

@@ -21,7 +21,7 @@
       </v-card-actions>
       <v-divider></v-divider>
       <v-card-actions class="edit-images">
-        <v-img height="200px" :src="cover" :alt="name" class="image" />
+        <v-img height="200px" :src="cover" :alt="name" />
         <v-btn class="button-cover ma-2" plain fab>
           <v-file-input
             hide-input
@@ -37,7 +37,7 @@
         </v-btn>
 
         <v-avatar size="140" class="profile-avatar" fab>
-          <v-img class="image" :src="avatar" :alt="name" />
+          <v-img :src="avatar" :alt="name" />
 
           <v-btn class="button-avatar ma-2" plain fab>
             <v-file-input

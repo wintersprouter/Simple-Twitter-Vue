@@ -1,60 +1,51 @@
 @import "./utility/_reset.scss";
 @import "./utility/_variables.scss";
-@import"./components/AdminUsers";
-@import"./layout/ThreeColumn";
+@import './_basic';
+@import"./layout/_ThreeColumn";
+@import"./components/_AdminUsers";
 
-.v-application {
-  font-family: $font-family, sans-serif !important;
-  color:$font-color-root;
-  font-size:$font-size-root;
-  [class*='text-'] {
-    font-family: $font-family, sans-serif !important;
-    font-style: $font-style-title;
-    color: $font-color-root
-  }
-  .tweets-name ,.tweets-content {
-    font-size: $font-size-root;
-    line-height: $font-line-root;
-    color: $font-color-root;
-  }
-  .tweets-name {
-    font-weight: $font-weight-title;
 
-  }
-  .tweets-account {
-    font-weight: $font-weight-sub-title;
-    font-size: $font-line-sub-title;
-    line-height: $font-line-root;
-    color: $font-color-account;
-  }
-  .tweets-content {
-    font-weight: $font-weight-content;
-  }
-  .header-title {
-    font-weight: $font-weight-title;
-    font-size: $font-size-title;
-    line-height: $font-line-title;
-    color: $font-color-root;
-  }
-  .header-user-title {
-    font-weight: $font-weight-medium;
-    font-size: $font-size-medium;
-    line-height: $font-line-medium;
-    color: $font-color-root;
-  }
-  .header-user-subtitle {
-    font-weight: $font-weight-sub-title;
-    font-size: $font-size-small;
-    line-height: $font-line-header;
-    color: $font-color-account;
-  }
-  .links, .nav-link {
-    text-decoration: none;
-  }
-  .links {
-    color:$font-color-account;
-  }
-  .image {
-    object-fit: cover;
-  } 
-}
+// .v-application {
+//   .tweets-name ,.tweets-content {
+//     font-size: $font-size-root;
+//     line-height: $font-line-root;
+//     color: $font-color-root;
+//   }
+//   .tweets-name {
+//     font-weight: $font-weight-title;
+
+//   }
+//   .tweets-account {
+//     font-weight: $font-weight-sub-title;
+//     font-size: $font-line-sub-title;
+//     line-height: $font-line-root;
+//     color: $font-color-account;
+//   }
+//   .tweets-content {
+//     font-weight: $font-weight-content;
+//   }
+//   .header-title {
+//     font-weight: $font-weight-title;
+//     font-size: $font-size-title;
+//     line-height: $font-line-title;
+//     color: $font-color-root;
+//   }
+//   .header-user-title {
+//     font-weight: $font-weight-medium;
+//     font-size: $font-size-medium;
+//     line-height: $font-line-medium;
+//     color: $font-color-root;
+//   }
+//   .header-user-subtitle {
+//     font-weight: $font-weight-sub-title;
+//     font-size: $font-size-small;
+//     line-height: $font-line-header;
+//     color: $font-color-account;
+//   }
+//   .links, .nav-link {
+//     text-decoration: none;
+//   }
+//   .links {
+//     color:$font-color-account;
+//   }
+// }

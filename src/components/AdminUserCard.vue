@@ -1,8 +1,7 @@
 <template>
   <v-col>
     <v-card color="#F6F7F8" class="admin-users-card ma-2 align-self-stretch;">
-      <v-img height="140px" :src="user.cover" :alt="user.name" class="image">
-      </v-img>
+      <v-img height="140px" :src="user.cover" :alt="user.name"> </v-img>
       <v-avatar
         size="100"
         class="profile-avatar"
@@ -10,11 +9,7 @@
         absolute
         fab
       >
-        <img
-          class="profile-avatar-image image"
-          :alt="user.name"
-          :src="user.avatar"
-        />
+        <img class="profile-avatar-image" :alt="user.name" :src="user.avatar" />
       </v-avatar>
       <v-container>
         <v-card-title class="admin-users-card-name mt-2">{{

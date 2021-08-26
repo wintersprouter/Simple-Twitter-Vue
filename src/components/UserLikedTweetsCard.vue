@@ -3,7 +3,7 @@
     <v-card elevation="0" class="tweet-card">
       <router-link :to="`/users/${tweet.likedTweetUserId}`" class="links">
         <v-avatar size="50" class="tweet-card-avatar">
-          <img :src="tweet.avatar" :alt="tweet.name" class="image" />
+          <v-img :src="tweet.avatar" :alt="tweet.name" />
         </v-avatar>
       </router-link>
       <v-list class="tweet-card-list">

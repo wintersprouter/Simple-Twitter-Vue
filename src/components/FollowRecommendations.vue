@@ -24,7 +24,7 @@
                 color="gary"
                 size="50"
               >
-                <img :src="user.avatar" :alt="user.name" class="image" />
+                <img :src="user.avatar" :alt="user.name" />
               </v-list-item-avatar>
             </router-link>
             <v-list-item-content class="user-info-text">
@@ -93,7 +93,7 @@
                     color="gary"
                     size="50"
                   >
-                    <img :src="user.avatar" :alt="user.name" class="image" />
+                    <img :src="user.avatar" :alt="user.name" />
                   </v-list-item-avatar>
                 </router-link>
                 <v-list-item-content class="user-info-text">
