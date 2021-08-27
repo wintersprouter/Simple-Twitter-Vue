@@ -2,134 +2,134 @@
   <v-card
     height="100vh"
     elevation="0"
-    width="210px"
-    class="nav-list d-flex align-start flex-column pa-2"
+    class="nav-list d-flex align-start flex-column px-2"
     ><Spinner v-if="isLoading" />
     <template v-else>
-      <v-list rounded nav>
-        <!-- user -->
-        <v-list-item-group v-model="model" color="primary">
-          <!-- logo -->
-          <v-btn
-            icon
-            color="primary"
-            rounded
-            class="ml-1"
-            width="70px"
-            height="45px"
-            :to="'/'"
-          >
-            <v-img
-              src="../assets/img/logo.svg"
-              max-width="40px"
-              max-height="40px"
-              class="avatar-image"
-            ></v-img>
-          </v-btn>
-          <!-- logo-end -->
-          <v-list-item
-            v-for="option in options"
-            :key="option.id"
-            class="mt-5 pr-3 option-item"
-            :to="option.path"
-          >
-            <v-list-item-icon class="ml-2 pr-0 nav-icon">
-              <v-icon class="option-icon">{{ option.icon }}</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title class="nav-title">{{
-                option.title
-              }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item class="mt-5" v-if="currentUser.role === 'user'">
-            <v-dialog v-model="dialog" max-width="600px" max-hight="300px">
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  rounded
-                  block
-                  color="primary"
-                  dark
-                  v-bind="attrs"
-                  v-on="on"
-                  depressed
-                  x-large
-                  class="nav-button"
-                >
-                  推文
-                </v-btn>
-              </template>
-              <v-card elevation="0" style="border-radius: 14px">
-                <v-card-actions>
-                  <v-btn color="primary" text @click="dialog = false"
-                    ><span>&#10005;</span>
+      <div>
+        <v-list rounded nav>
+          <!-- user -->
+          <v-list-item-group color="primary">
+            <!-- logo -->
+            <v-btn
+              icon
+              color="primary"
+              rounded
+              class="ml-2"
+              width="70px"
+              height="50px"
+              :to="'/'"
+            >
+              <v-img
+                src="../assets/img/logo.svg"
+                max-width="40px"
+                max-height="40px"
+              ></v-img>
+            </v-btn>
+            <!-- logo-end -->
+            <v-list-item
+              v-for="option in options"
+              :key="option.id"
+              class="mt-5 pr-3"
+              :to="option.path"
+            >
+              <v-list-item-icon class="ml-2 pr-0 nav-icon">
+                <v-icon class="option-icon">{{ option.icon }}</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content class="nav-title-content">
+                <v-list-item-title class="nav-title">{{
+                  option.title
+                }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item class="mt-5" v-if="currentUser.role === 'user'">
+              <v-dialog v-model="dialog" max-width="600px" max-hight="300px">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    rounded
+                    block
+                    color="primary"
+                    dark
+                    v-bind="attrs"
+                    v-on="on"
+                    depressed
+                    x-large
+                    class="nav-button"
+                  >
+                    推文
                   </v-btn>
-                </v-card-actions>
-                <v-divider></v-divider>
-                <v-form @submit.stop.prevent="handleSubmit">
+                </template>
+                <v-card elevation="0" style="border-radius: 14px">
                   <v-card-actions>
-                    <v-container class="d-flex justify-space-between">
-                      <v-avatar size="50" class="mr-5">
-                        <img
-                          :src="currentUser.avatar"
-                          :alt="currentUser.name"
-                        />
-                      </v-avatar>
-                      <v-textarea
-                        v-model="text"
-                        :rules="rules"
-                        counter
-                        maxlength="140"
-                        auto-grow
-                        autofocus
-                        row-height="15"
-                        placeholder="有什麼新鮮事？"
-                      ></v-textarea>
-                    </v-container>
-                  </v-card-actions>
-
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn
-                      color="primary"
-                      rounded
-                      depressed
-                      type="submit"
-                      class="mb-5"
-                      :disabled="isProcessing"
-                    >
-                      推文
+                    <v-btn color="primary" text @click="dialog = false"
+                      ><span>&#10005;</span>
                     </v-btn>
                   </v-card-actions>
-                </v-form>
-              </v-card>
-            </v-dialog>
+                  <v-divider></v-divider>
+                  <v-form @submit.stop.prevent="handleSubmit">
+                    <v-card-actions>
+                      <v-container class="d-flex justify-space-between">
+                        <v-avatar size="50" class="mr-5">
+                          <img
+                            :src="currentUser.avatar"
+                            :alt="currentUser.name"
+                          />
+                        </v-avatar>
+                        <v-textarea
+                          v-model="text"
+                          :rules="rules"
+                          counter
+                          maxlength="140"
+                          auto-grow
+                          autofocus
+                          row-height="15"
+                          placeholder="有什麼新鮮事？"
+                        ></v-textarea>
+                      </v-container>
+                    </v-card-actions>
+
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        color="primary"
+                        rounded
+                        depressed
+                        type="submit"
+                        class="mb-5"
+                        :disabled="isProcessing"
+                      >
+                        推文
+                      </v-btn>
+                    </v-card-actions>
+                  </v-form>
+                </v-card>
+              </v-dialog>
+            </v-list-item>
+          </v-list-item-group>
+          <!-- user-end -->
+        </v-list>
+      </div>
+
+      <!-- logout -->
+      <div>
+        <v-list rounded nav>
+          <v-list-item class="pl-3">
+            <v-btn text rounded @click="logout" x-large class="pl-0">
+              <v-list-item-icon class="ml-2 pr-0 nav-icon">
+                <v-img
+                  src="../assets/img/logout.svg"
+                  width="1.5rem"
+                  height="1.5rem"
+                ></v-img>
+              </v-list-item-icon>
+              <v-list-item-content class="nav-title-content">
+                <v-list-item-title class="nav-title">登出</v-list-item-title>
+              </v-list-item-content>
+            </v-btn>
           </v-list-item>
-        </v-list-item-group>
-        <!-- user-end -->
-      </v-list>
+        </v-list>
+      </div>
+      <!-- logout -->
     </template>
-    <!-- logout -->
-    <div>
-      <v-list flat rounded nav class="p-0">
-        <v-list-item class="pl-0">
-          <v-btn text rounded @click="logout" x-large class="pl-0">
-            <v-list-item-icon class="ml-2 pr-0">
-              <v-img
-                src="../assets/img/logout.svg"
-                width="1.5rem"
-                height="1.5rem"
-                class="ml-2"
-              ></v-img>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title class="nav-title">登出</v-list-item-title>
-            </v-list-item-content>
-          </v-btn>
-        </v-list-item>
-      </v-list>
-    </div>
-    <!-- logout -->
   </v-card>
 </template>
 

@@ -1,63 +1,61 @@
 <template>
-  <v-container>
-    <v-row>
-      <section class="left-section">
-        <Navbar @after-post-tweet="updateTweet" />
-      </section>
-      <section class="middle-section">
-        <Spinner v-if="isLoading" />
-        <template v-else>
-          <v-card elevation="0" height="55px" class="mt-0"
-            ><v-card-title class="header-title">首頁</v-card-title></v-card
-          >
-          <v-divider></v-divider>
-          <v-card elevation="0" class="mt-0">
-            <v-form @submit.stop.prevent="handleSubmit()">
-              <v-container class="d-flex justify-space-between px-4 pt-4 pb-0">
-                <v-avatar size="50" class="mr-5">
-                  <v-img
-                    :src="currentUser.avatar"
-                    :alt="'@' + currentUser.account"
-                  />
-                </v-avatar>
-                <v-textarea
-                  v-model="text"
-                  counter
-                  maxlength="140"
-                  auto-grow
-                  row-height="5"
-                  placeholder="有什麼新鮮事？"
-                  class="pt-2"
-                ></v-textarea>
-              </v-container>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn
-                  color="primary"
-                  rounded
-                  depressed
-                  type="submit"
-                  class="mt-0 mb-2 mr-3"
-                  :disabled="isProcessing"
-                >
-                  推文
-                </v-btn>
-              </v-card-actions>
-            </v-form>
-          </v-card>
-          <v-divider></v-divider>
-          <UserTweets
-            v-for="tweet in tweets"
-            :key="tweet.id"
-            :initial-tweet="tweet"
-          />
-        </template>
-      </section>
-      <section class="right-section">
-        <FollowRecommendations :initial-top-users="topUsers" />
-      </section>
-    </v-row>
-  </v-container>
+  <div class="container d-flex pa-0 m-0">
+    <section class="left-section">
+      <Navbar @after-post-tweet="updateTweet" />
+    </section>
+    <section class="middle-section">
+      <Spinner v-if="isLoading" />
+      <template v-else>
+        <v-card elevation="0" height="55px" tile class="mt-0" max-width="600px"
+          ><v-card-title class="header-title">首頁</v-card-title></v-card
+        >
+        <v-divider></v-divider>
+        <v-card elevation="0" class="mt-0" tile max-width="600px">
+          <v-form @submit.stop.prevent="handleSubmit()">
+            <v-container class="d-flex justify-space-between px-4 pt-4 pb-0">
+              <v-avatar size="50" class="mr-5">
+                <v-img
+                  :src="currentUser.avatar"
+                  :alt="'@' + currentUser.account"
+                />
+              </v-avatar>
+              <v-textarea
+                v-model="text"
+                counter
+                maxlength="140"
+                auto-grow
+                row-height="5"
+                placeholder="有什麼新鮮事？"
+                class="pt-2"
+              ></v-textarea>
+            </v-container>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="primary"
+                rounded
+                depressed
+                type="submit"
+                class="mt-0 mb-2 mr-3"
+                :disabled="isProcessing"
+              >
+                推文
+              </v-btn>
+            </v-card-actions>
+          </v-form>
+        </v-card>
+        <v-divider></v-divider>
+        <UserTweets
+          v-for="tweet in tweets"
+          :key="tweet.id"
+          :initial-tweet="tweet"
+        />
+      </template>
+    </section>
+    <section class="right-section">
+      <FollowRecommendations :initial-top-users="topUsers" />
+    </section>
+  </div>
 </template>
 
 <script>

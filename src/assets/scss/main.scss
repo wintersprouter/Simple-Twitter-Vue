@@ -2,11 +2,12 @@
 
 @import "./utility/_reset.scss";
 @import "./utility/_variables.scss";
+@import"./utility/_mixin.scss";
 @import './_basic';
 
 @import"./layout/_UserSignIn";
 @import"./components/_Navbar";
-@import"./layout/_ThreeColumn";
+@import"./layout/_Home";
 @import"./components/_CardText";
 
 

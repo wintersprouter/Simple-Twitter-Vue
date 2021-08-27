@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="0" max-width="350" class="recommend-list">
+  <v-card elevation="0" max-width="350px" height="100vh" class="recommend-list">
     <Spinner v-if="isLoading" />
     <template v-else>
       <v-card class="secondary rounded-t-xl my-0" outlined>
@@ -11,12 +11,12 @@
         v-for="user in users.slice(0, 6)"
         :key="user.id"
         class="secondary my-0"
-        max-width="350"
+        width="100%"
         outlined
       >
         <v-divider></v-divider>
         <v-row align="center" justify="space-around">
-          <v-list-item two-line class="ma-2 p-0" width="100%">
+          <v-list-item two-line class="ma-2 p-0" max-width="350">
             <router-link :to="`/users/${user.id}`" class="links">
               <v-list-item-avatar
                 class="recommend-user-info-avatar"
@@ -257,9 +257,10 @@ export default {
 
 <style lang="scss" scoped>
 .recommend-list {
-  margin: 2rem auto;
+  margin: 0.5rem auto;
   .recommend-list-top-title {
-    margin-left: 8px;
+    margin-left: 16px;
+    padding: 8px;
   }
   .recommend-user-info-avatar {
     margin-left: 8px;

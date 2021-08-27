@@ -1,0 +1,31 @@
+//1440px-
+@mixin pc-width() {
+  @media all and (min-width: $laptop-l-media) {
+    @content;
+  }
+}
+//1024px-1439px
+@mixin pcs-width() {
+  @media all and (min-width: $laptop-media) and 
+    (max-width: $laptop-m-media) {
+    @content;
+  }
+}
+//768px-1023px
+@mixin pad-width() {
+  @media all and (min-width:$pad-l-media) and (max-width: $laptop-s-media) {
+    @content;
+  }
+}
+//480px-767px
+@mixin small-pad-width() {
+  @media all and (min-width: $phone-media) and (max-width:$pad-m-media) {
+    @content;
+  }
+}
+//0-479px
+@mixin phone-width() {
+  @media all and (max-width: $phone-s-media) {
+    @content;
+  }
+}

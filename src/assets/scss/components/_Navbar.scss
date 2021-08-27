@@ -1,4 +1,5 @@
 .nav-list {
+  max-width:210px;
   margin: 0 auto;
   justify-content:space-between;
   .nav-title {
@@ -14,7 +15,24 @@
   }
   .nav-button {
     margin: 0 auto;
-    width: 150px;
-    height: 45px;
+    max-width: 150px;
+    max-height: 45px;
+  }
+}
+// @include pad-width {
+//   .nav-title-content,.nav-title {
+//     display: none;
+//   }
+  
+// }
+@include small-pad-width {
+  .nav-title-content,.nav-title {
+    display: none;
+  }
+  
+}
+@include phone-width {
+  .nav-title-content,.nav-title {
+    display: none;
   }
 }
