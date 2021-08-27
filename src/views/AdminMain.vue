@@ -1,5 +1,5 @@
 <template>
-  <div class="container d-flex pa-0">
+  <div class="main-container d-flex pa-0">
     <section class="left-section"><Navbar /></section>
     <section class="main-section">
       <router-view></router-view>

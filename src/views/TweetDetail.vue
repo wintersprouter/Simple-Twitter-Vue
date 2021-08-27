@@ -1,8 +1,15 @@
 <template>
-  <div class="container d-flex pa-0">
+  <div class="main-container d-flex pa-0">
     <section class="left-section"><Navbar /></section>
     <section class="middle-section">
-      <v-card elevation="0" height="55px">
+      <v-card
+        elevation="0"
+        height="55px"
+        tile
+        class="mt-0"
+        width="100%"
+        min-width="600px"
+      >
         <v-container class="d-flex p-0">
           <v-btn icon @click="$router.back()">
             <v-icon color="black">mdi-arrow-left</v-icon>
@@ -14,44 +21,42 @@
       <TweetLoading v-if="isLoading" />
       <template v-else>
         <v-card elevation="0" tile class="detail-tweet-card">
-          <v-card-text class="ml-1">
-            <v-row>
-              <router-link :to="`/users/${tweet.UserId}`" class="links">
-                <v-avatar size="50" class="tweet-card-avatar mb-2">
-                  <img :src="tweet.avatar" :alt="tweet.name" />
-                </v-avatar>
-              </router-link>
-              <v-list class="pt-1 ml-2">
-                <v-list-item-title class="tweets-name">{{
+          <v-container class="d-flex justify-space-between align-start">
+            <router-link :to="`/users/${tweet.UserId}`">
+              <v-avatar size="50" class="tweet-card-avatar mb-2">
+                <img :src="tweet.avatar" :alt="tweet.name" />
+              </v-avatar>
+            </router-link>
+            <v-list class="pt-0 ml-2 mt-0">
+              <v-card-text class="pt-0">
+                <v-list-item-title class="tweets-user-name">{{
                   tweet.name
                 }}</v-list-item-title>
-                <v-list-item-subtitle class="tweets-account"
+                <v-list-item-subtitle class="tweets-user-account"
                   >@{{ tweet.account }}</v-list-item-subtitle
                 >
-              </v-list>
-            </v-row>
-          </v-card-text>
+              </v-card-text>
+            </v-list>
+          </v-container>
 
-          <v-card-text class="detail-tweet-card-content">
-            <p class="detail-tweet-card-content">
+          <v-card-text>
+            <p class="tweet-description">
               {{ tweet.description }}
             </p>
           </v-card-text>
-          <v-card-subtitle class="detail-tweet-card-time">{{
-            tweet.createdAt | fromNow
-          }}</v-card-subtitle>
+          <v-card-subtitle
+            ><p class="tweets-user-account">
+              {{ tweet.createdAt | fromNow }}
+            </p></v-card-subtitle
+          >
 
           <v-divider class="mx-1"></v-divider>
 
           <v-card-subtitle>
-            <span class="tweet-card-reply-count mr-1">{{
-              tweet.repliedCount
-            }}</span>
-            <span class="tweet-card-reply-text mr-3">回覆</span>
-            <span class="tweet-card-like-count mr-1">{{
-              tweet.likedCount
-            }}</span>
-            <span class="tweet-card-like-text">喜歡次數</span>
+            <span class="tweet-count mr-1">{{ tweet.repliedCount }}</span>
+            <span class="tweet-count-text mr-3">回覆</span>
+            <span class="tweet-count mr-1">{{ tweet.likedCount }}</span>
+            <span class="tweet-count-text">喜歡次數</span>
           </v-card-subtitle>
 
           <v-divider class="mx-1"></v-divider>
@@ -261,3 +266,9 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.detail-tweet-card {
+  margin: 0 auto;
+  padding: 15px;
+}
+</style>

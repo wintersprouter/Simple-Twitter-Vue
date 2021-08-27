@@ -107,10 +107,13 @@
 }
 
 //tweet card
-// font-weight: 500;
-// font-size: 23px;
-// line-height: 34px;
-// color: #1C1C1C;
+.tweet-description {
+  font-weight:$font-weight-sub-title;
+  font-size:$font-size-large; 
+  color: $font-color-root;
+  line-height: $font-line-large;
+}
+
 
 
 //profile-intro
@@ -119,13 +122,6 @@
 // line-height: 20px;
 // color: #000000;
 
-
-.tweets-count {
-  font-size: $font-size-small;
-  line-height: $font-line-small;
-  color: $font-color-account;
-  font-weight: $font-weight-sub-title;
-}
 
 
 //count--------------------
@@ -141,15 +137,20 @@
 
 //tweet card
 //number
-// font-weight: 700;
-// font-size: 19px;
-// line-height: 28px;
-// color: #000000;
-//text
-// font-weight: 700;
-// font-size: 19px;
-// line-height: 28px;
-// color: #657786;
+%tweet-card-count-style {
+  font-weight: $font-weight-title;
+  font-size: $font-size-medium;
+  line-height: $font-line-medium;
+}
+.tweet-count {
+  @extend %tweet-card-count-style;
+  color: $font-color-black;
+}
+.tweet-count-text {
+  @extend %tweet-card-count-style;
+  color: $font-color-account;
+}
+
 
 //profile
 //number
