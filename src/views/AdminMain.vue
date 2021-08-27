@@ -1,12 +1,10 @@
 <template>
-  <v-container>
-    <v-row>
-      <section class="left-section"><Navbar /></section>
-      <section class="main-section">
-        <router-view></router-view>
-      </section>
-    </v-row>
-  </v-container>
+  <div class="container d-flex pa-0">
+    <section class="left-section"><Navbar /></section>
+    <section class="main-section">
+      <router-view></router-view>
+    </section>
+  </div>
 </template>
 <script>
 import Navbar from "./../components/Navbar";

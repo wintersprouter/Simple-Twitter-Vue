@@ -1,5 +1,5 @@
 <template>
-  <div class="container d-flex pa-0 m-0">
+  <div class="container d-flex pa-0">
     <section class="left-section">
       <Navbar @after-post-tweet="updateTweet" />
     </section>
@@ -13,7 +13,7 @@
         <v-card elevation="0" class="mt-0" tile max-width="600px">
           <v-form @submit.stop.prevent="handleSubmit()">
             <v-container class="d-flex justify-space-between px-4 pt-4 pb-0">
-              <v-avatar size="50" class="mr-5">
+              <v-avatar size="50" class="mr-5 ml-2">
                 <v-img
                   :src="currentUser.avatar"
                   :alt="'@' + currentUser.account"
