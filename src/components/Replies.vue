@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="0" tile class="reply-list">
+  <v-card elevation="0" tile class="reply-list" max-width="600px">
     <v-card
       tile
       v-for="reply in replies"

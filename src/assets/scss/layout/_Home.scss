@@ -39,7 +39,7 @@
   @include pad-width {
     padding-left:0px;
     padding-right: 0px;
-    left: 7%;
+    left: 6%;
   }
   @include small-pad-width {
     padding-left:23px;
@@ -62,8 +62,7 @@
 
   }
   @include pcs-width {
-    max-width: 425px;
-    margin-right: 15px;
+    max-width: 40%;
     border-left: 1px solid #E5E5E5;
     border-right: 1px solid #E5E5E5;
   }

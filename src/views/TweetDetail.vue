@@ -13,7 +13,7 @@
       <v-divider></v-divider>
       <TweetLoading v-if="isLoading" />
       <template v-else>
-        <v-card elevation="0" tile class="detail-tweet-card">
+        <v-card elevation="0" tile class="detail-tweet-card" max-width="600px">
           <v-container class="d-flex justify-space-between align-start">
             <router-link :to="`/users/${tweet.UserId}`">
               <v-avatar size="50" class="tweet-card-avatar mb-2">
@@ -21,7 +21,7 @@
               </v-avatar>
             </router-link>
             <v-list class="pt-0 ml-2 mt-0">
-              <v-card-text class="pt-0">
+              <v-card-text class="py-0">
                 <v-list-item-title class="tweets-user-name">{{
                   tweet.name
                 }}</v-list-item-title>
@@ -260,14 +260,15 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.middle-section {
-  width: 100%;
-  .header-card {
-    width: 100%;
-  }
-  .detail-tweet-card {
-    margin: 0 auto;
-    padding: 15px;
-  }
+.header-card {
+  padding-left: 0;
+  margin: 0 auto;
+}
+.detail-tweet-card {
+  margin: 0;
+  padding: 15px;
+}
+.tweet-description {
+  min-width: 450px;
 }
 </style>
