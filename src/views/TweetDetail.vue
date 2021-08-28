@@ -2,14 +2,7 @@
   <div class="main-container d-flex pa-0">
     <section class="left-section"><Navbar /></section>
     <section class="middle-section">
-      <v-card
-        elevation="0"
-        height="55px"
-        tile
-        class="mt-0"
-        width="100%"
-        min-width="600px"
-      >
+      <v-card elevation="0" height="55px" tile class="mt-0 header-card">
         <v-container class="d-flex p-0">
           <v-btn icon @click="$router.back()">
             <v-icon color="black">mdi-arrow-left</v-icon>
@@ -267,8 +260,14 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.detail-tweet-card {
-  margin: 0 auto;
-  padding: 15px;
+.middle-section {
+  width: 100%;
+  .header-card {
+    width: 100%;
+  }
+  .detail-tweet-card {
+    margin: 0 auto;
+    padding: 15px;
+  }
 }
 </style>

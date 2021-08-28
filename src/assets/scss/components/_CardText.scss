@@ -163,3 +163,10 @@
 // font-size: 14px;
 // line-height: 20px;
 // color: #657786;
+
+.reply-target {
+  font-weight: $font-weight-sub-title;
+  font-size: $font-size-root;
+  line-height: $font-line-root;
+  color: $font-color-primary;
+}
