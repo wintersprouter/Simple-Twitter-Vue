@@ -1,8 +1,5 @@
 <template>
-  <v-card
-    height="100vh"
-    elevation="0"
-    class="nav-list d-flex align-start flex-column"
+  <v-card height="100vh" elevation="0" class="nav-list"
     ><Spinner v-if="isLoading" />
     <template v-else>
       <v-navigation-drawer
@@ -11,7 +8,7 @@
         :mini-variant="$vuetify.breakpoint.smAndDown"
         mini-variant-width="60"
       >
-        <div>
+        <div style="broder=1px solid blue">
           <v-list rounded nav class="option-list">
             <!-- user -->
             <v-list-item-group color="primary">
@@ -44,7 +41,7 @@
                       block
                       color="primary"
                       v-bind="attrs"
-                      :x-large="$vuetify.breakpoint.mdAndUp"
+                      x-large
                       v-on="on"
                       depressed
                       v-text="'推文'"
@@ -53,12 +50,14 @@
                     <v-btn
                       v-else-if="$vuetify.breakpoint.smAndDown"
                       class="mx-1"
+                      v-bind="attrs"
+                      v-on="on"
                       small
                       fab
                       dark
                       color="primary"
                     >
-                      <v-icon dark color="white"> mdi-feather </v-icon>
+                      <v-icon dark> mdi-feather </v-icon>
                     </v-btn>
                   </template>
                   <v-card elevation="0" style="border-radius: 14px">
@@ -113,24 +112,28 @@
         </div>
 
         <!-- logout -->
-        <div>
-          <v-list rounded nav>
-            <v-list-item class="pl-3">
-              <v-btn text rounded @click="logout" x-large class="pl-0">
-                <v-list-item-icon class="pr-0 logout-icon">
-                  <v-img
-                    src="../assets/img/logout.svg"
-                    width="1.5rem"
-                    height="1.5rem"
-                  ></v-img>
-                </v-list-item-icon>
-                <v-list-item-content class="nav-title-content">
-                  <v-list-item-title class="nav-title">登出</v-list-item-title>
-                </v-list-item-content>
-              </v-btn>
-            </v-list-item>
-          </v-list>
-        </div>
+        <template v-slot:append>
+          <div>
+            <v-list rounded nav class="mt-15">
+              <v-list-item class="pl-3">
+                <v-btn text rounded @click="logout" x-large class="pl-0">
+                  <v-list-item-icon class="pr-0 logout-icon">
+                    <v-img
+                      src="../assets/img/logout.svg"
+                      width="1.5rem"
+                      height="1.5rem"
+                    ></v-img>
+                  </v-list-item-icon>
+                  <v-list-item-content class="nav-title-content">
+                    <v-list-item-title class="nav-title"
+                      >登出</v-list-item-title
+                    >
+                  </v-list-item-content>
+                </v-btn>
+              </v-list-item>
+            </v-list>
+          </div>
+        </template>
         <!-- logout -->
       </v-navigation-drawer>
     </template>

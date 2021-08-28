@@ -32,26 +32,22 @@
     padding-left:70px;
     left: 10%;
   }
-
   @include pcs-width {
     padding-left:75px;
     left: 2%;
   }
-
   @include pad-width {
     padding-left:0px;
     padding-right: 0px;
     left: 7%;
   }
   @include small-pad-width {
-    padding-left:0px;
-    padding-right: 0px;
+    padding-left:23px;
   }
   @include phone-width {
     padding-left:0px;
     padding-right: 0px;
   }
-
 }
 
 
@@ -72,11 +68,11 @@
     border-right: 1px solid #E5E5E5;
   }
   @include pad-width {
-    width: 68%;
+    width: 70%;
     border-left: 1px solid #E5E5E5;
   }
   @include small-pad-width {
-    width: 80%;
+    width: 85%;
     border-left: 1px solid #E5E5E5;
   }
   @include phone-width {
