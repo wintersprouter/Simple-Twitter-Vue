@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="0" style="border-radius: 14px">
+  <v-card elevation="0" style="border-radius: 14px" class="mt-0">
     <v-card-actions>
       <v-btn @click.stop.prevent="handleClick" icon
         ><span>&#10005;</span>
@@ -23,12 +23,12 @@
               {{ tweet.createdAt | fromNow }}</span
             >
           </v-list-item-title>
-          <p class="pt-2 pb-1 pr-0 tweet-description">
+          <p class="pt-2 pb-1 pr-0 reply-description">
             {{ tweet.description }}
           </p>
           <v-list-item-subtitle>
-            <span class="tweet-reply-title mr-1">回覆給</span>
-            <span class="tweet-reply-target"
+            <span class="reply-modal-text">回覆給</span>
+            <span class="reply-modal-target"
               >@{{ tweet.account }}</span
             ></v-list-item-subtitle
           >
@@ -49,6 +49,7 @@
             row-height="15"
             placeholder="推你的回覆"
             autofocus
+            required
           ></v-textarea>
         </v-container>
       </v-card-actions>
@@ -74,6 +75,7 @@ import { mapState } from "vuex";
 import tweetsAPI from "./../apis/tweets";
 import { Toast } from "./../utils/helpers";
 export default {
+  name: "ReplyTweetModal",
   props: {
     initTweet: {
       type: Object,
@@ -82,7 +84,7 @@ export default {
   },
   data() {
     return {
-      repliedContent: " ",
+      repliedContent: "",
       tweet: this.initTweet,
       isProcessing: false,
       dialog: true,
@@ -96,12 +98,12 @@ export default {
   methods: {
     async handleSubmit(tweetId) {
       try {
-        if (!this.repliedContent) {
+        if (!this.repliedContent.trim().length) {
           Toast.fire({ icon: "warning", title: "您尚未填寫任何內容" });
           return;
         }
         this.isProcessing = true;
-        const content = { comment: this.repliedContent };
+        const content = { comment: this.repliedContent.trim() };
 
         const { data } = await tweetsAPI.postReply({
           tweetId,
@@ -137,3 +139,15 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.modal-top {
+  position: relative;
+  #connect-line {
+    // background-color: $font-color-outline;
+    position: absolute;
+    left: 6.5%;
+    top: 50%;
+    height: 80px;
+  }
+}
+</style>

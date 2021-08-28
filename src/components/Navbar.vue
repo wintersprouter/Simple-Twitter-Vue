@@ -60,7 +60,11 @@
                       <v-icon dark> mdi-feather </v-icon>
                     </v-btn>
                   </template>
-                  <v-card elevation="0" style="border-radius: 14px">
+                  <v-card
+                    elevation="0"
+                    style="border-radius: 14px"
+                    class="mt-0"
+                  >
                     <v-card-actions>
                       <v-btn color="primary" text @click="dialog = false"
                         ><span>&#10005;</span>
@@ -169,7 +173,7 @@ export default {
     },
     async handleSubmit() {
       try {
-        if (!this.text) {
+        if (!this.text.trim().length) {
           Toast.fire({ icon: "warning", title: "您尚未填寫任何內容" });
           return;
         }
@@ -180,7 +184,7 @@ export default {
         this.isProcessing = true;
 
         const { data } = await tweetsAPI.postTweet({
-          description: this.text,
+          description: this.text.trim(),
         });
         console.log(data);
         if (data.status !== "success") {

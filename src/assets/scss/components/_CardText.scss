@@ -170,3 +170,18 @@
   line-height: $font-line-root;
   color: $font-color-primary;
 }
+
+%reply-modal-text-style {
+  font-weight: $font-weight-sub-title;
+  font-size:$font-size-small;
+  line-height:$font-line-small;
+}
+.reply-modal-text {
+  @extend %reply-modal-text-style;
+  color:$font-color-account;
+  margin-right: 1rem;
+}
+.reply-modal-target {
+  @extend %reply-modal-text-style;
+  color:$font-color-primary;
+}

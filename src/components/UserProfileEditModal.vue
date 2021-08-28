@@ -137,7 +137,7 @@ export default {
     },
     async handleSubmit() {
       try {
-        if (!this.name) {
+        if (!this.name.trim().length) {
           Toast.fire({
             icon: "warning",
             title: "請填寫使用者名稱",
