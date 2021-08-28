@@ -6,7 +6,7 @@
     <section class="middle-section">
       <ProfileLoading v-if="isLoading" />
       <template v-else>
-        <v-card elevation="0" height="55px">
+        <v-card elevation="0" height="55px" tile class="mt-0" max-width="600px">
           <v-container class="d-flex pt-1">
             <v-btn icon @click="$router.back()">
               <v-icon color="black">mdi-arrow-left</v-icon>
