@@ -41,16 +41,15 @@
   @include pad-width {
     padding-left:0px;
     padding-right: 0px;
-    left: 0;
+    left: 7%;
   }
   @include small-pad-width {
     padding-left:0px;
     padding-right: 0px;
-    left: 0;
-
   }
   @include phone-width {
-    display: none;
+    padding-left:0px;
+    padding-right: 0px;
   }
 
 }
@@ -59,25 +58,30 @@
 .middle-section {
   height: 100%;
   overflow-y: hidden;
-  border-left: 1px solid #E5E5E5;
-  border-right: 1px solid #E5E5E5;
   margin-top: 0;
   @include pc-width {
     max-width: 600px;
+    border-left: 1px solid #E5E5E5;
+    border-right: 1px solid #E5E5E5;
 
   }
   @include pcs-width {
     max-width: 425px;
     margin-right: 15px;
+    border-left: 1px solid #E5E5E5;
+    border-right: 1px solid #E5E5E5;
   }
   @include pad-width {
-    width: 70%;
+    width: 68%;
+    border-left: 1px solid #E5E5E5;
   }
   @include small-pad-width {
-    width: 70%;
+    width: 80%;
+    border-left: 1px solid #E5E5E5;
   }
   @include phone-width {
-    width: 90%;
+    width: 84%;
+    border-left: 1px solid #E5E5E5;
   }
 }
   
