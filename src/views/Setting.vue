@@ -2,11 +2,13 @@
   <div class="main-container d-flex pa-0">
     <section class="left-section"><Navbar /></section>
     <section class="main-section">
-      <v-card elevation="0" height="55px"
-        ><v-card-title class="header-title">帳戶設定</v-card-title>
+      <v-card elevation="0" height="55px" tile class="header-card mt-0">
+        <v-card-title class="header-setting" max-width="600px"
+          >帳戶設定</v-card-title
+        >
       </v-card>
       <v-divider></v-divider>
-      <v-col cols="6">
+      <v-col class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
         <UserForm />
       </v-col>
     </section>

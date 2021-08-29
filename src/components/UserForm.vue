@@ -313,5 +313,9 @@ export default {
     font-size: 18px;
     line-height: 26px;
   }
+  .button-save {
+    position: absolute;
+    right: 16px;
+  }
 }
 </style>

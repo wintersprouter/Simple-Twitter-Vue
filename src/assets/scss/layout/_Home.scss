@@ -1,6 +1,5 @@
 .main-container {
   margin: 0 auto;
-
   @include pc-width {
     justify-content: center;
   }

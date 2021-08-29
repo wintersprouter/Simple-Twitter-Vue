@@ -68,10 +68,15 @@
 
 // header---------------------
 //帳戶設定title
-//font-weight: bold;700
-//font-size: 19px;
-//line-height: 28px;
-//color: #1C1C1C;
+.header-setting {
+  font-weight: $font-weight-title;
+  font-size: $font-size-medium;
+  line-height: $font-line-medium;
+  color: $font-color-root;
+  @include phone-width {
+    font-size:$font-size-title;
+  }
+}
 
 
 //首頁title //推文清單title //使用者列表//推文title

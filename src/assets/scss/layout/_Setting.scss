@@ -1,0 +1,27 @@
+
+.main-section {
+  height: 100%;
+  margin-top: 0;
+
+  @include pc-width {
+    width: 600px;
+    border-left: 1px solid #E5E5E5;
+  }
+  @include pcs-width {
+    width: 600px;
+    margin-left: 150px;
+    border-left: 1px solid #E5E5E5;
+  }
+  @include pad-width {
+    width: 70%;
+    border-left: 1px solid #E5E5E5;
+  }
+  @include small-pad-width {
+    width: 85%;
+    border-left: 1px solid #E5E5E5;
+  }
+  @include phone-width {
+    width: 84%;
+    border-left: 1px solid #E5E5E5;
+  }
+}
