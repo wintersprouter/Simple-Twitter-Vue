@@ -15,13 +15,13 @@
         </router-link>
         <v-list class="mt-0 ml-2 pt-0">
           <v-list-item-title class="ml-2">
-            <span class="tweets-user-name">{{ reply.name }}</span>
-            <span class="ml-2 tweets-user-account"
-              >@{{ reply.commentAccount }}</span
-            >
-            <span class="ml-2 tweets-user-account"
-              >· {{ reply.createdAt | fromNow }}</span
-            >
+            <span class="mr-1 tweets-user-name">{{ reply.name }}</span>
+            <template v-if="$vuetify.breakpoint.xsOnly">
+              <br />
+            </template>
+            <span class="tweets-user-account"
+              >@{{ reply.commentAccount }}·{{ reply.createdAt | fromNow }}
+            </span>
           </v-list-item-title>
           <v-list-item-subtitle class="ml-2">
             <span class="tweets-user-account">回覆</span>
@@ -73,6 +73,13 @@ export default {
     padding: 10px 15px 0px 15px;
     margin: 0 auto;
     border-bottom: 1px solid #e5e5e5;
+    .v-list-item-group {
+      max-width: 480px;
+      .tweet-card-description {
+        max-width: 490px;
+        padding: 0;
+      }
+    }
   }
 }
 </style>
