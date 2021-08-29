@@ -306,5 +306,16 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "../assets/scss/components/_UserForm.scss";
+.button-section {
+  position: relative;
+  .button-signup {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 26px;
+  }
+  .button-save {
+    position: absolute;
+    right: 16px;
+  }
+}
 </style>

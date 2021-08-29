@@ -6,7 +6,7 @@
           ><span>&#10005;</span>
         </v-btn>
         <v-row class="justify-space-between px-2 mx-0 mt-0" hight="50px">
-          <p class="profile-card-title mt-1 ml-3">編輯個人資料</p>
+          <p class="tweet-count mt-1 ml-3">編輯個人資料</p>
           <v-btn
             class="ml-2 mr-1"
             color="primary"
@@ -21,7 +21,7 @@
       </v-card-actions>
       <v-divider></v-divider>
       <v-card-actions class="edit-images">
-        <v-img height="200px" :src="cover" :alt="name" class="image" />
+        <v-img height="200px" :src="cover" :alt="name" />
         <v-btn class="button-cover ma-2" plain fab>
           <v-file-input
             hide-input
@@ -37,7 +37,7 @@
         </v-btn>
 
         <v-avatar size="140" class="profile-avatar" fab>
-          <v-img class="image" :src="avatar" :alt="name" />
+          <v-img :src="avatar" :alt="name" />
 
           <v-btn class="button-avatar ma-2" plain fab>
             <v-file-input
@@ -137,7 +137,7 @@ export default {
     },
     async handleSubmit() {
       try {
-        if (!this.name) {
+        if (!this.name.trim().length) {
           Toast.fire({
             icon: "warning",
             title: "請填寫使用者名稱",
@@ -194,7 +194,49 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-@import "../assets/scss/components/_UserProfileInfo.scss";
-@import "../assets/scss/components/_UserProfileEditModal.scss";
+<style lang="scss" scoped>
+.profile-card {
+  position: relative;
+  margin: 0 auto;
+  .edit-images {
+    padding: 0 0 8px 0;
+    position: relative;
+    .profile-cover-image {
+      position: relative;
+      opacity: 75%;
+      z-index: 1;
+    }
+    .button-cover {
+      position: absolute;
+      right: calc(50% - 50px);
+      top: calc(50% - 35px);
+      z-index: 2;
+      .input-cover {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .profile-avatar {
+      position: absolute;
+      // right: calc(50% - 50px);
+      left: 20px;
+      top: 130px;
+      .profile-avatar-image {
+        opacity: 85%;
+        z-index: 2;
+      }
+      .button-avatar {
+        position: absolute;
+        right: calc(50% - 50px);
+        bottom: calc(50% - 35px);
+        z-index: 3;
+        .input-avatar {
+          margin: 0;
+          padding: 0;
+        }
+      }
+    }
+  }
+}
 </style>

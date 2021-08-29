@@ -1,7 +1,6 @@
 <template>
   <v-card elevation="0" tile class="profile-card">
-    <v-img height="200px" :src="user.cover" :alt="user.name" class="image">
-    </v-img>
+    <v-img height="200px" :src="user.cover" :alt="user.name" />
     <v-avatar
       size="140"
       class="profile-avatar"
@@ -10,7 +9,7 @@
       bottom
       fab
     >
-      <img class="image" :alt="user.name" :src="user.avatar" />
+      <v-img :alt="user.name" :src="user.avatar" />
     </v-avatar>
     <v-card-text class="profile-content">
       <v-card-actions>
@@ -27,6 +26,7 @@
                 v-bind="attrs"
                 v-on="on"
                 color="primary"
+                :small="$vuetify.breakpoint.smAndDown"
                 class="text-no-wrap rounded-pill px-4"
                 >編輯個人資料</v-btn
               >
@@ -55,29 +55,31 @@
           >
         </v-row>
       </v-card-actions>
-      <v-list class="ml-1" align="start">
-        <v-list-item-title class="profile-name">{{
-          user.name
-        }}</v-list-item-title>
-        <v-list-item-subtitle class="tweets-account"
+      <v-list class="ml-4 mt-0 pt-0" align="start">
+        <v-list-item-title
+          class="profile-user-name pt-md-0 pt-3"
+          style="font-size: 19px"
+          >{{ user.name }}</v-list-item-title
+        >
+        <v-list-item-subtitle class="tweets-user-account"
           >@{{ user.account }}</v-list-item-subtitle
         >
       </v-list>
-      <v-card-text class="profile-intro">{{ user.introduction }} </v-card-text>
-      <v-card-subtitle class="profile-followship">
+      <v-card-text class="profile-intro pt-0"
+        >{{ user.introduction }}
+      </v-card-text>
+      <v-card-subtitle class="profile-followship py-0">
         <router-link :to="`/users/${user.id}/followship`" class="links">
-          <span class="profile-following-count"
+          <span class="profile-count ml-3"
             >{{ initialUser.followingCount }} 個</span
-          ><span class="profile-following-text mr-1">跟隨中</span>
+          ><span class="profile-text mr-1">跟隨中</span>
         </router-link>
         <router-link
           :to="`/users/${user.id}/followship/follower`"
           class="links"
         >
-          <span class="profile-follower-count"
-            >{{ user.followerCount }} 位</span
-          >
-          <span class="profile-follower-text">跟隨者</span>
+          <span class="profile-count ml-4">{{ user.followerCount }} 位</span>
+          <span class="profile-text">跟隨者</span>
         </router-link></v-card-subtitle
       >
     </v-card-text>
@@ -167,7 +169,19 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-@import "./../assets/scss/components/_UserProfileInfo.scss";
+<style lang="scss" scoped>
+.profile-card {
+  position: relative;
+  margin: 0;
+  .profile-avatar {
+    position: absolute;
+    border: 4px solid #ffffff;
+    box-sizing: border-box;
+    top: 129px;
+    left: 15px;
+  }
+  .profile-followship {
+    padding: 1rem 0.2rem;
+  }
+}
 </style>
-

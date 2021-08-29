@@ -7,7 +7,7 @@
         :key="tweet.id"
         :initial-tweet="tweet"
       />
-      <v-card elevation="0" v-if="!tweets.length" class="message-card">
+      <v-card elevation="0" v-if="!tweets.length" class="message-card mt-0">
         <v-card-title>This account haven’t Tweeted. </v-card-title>
       </v-card>
     </template>
@@ -69,5 +69,4 @@ export default {
 .message-card {
   border-bottom: 1px solid #e6ecf0;
 }
-@import "./../assets/scss/components/_UserTweets.scss";
 </style>

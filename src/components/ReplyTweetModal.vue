@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="0" style="border-radius: 14px">
+  <v-card elevation="0" style="border-radius: 14px" class="mt-0">
     <v-card-actions>
       <v-btn @click.stop.prevent="handleClick" icon
         ><span>&#10005;</span>
@@ -10,23 +10,25 @@
     <v-card-actions>
       <v-container class="d-flex justify-space-between modal-top">
         <v-avatar size="50" class="tweet-card-avatar">
-          <img :src="tweet.avatar" :alt="tweet.name" class="image" />
+          <img :src="tweet.avatar" :alt="tweet.name" />
         </v-avatar>
         <v-divider vertical inset class="my-1" id="connect-line"></v-divider>
 
         <v-card-text class="py-0">
           <v-list-item-title>
-            <span class="mr-2 tweets-name">{{ tweet.name }}</span>
-            <span class="tweets-account">@{{ tweet.account }}</span>
-            <span class="tweets-account"> · </span>
-            <span class="tweets-account"> {{ tweet.createdAt | fromNow }}</span>
+            <span class="mr-2 tweets-user-name">{{ tweet.name }}</span>
+            <span class="tweets-user-account">@{{ tweet.account }}</span>
+            <span class="tweets-user-account"> · </span>
+            <span class="tweets-user-account">
+              {{ tweet.createdAt | fromNow }}</span
+            >
           </v-list-item-title>
-          <p class="pt-2 pb-1 pr-0 tweet-description">
+          <p class="pt-2 pb-1 pr-0 reply-description">
             {{ tweet.description }}
           </p>
           <v-list-item-subtitle>
-            <span class="tweet-reply-title mr-1">回覆給</span>
-            <span class="tweet-reply-target"
+            <span class="reply-modal-text">回覆給</span>
+            <span class="reply-modal-target"
               >@{{ tweet.account }}</span
             ></v-list-item-subtitle
           >
@@ -37,11 +39,7 @@
       <v-card-actions>
         <v-container class="d-flex justify-space-between">
           <v-avatar size="50" class="ml-2 mr-5">
-            <img
-              :src="currentUser.avatar"
-              :alt="currentUser.name"
-              class="image"
-            />
+            <img :src="currentUser.avatar" :alt="currentUser.name" />
           </v-avatar>
           <v-textarea
             v-model="repliedContent"
@@ -51,6 +49,7 @@
             row-height="15"
             placeholder="推你的回覆"
             autofocus
+            required
           ></v-textarea>
         </v-container>
       </v-card-actions>
@@ -76,6 +75,7 @@ import { mapState } from "vuex";
 import tweetsAPI from "./../apis/tweets";
 import { Toast } from "./../utils/helpers";
 export default {
+  name: "ReplyTweetModal",
   props: {
     initTweet: {
       type: Object,
@@ -84,7 +84,7 @@ export default {
   },
   data() {
     return {
-      repliedContent: " ",
+      repliedContent: "",
       tweet: this.initTweet,
       isProcessing: false,
       dialog: true,
@@ -98,12 +98,12 @@ export default {
   methods: {
     async handleSubmit(tweetId) {
       try {
-        if (!this.repliedContent) {
+        if (!this.repliedContent.trim().length) {
           Toast.fire({ icon: "warning", title: "您尚未填寫任何內容" });
           return;
         }
         this.isProcessing = true;
-        const content = { comment: this.repliedContent };
+        const content = { comment: this.repliedContent.trim() };
 
         const { data } = await tweetsAPI.postReply({
           tweetId,
@@ -139,6 +139,14 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-@import "../assets/scss/components/_ReplyTweetModal.scss";
+<style lang="scss" scoped>
+.modal-top {
+  position: relative;
+  #connect-line {
+    position: absolute;
+    left: 6.5%;
+    top: 50%;
+    height: 80px;
+  }
+}
 </style>

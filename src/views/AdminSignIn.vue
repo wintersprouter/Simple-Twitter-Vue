@@ -9,7 +9,7 @@
     </v-card-actions>
     <v-card-title class="sign-title">後台登入</v-card-title>
     <SignInForm :in-is-admin-sign-page="isAdminSignPage" />
-    <v-card-actions class="pt-5 justify-content-center"
+    <v-card-actions class="pt-5 justify-content-center sign-actions"
       ><v-spacer></v-spacer>
       <v-btn text :to="'/signin'" class="sign-link"
         >前台登入</v-btn
@@ -31,6 +31,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-@import "../assets/scss/components/_UserSignIn.scss";
-</style>

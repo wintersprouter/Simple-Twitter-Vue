@@ -1,3 +1,4 @@
+import '@mdi/font/css/materialdesignicons.css'
 import Vue from 'vue'
 import 'vuetify/dist/vuetify.min.css'
 import Vuetify from 'vuetify/lib/framework'
@@ -8,10 +9,10 @@ export default new Vuetify({
   breakpoint: {
     scrollBarWidth: 16,
     thresholds: {
-      xs: 600,
-      sm: 960,
-      md: 1280,
-      lg: 1920
+      xs: 479,
+      sm: 768,
+      md: 1024,
+      lg: 1440
     }
   },
   theme: {

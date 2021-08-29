@@ -62,12 +62,12 @@ const routes = [
       {
         path: 'tweets',
         name: 'adminTweets',
-        component: () => import('../components/AdminTweetsList.vue')
+        component: () => import('../components/AdminTweets.vue')
       },
       {
         path: 'users',
         name: 'adminUsers',
-        component: () => import('../components/AdminUsersList.vue')
+        component: () => import('../components/AdminUsers.vue')
       }
     ]
   },

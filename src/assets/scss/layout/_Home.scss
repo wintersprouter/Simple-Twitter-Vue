@@ -1,0 +1,106 @@
+.main-container {
+  margin: 0 auto;
+  @include pc-width {
+    justify-content: center;
+  }
+  @include pcs-width {
+    justify-content: center;
+  }
+
+  @include pad-width {
+    justify-content: flex-end;
+  }
+  @include small-pad-width {
+    justify-content: flex-end;
+  }
+  @include phone-width {
+    justify-content: flex-end;
+  }
+  
+}
+
+
+
+.left-section {
+  padding: 0px 70px 0px 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  @include pc-width {
+    padding-right: 30px;
+    padding-left:70px;
+    left: 10%;
+  }
+  @include pcs-width {
+    padding-left:75px;
+    left: 2%;
+  }
+  @include pad-width {
+    padding-left:0px;
+    padding-right: 0px;
+    left: 6%;
+  }
+  @include small-pad-width {
+    padding-left:23px;
+  }
+  @include phone-width {
+    padding-left:0px;
+    padding-right: 0px;
+  }
+}
+
+
+.middle-section {
+  height: 100%;
+  overflow-y: hidden;
+  margin-top: 0;
+  @include pc-width {
+    max-width: 600px;
+    border-left: 1px solid #E5E5E5;
+    border-right: 1px solid #E5E5E5;
+
+  }
+  @include pcs-width {
+    width: 40%;
+    border-left: 1px solid #E5E5E5;
+    border-right: 1px solid #E5E5E5;
+  }
+  @include pad-width {
+    width: 70%;
+    border-left: 1px solid #E5E5E5;
+  }
+  @include small-pad-width {
+    width: 85%;
+    border-left: 1px solid #E5E5E5;
+  }
+  @include phone-width {
+    width: 84%;
+    border-left: 1px solid #E5E5E5;
+  }
+}
+  
+.right-section {
+  padding: 15px 82px 0px 30px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  max-width: 450px;
+  @include pc-width {
+    padding: 15px 0px 0px 30px;
+    right: 4%;
+  }
+  @include pcs-width {
+    width: 300px;
+    padding: 0;
+  }
+  @include pad-width {
+    display: none;
+  }
+  @include small-pad-width {
+    display: none;
+  }
+  @include phone-width {
+    display: none;
+  }
+}

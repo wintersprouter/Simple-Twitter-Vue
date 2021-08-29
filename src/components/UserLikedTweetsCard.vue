@@ -1,67 +1,70 @@
 <template>
-  <v-card elevation="0" tile class="tweet-list">
+  <v-card elevation="0" tile class="tweet-list" max-width="600px">
     <v-card elevation="0" class="tweet-card">
-      <router-link :to="`/users/${tweet.likedTweetUserId}`" class="links">
-        <v-avatar size="50" class="tweet-card-avatar">
-          <img :src="tweet.avatar" :alt="tweet.name" class="image" />
-        </v-avatar>
-      </router-link>
-      <v-list class="tweet-card-list">
-        <v-card-text class="py-0">
-          <router-link :to="`/tweets/${tweet.TweetId}`" class="links">
-            <v-list-item-group>
-              <v-list-item-title>
-                <span class="mr-2 tweets-name">{{ tweet.name }}</span>
-                <span class="tweets-account">@{{ tweet.account }}</span>
-                <span class="tweets-account"> · </span>
-                <span class="tweets-account"
-                  >{{ tweet.tweetCreatedAt | fromNow }}
-                </span>
-              </v-list-item-title>
-              <v-list-item-action-text class="pt-2 pb-0 tweet-card-description">
-                {{ tweet.description }}
-              </v-list-item-action-text>
-            </v-list-item-group>
-          </router-link>
-        </v-card-text>
+      <v-container class="d-flex justify-space-between">
+        <router-link :to="`/users/${tweet.likedTweetUserId}`" class="links">
+          <v-avatar size="50" class="tweet-card-avatar mt-2">
+            <v-img :src="tweet.avatar" :alt="tweet.name" />
+          </v-avatar>
+        </router-link>
+        <v-list class="tweet-card-list">
+          <v-card-text class="py-0">
+            <router-link :to="`/tweets/${tweet.TweetId}`" class="links">
+              <v-list-item-group>
+                <v-list-item-title>
+                  <span class="mr-1 tweets-user-name">{{ tweet.name }}</span>
+                  <template v-if="$vuetify.breakpoint.xsOnly">
+                    <br />
+                  </template>
+                  <span class="tweets-user-account"
+                    >@{{ tweet.account }}·{{ tweet.tweetCreatedAt | fromNow }}
+                  </span>
+                </v-list-item-title>
+                <v-list-item-content class="tweets-description pt-2 pb-2">
+                  {{ tweet.description }}
+                </v-list-item-content>
+              </v-list-item-group>
+            </router-link>
+          </v-card-text>
 
-        <v-card-actions class="pb-0 pt-1 justify-start">
-          <v-dialog v-model="dialog" max-width="600px" max-hight="300px">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn icon color="gary" v-bind="attrs" v-on="on">
-                <v-icon>mdi-message-reply-outline</v-icon>
-              </v-btn>
-            </template>
-            <!-- modal -->
-            <ReplyLikedTweetModal
-              :init-tweet="tweet"
-              @after-create-reply="afterCreateReply(tweet)"
-              @after-click-close="afterClickClose"
-            />
-          </v-dialog>
-          <span class="mr-8 tweet-card-count">{{ tweet.repliedCount }}</span>
+          <v-card-actions class="pb-0 pt-1 justify-start">
+            <v-dialog v-model="dialog" max-width="600px" max-hight="300px">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn icon color="gary" v-bind="attrs" v-on="on">
+                  <v-icon>mdi-message-reply-outline</v-icon>
+                </v-btn>
+              </template>
+              <!-- modal -->
+              <ReplyLikedTweetModal
+                :init-tweet="tweet"
+                @after-create-reply="afterCreateReply(tweet)"
+                @after-click-close="afterClickClose"
+              />
+            </v-dialog>
+            <span class="mr-8 tweet-card-count">{{ tweet.repliedCount }}</span>
 
-          <v-btn
-            v-if="tweet.isLike"
-            @click.stop.prevent="postUnlike(tweet)"
-            :disabled="isProcessing"
-            icon
-            color="pink"
-          >
-            <v-icon>mdi-heart</v-icon>
-          </v-btn>
-          <v-btn
-            v-else
-            @click.stop.prevent="postLike(tweet)"
-            :disabled="isProcessing"
-            icon
-            color="gary"
-          >
-            <v-icon>mdi-heart-outline</v-icon>
-          </v-btn>
-          <span class="tweet-card-count">{{ tweet.likedCount }}</span>
-        </v-card-actions>
-      </v-list>
+            <v-btn
+              v-if="tweet.isLike"
+              @click.stop.prevent="postUnlike(tweet)"
+              :disabled="isProcessing"
+              icon
+              color="pink"
+            >
+              <v-icon>mdi-heart</v-icon>
+            </v-btn>
+            <v-btn
+              v-else
+              @click.stop.prevent="postLike(tweet)"
+              :disabled="isProcessing"
+              icon
+              color="gary"
+            >
+              <v-icon>mdi-heart-outline</v-icon>
+            </v-btn>
+            <span class="tweet-card-count">{{ tweet.likedCount }}</span>
+          </v-card-actions>
+        </v-list>
+      </v-container>
     </v-card>
     <v-divider></v-divider>
   </v-card>
@@ -164,5 +167,26 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "./../assets/scss/components/_UserTweets.scss";
+.tweet-list {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  .tweet-card {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+
+    .tweet-card-list {
+      margin-top: 0;
+      margin-left: 0;
+      .v-list-item-group {
+        max-width: 480px;
+        .tweet-card-description {
+          max-width: 490px;
+          padding: 0;
+        }
+      }
+    }
+  }
+}
 </style>

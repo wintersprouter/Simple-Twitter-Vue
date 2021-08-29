@@ -1,12 +1,10 @@
 <template>
-  <v-container>
-    <v-row>
-      <section class="left-section"><Navbar /></section>
-      <section class="main-section">
-        <router-view></router-view>
-      </section>
-    </v-row>
-  </v-container>
+  <div class="admin-main-container d-flex pa-0">
+    <section class="left-section"><Navbar /></section>
+    <section class="admin-main-section">
+      <router-view></router-view>
+    </section>
+  </div>
 </template>
 <script>
 import Navbar from "./../components/Navbar";
@@ -28,7 +26,6 @@ export default {
 };
 </script>
 <style lang="scss">
-@import "./../assets/scss/layout/TwoColumn.scss";
 .header-card {
   width: 100%;
 }
