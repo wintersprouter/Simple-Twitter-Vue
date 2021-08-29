@@ -1,6 +1,6 @@
 <template>
-  <v-card elevation="0">
-    <v-card elevation="0" height="55px" class="header-card">
+  <v-card elevation="0" tile class="mt-0">
+    <v-card elevation="0" height="55px" class="header-card mt-0" tile>
       <v-card-title class="header-title">使用者列表</v-card-title>
     </v-card>
     <v-divider></v-divider>
@@ -21,8 +21,8 @@
 
 <script>
 import AdminUserCard from "./AdminUserCard.vue";
-import adminAPI from "./../apis/admin";
-import { Toast } from "./../utils/helpers";
+import adminAPI from "../apis/admin";
+import { Toast } from "../utils/helpers";
 import UserLoading from "./../components/UserLoading";
 export default {
   name: "AdminUsersList",
@@ -58,5 +58,3 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-</style>

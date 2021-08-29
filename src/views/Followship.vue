@@ -1,43 +1,41 @@
 <template>
-  <v-container>
-    <v-row>
-      <section class="left-section">
-        <Navbar @after-post-tweet="updateTweet" />
-      </section>
-      <section class="middle-section">
-        <HeaderLoading v-if="isLoading" />
-        <v-card v-else elevation="0" height="55px">
-          <v-container class="d-flex pt-1">
-            <v-btn icon @click="$router.back()">
-              <v-icon color="black">mdi-arrow-left</v-icon>
-            </v-btn>
-            <p class="ml-3">
-              <v-list-item-title class="header-user-title">{{
-                name
-              }}</v-list-item-title>
-              <v-list-item-subtitle class="header-user-subtitle"
-                >{{ tweetCount }} 推文
-              </v-list-item-subtitle>
-            </p>
-          </v-container>
-        </v-card>
+  <div class="main-container d-flex pa-0">
+    <section class="left-section">
+      <Navbar @after-post-tweet="updateTweet" />
+    </section>
+    <section class="middle-section">
+      <HeaderLoading v-if="isLoading" />
+      <v-card v-else elevation="0" height="55px " tile class="mt-0 header-card">
+        <v-container class="d-flex p-0">
+          <v-btn icon @click="$router.back()">
+            <v-icon color="black">mdi-arrow-left</v-icon>
+          </v-btn>
+          <p class="ml-3">
+            <v-list-item-title class="header-user-title">{{
+              name
+            }}</v-list-item-title>
+            <v-list-item-subtitle class="header-user-subtitle"
+              >{{ tweetCount }} 推文
+            </v-list-item-subtitle>
+          </p>
+        </v-container>
+      </v-card>
 
-        <v-tabs>
-          <v-tab :to="`/users/${this.$route.params.id}/followship/follower`">
-            跟隨者
-          </v-tab>
-          <v-tab :to="`/users/${this.$route.params.id}/followship/following`">
-            跟隨中
-          </v-tab>
-        </v-tabs>
-        <v-divider></v-divider>
-        <router-view></router-view>
-      </section>
-      <section class="right-section">
-        <FollowRecommendations :initial-top-users="topUsers" />
-      </section>
-    </v-row>
-  </v-container>
+      <v-tabs>
+        <v-tab :to="`/users/${this.$route.params.id}/followship/follower`">
+          跟隨者
+        </v-tab>
+        <v-tab :to="`/users/${this.$route.params.id}/followship/following`">
+          跟隨中
+        </v-tab>
+      </v-tabs>
+      <v-divider></v-divider>
+      <router-view></router-view>
+    </section>
+    <section class="right-section">
+      <FollowRecommendations :initial-top-users="topUsers" />
+    </section>
+  </div>
 </template>
 <script>
 import Navbar from "./../components/Navbar";
@@ -104,6 +102,3 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-@import "./../assets/scss/layout/ThreeColumn.scss";
-</style>

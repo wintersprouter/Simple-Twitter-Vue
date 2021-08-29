@@ -1,50 +1,48 @@
 <template>
-  <v-container>
-    <v-row>
-      <section class="left-section">
-        <Navbar @after-post-tweet="updateTweet" />
-      </section>
-      <section class="middle-section">
-        <ProfileLoading v-if="isLoading" />
-        <template v-else>
-          <v-card elevation="0" height="55px">
-            <v-container class="d-flex pt-1">
-              <v-btn icon @click="$router.back()">
-                <v-icon color="black">mdi-arrow-left</v-icon>
-              </v-btn>
-              <p class="ml-3">
-                <v-list-item-title class="header-user-title">{{
-                  this.name
-                }}</v-list-item-title>
-                <v-list-item-subtitle class="header-user-subtitle"
-                  >{{ this.tweetCount }} 推文
-                </v-list-item-subtitle>
-              </p>
-            </v-container>
-          </v-card>
+  <div class="main-container d-flex pa-0">
+    <section class="left-section">
+      <Navbar @after-post-tweet="updateTweet" />
+    </section>
+    <section class="middle-section">
+      <ProfileLoading v-if="isLoading" />
+      <template v-else>
+        <v-card elevation="0" height="55px" tile class="header-card mt-0">
+          <v-container class="d-flex pt-1">
+            <v-btn icon @click="$router.back()">
+              <v-icon color="black">mdi-arrow-left</v-icon>
+            </v-btn>
+            <p class="ml-3">
+              <v-list-item-title class="header-user-title">{{
+                this.name
+              }}</v-list-item-title>
+              <v-list-item-subtitle class="header-user-subtitle"
+                >{{ this.tweetCount }} 推文
+              </v-list-item-subtitle>
+            </p>
+          </v-container>
+        </v-card>
 
-          <v-divider></v-divider>
-          <UserProfileInfo
-            :initial-user="user"
-            @after-build-followship="afterBuildFollowship"
-          />
-        </template>
-        <v-tabs>
-          <v-tab v-for="tab in tabs" :key="tab.id" :to="tab.path">
-            {{ tab.name }}
-          </v-tab>
-        </v-tabs>
-        <router-view />
-      </section>
-      <section class="right-section">
-        <FollowRecommendations
-          :initial-top-users="topUsers"
-          @after-build-top-followhip="afterBuildTopFollowship"
-          @after-remove-top-followhip="afterRemoveTopFollowship"
+        <v-divider></v-divider>
+        <UserProfileInfo
+          :initial-user="user"
+          @after-build-followship="afterBuildFollowship"
         />
-      </section>
-    </v-row>
-  </v-container>
+      </template>
+      <v-tabs class="d-flex flex-start m-0">
+        <v-tab v-for="tab in tabs" :key="tab.id" :to="tab.path">
+          {{ tab.name }}
+        </v-tab>
+      </v-tabs>
+      <router-view />
+    </section>
+    <section class="right-section">
+      <FollowRecommendations
+        :initial-top-users="topUsers"
+        @after-build-top-followhip="afterBuildTopFollowship"
+        @after-remove-top-followhip="afterRemoveTopFollowship"
+      />
+    </section>
+  </div>
 </template>
 <script>
 import Navbar from "./../components/Navbar";
@@ -92,13 +90,14 @@ export default {
   computed: {
     ...mapState(["currentUser", "isAuthenticated", "topUsers"]),
   },
-  created() {
+  async created() {
     const { id } = this.$route.params;
-    this.fetchProfileInfo(id);
-    this.createTabs(id);
+    await this.fetchProfileInfo(id);
+    await this.createTabs(id);
   },
-  beforeRouteUpdate(to, from, next) {
-    this.fetchProfileInfo(to.params.id);
+  async beforeRouteUpdate(to, from, next) {
+    await this.fetchProfileInfo(to.params.id);
+    await this.createTabs(to.params.id);
     next();
   },
   methods: {
@@ -196,6 +195,9 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-@import "./../assets/scss/layout/ThreeColumn.scss";
+<style lang="scss" scoped>
+.header-card {
+  padding-left: 0;
+  margin: 0 auto;
+}
 </style>

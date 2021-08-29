@@ -1,16 +1,121 @@
-@import "./../main.scss";
-
 .nav-list {
+  max-width:210px;
   margin: 0 auto;
-  justify-content:space-between;
-  .nav-title {
-    font-weight: $font-weight-title;
-    font-size: $font-size-title;
-    line-height:$font-line-title;
+  padding-left:4px ;
+  padding-right:4px ;
+  height: 100vh;
+  .v-navigation-drawer {
+    display: flex;
+    justify-content:space-between;
   }
-  .nav-button {
+  .v-navigation-drawer__border {
+    display: none;
+  }
+  .logo-btn {
+    margin-left: 15px;
+    margin-top:0 ;
+    .logo-img {
+      width: 2rem;
+      height:2rem;
+    }
+  }
+  .option-item {
+    margin-top: 10px;
+    .nav-button {
+      margin: 0 auto;
+      max-width: 150px;
+      max-height: 45px;
+    }
+  }
+  .nav-icon {
+    color: $font-color-primary;
+    margin-left: 0.5rem;
+    padding-right: 0;
+    .option-icon  {
+      color: $font-color-root;
+    }
+  }
+  .nav-title {
+      margin-right: 0.5rem;
+      font-weight: $font-weight-title;
+      font-size: $font-size-title;
+      line-height:$font-line-title;
+    }
+  .logout-icon {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+  }    
+  
+}
+@include small-pad-width {
+  .nav-list {
     margin: 0 auto;
-    width: 150px;
-    height: 45px;
+    padding: 0;
+    width: 100%;
+
+    .logo-btn {
+      margin-left: 2px;
+      width: 70px;
+      height:50px;
+      .logo-img {
+        width: 2rem;
+        height:2rem;
+      }
+    }
+  
+  .option-item {
+    width: 100%;
+    .nav-title {
+      margin: 0 ;
+    }
+    .nav-icon {
+      padding: 0;
+      margin-left: 25px;
+    }
+  }
+  }
+  .nav-title,.nav-title-content {
+    display: none;
+  }
+  .logout-icon {
+    padding-left: 55px;
+  }
+  .option-list {
+    margin: 0 auto;
+    padding-top: 0;
+  }
+}
+@include phone-width {
+  .nav-list {
+    margin: 0;
+    padding: 0;
+    width:100%;
+    .option-list {
+      margin-top: 0;
+      .logo-btn {
+        margin-left:2px;
+        margin-bottom: 5px;
+        .logo-img {
+          width: 1.5rem;
+          height:2rem;
+        }
+      }
+    }
+  }
+  .option-item {
+    width: 100%;
+    .nav-title {
+      margin: 0 ;
+    }
+    .nav-icon {
+      padding: 0;
+      margin-left: 25px;
+    }
+  }
+  .nav-title,.nav-title-content {
+    display: none;
+  }
+  .logout-icon {
+    padding-left: 55px;
   }
 }

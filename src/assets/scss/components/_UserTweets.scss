@@ -1,34 +1,22 @@
-@import "./../main.scss";
-.tweet-list {
-  max-width: 600px;
-  margin: 0 auto;
-  .tweet-card {
-    margin: 0 auto;
-    padding:  0 15px;
-    display: flex;
-    .tweet-card-avatar {
-      margin-top: 10px;
-    }
-    .tweet-card-list {
-      padding-top: 10px;
-      .v-list-item-group{
-        max-width: 490px;
-      .tweet-card-description { 
-        max-width: 490px;
-        padding:0 ;
-        font-size: $font-size-root;
-        line-height: $font-line-root;
-        color: $font-color-root;
-      }
-      .tweet-card-count {
-        font-size: $font-size-small;
-        line-height: $font-line-small;
-        color: $font-color-account;
-      }
-      .tweet-card-count, .tweet-card-description {
-        font-weight: $font-weight-sub-title;
-      }
-      }
-    }
+.v-list-item-group {
+  @include pc-width {
+    max-width: 480px;
   }
-}  
+  @include pcs-width {
+    max-width: 450px;
+  }
+  @include pad-width {
+    width: 100%;
+  }
+  @include small-pad-width {
+    width: 100%;
+  }
+  @include phone-width {
+    width: 100%;
+  }
+}
+.tweet-card {
+  @include phone-width {
+    padding: 0 10px;
+  }
+}

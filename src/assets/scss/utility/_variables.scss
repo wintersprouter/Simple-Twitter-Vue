@@ -16,7 +16,7 @@ $font-color-black: #000000;
 $font-color-link: #0099FF;
 
 
-$font-style-title:normal;
+$font-style-normal:normal;
 
 $font-weight-medium: 900;
 $font-weight-title: 700;
@@ -33,4 +33,11 @@ $font-line-intro:20px;
 $font-line-header:19px;
 $font-line-small:13px;
 
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap");
+$laptop-l-media:1440px;
+$laptop-m-media:1439px;
+$laptop-media:1024px;
+$laptop-s-media:1023px;
+$pad-l-media:768px;
+$pad-m-media:767px;
+$phone-media:480px;
+$phone-s-media:479px;

@@ -1,0 +1,22 @@
+html {
+  font-size: $font-size-root;
+  height: 100%;
+  font-family: $font-family;
+}
+body {
+  height: 100%;
+  font-family: $font-family;
+  font-style: normal;
+  color: $font-color-root;
+}
+a {
+  text-decoration: none;
+}
+img {
+  object-fit: cover;
+}
+main {
+  margin: 0 auto ;
+  height: 100%;
+  width: 100%;
+}

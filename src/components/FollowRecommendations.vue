@@ -1,37 +1,37 @@
 <template>
-  <v-card elevation="0" max-width="350" class="recommend-list">
+  <v-card elevation="0" max-width="350px" height="100vh" class="recommend-list">
     <Spinner v-if="isLoading" />
     <template v-else>
-      <v-card class="secondary rounded-t-xl" outlined>
+      <v-card class="secondary rounded-t-xl my-0" outlined>
         <v-card-title class="text-left recommend-list-top-title"
-          >跟隨誰</v-card-title
+          >Popular</v-card-title
         >
       </v-card>
-
       <v-card
         v-for="user in users.slice(0, 6)"
         :key="user.id"
-        class="secondary"
-        max-width="350"
+        class="secondary my-0"
+        width="100%"
         outlined
       >
         <v-divider></v-divider>
         <v-row align="center" justify="space-around">
-          <v-list-item two-line class="ma-2" width="100%">
+          <v-list-item two-line class="ma-2 p-0" max-width="350">
             <router-link :to="`/users/${user.id}`" class="links">
               <v-list-item-avatar
-                class="user-info-avatar"
+                class="recommend-user-info-avatar"
                 color="gary"
                 size="50"
+                :to="`/users/${user.id}`"
               >
-                <img :src="user.avatar" :alt="user.name" class="image" />
+                <img :src="user.avatar" :alt="user.name" />
               </v-list-item-avatar>
             </router-link>
-            <v-list-item-content class="user-info-text">
-              <v-list-item-title class="user-info-text-name">{{
+            <v-list-item-content>
+              <v-list-item-title class="top-user-name">{{
                 user.name
               }}</v-list-item-title>
-              <v-list-item-subtitle class="user-info-text-account"
+              <v-list-item-subtitle class="top-user-account"
                 >@{{ user.account }}</v-list-item-subtitle
               >
             </v-list-item-content>
@@ -66,10 +66,10 @@
       </v-card>
 
       <v-expand-transition>
-        <v-card elevation="0" max-width="350">
+        <v-card elevation="0" max-width="350" class="my-0">
           <v-card
             v-if="show && users.length <= 4"
-            class="secondary"
+            class="secondary my-0"
             max-width="350"
             outlined
           >
@@ -78,7 +78,7 @@
           </v-card>
           <v-card
             v-show="show"
-            class="secondary"
+            class="secondary my-0"
             max-width="350"
             outlined
             v-for="user in users.slice(6, users.length)"
@@ -89,18 +89,18 @@
               <v-list-item two-line class="ma-2" width="100%">
                 <router-link :to="`/users/${user.id}`" class="links">
                   <v-list-item-avatar
-                    class="user-info-avatar"
+                    class="recommend-user-info-avatar"
                     color="gary"
                     size="50"
                   >
-                    <img :src="user.avatar" :alt="user.name" class="image" />
+                    <img :src="user.avatar" :alt="user.name" />
                   </v-list-item-avatar>
                 </router-link>
-                <v-list-item-content class="user-info-text">
-                  <v-list-item-title class="user-info-text-name">{{
+                <v-list-item-content>
+                  <v-list-item-title class="top-user-name">{{
                     user.name
                   }}</v-list-item-title>
-                  <v-list-item-subtitle class="user-info-text-account"
+                  <v-list-item-subtitle class="top-user-account"
                     >@{{ user.account }}</v-list-item-subtitle
                   >
                 </v-list-item-content>
@@ -135,10 +135,10 @@
           </v-card>
         </v-card>
       </v-expand-transition>
-      <v-card class="text-left secondary rounded-b-xl" outlined>
+      <v-card class="text-left secondary rounded-b-xl my-0" outlined>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn id="recommend-list-bottom-title" text @click="show = !show">
+          <v-btn class="recommend-list-bottom-title" text @click="show = !show">
             {{ show ? "顯示更少" : "顯示更多 " }}
           </v-btn>
           <v-spacer></v-spacer>
@@ -254,7 +254,20 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-@import "./../assets/scss/components/_FollowRecommendations.scss";
-</style>
 
+<style lang="scss" scoped>
+.recommend-list {
+  margin: 0.5rem auto;
+  .recommend-list-top-title {
+    margin-left: 16px;
+    padding: 8px;
+  }
+  .recommend-user-info-avatar {
+    margin-left: 8px;
+  }
+  .recommend-list-bottom-title {
+    margin-left: 8px;
+    color: #1da1f2;
+  }
+}
+</style>
