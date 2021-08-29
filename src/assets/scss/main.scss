@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap");
+
+@import "./utility/_reset.scss";
+@import "./utility/_variables.scss";
+@import"./utility/_mixin.scss";
+@import './_basic';
+
+@import"./layout/_UserSignIn";
+@import"./components/_Navbar";
+@import"./layout/_Home";
+@import"./components/_CardText";
+@import "./components/_UserTweets";
+@import "./layout/_Setting";
+@import "./layout/_AdminMain";
+
+.v-application {
+  font-family: $font-family !important;
+  color:$font-color-root;
+  font-size:$font-size-root;
+  [class*='text-'] {
+    font-family: $font-family, sans-serif !important;
+    font-style: normal;
+    color: $font-color-root
+  }
+}

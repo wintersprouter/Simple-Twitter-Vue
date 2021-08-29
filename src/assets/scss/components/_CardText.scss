@@ -1,0 +1,273 @@
+%top-card-style {
+  font-weight: $font-weight-title;
+  font-size: $font-size-root;
+  line-height: $font-line-sub-title;
+}
+.top-user-name {
+  @extend %top-card-style;
+  color:$font-color-root;
+}
+.top-user-account {
+  @extend %top-card-style;
+  color:$font-color-account;
+}
+//tweetsCard//tweetCard//replyCard//replyModal
+.tweets-user-name {
+  font-weight: $font-weight-title;
+  font-size: $font-size-root;
+  line-height:$font-line-root;
+  color:$font-color-root;
+  @include phone-width {
+    font-size:$font-size-intro;
+  }
+}
+.tweets-user-account {
+  font-weight: $font-weight-sub-title;
+  font-size: $font-size-root;
+  line-height:$font-line-root;
+  color:$font-color-account;
+  @include phone-width {
+    font-size:$font-size-intro;
+  }
+}
+.profile-user-name {
+  margin-top: 2rem;
+  font-weight: $font-weight-medium;
+  font-size: $font-size-medium;;
+  line-height: $font-line-medium;
+  color: $font-color-root;
+}
+
+%follow-card-style {
+  font-size: $font-size-root;
+  line-height: $font-line-sub-title;
+  @include phone-width {
+    font-size:$font-size-intro;
+  }
+}
+.followship-user-name {
+  @extend %follow-card-style;
+  font-weight: $font-weight-title;
+  color: $font-color-root;
+}
+.followship-user-account {
+  @extend %follow-card-style;
+  font-weight: $font-weight-sub-title;
+  color: $font-color-account;
+}
+.followship-intro {
+  font-weight: $font-weight-sub-title;
+  font-size: $font-size-root;
+  line-height: $font-line-root;
+  color: $font-color-root;
+  @include phone-width {
+    font-size:$font-size-intro;
+  }
+}
+%admin-users-card-style {
+  // justify-content: center;
+  // padding-bottom: 0 ;
+  font-size: $font-size-root;
+  line-height: $font-line-root;
+}
+.admin-user-name {
+  @extend %admin-users-card-style;
+  font-weight: $font-weight-medium;
+  color: $font-color-root;
+}
+.admin-user-account {
+  @extend %admin-users-card-style;
+  font-weight: $font-weight-sub-title;
+  color: $font-color-account!important;
+}
+
+.admin-user-icon {
+  color: $font-color-account;
+  margin-right: 0.5rem;
+}
+
+
+// header---------------------
+//帳戶設定title
+.header-setting {
+  font-weight: $font-weight-title;
+  font-size: $font-size-medium;
+  line-height: $font-line-medium;
+  color: $font-color-root;
+  @include phone-width {
+    font-size:$font-size-title;
+  }
+}
+
+
+//首頁title //推文清單title //使用者列表//推文title
+.header-title {
+  font-weight: $font-weight-title;
+  font-size: $font-size-title;
+  line-height: $font-line-title;
+  color: $font-color-root;
+  @include phone-width {
+    font-size:$font-size-root;
+  }
+}
+
+.header-user-title {
+  font-weight: $font-weight-medium;
+  font-size: $font-size-medium;
+  line-height: $font-line-medium;
+  color: $font-color-root;
+  @include phone-width {
+    font-size:$font-size-title;
+  }
+}
+
+.header-user-subtitle {
+  font-weight: $font-weight-sub-title;
+  font-size: $font-size-small;
+  line-height: $font-line-header;
+  color: $font-color-account;
+}
+
+
+//description --------------------
+%descriptions-style {
+  font-size: $font-size-root;
+  line-height: $font-line-root;
+  color: $font-color-root;
+  @include phone-width {
+    font-size:$font-size-intro;
+  }
+}
+
+//tweets card//follow-card
+.tweets-description {
+  font-weight:$font-weight-sub-title;
+  @extend %descriptions-style;
+}
+
+//reply card//reply modal
+.reply-description {
+  font-weight:$font-weight-content;
+  @extend %descriptions-style;
+}
+
+//tweet card
+.tweet-description {
+  font-weight:$font-weight-sub-title;
+  font-size:$font-size-large; 
+  color: $font-color-root;
+  line-height: $font-line-large;
+  @include phone-width {
+    font-size:$font-size-medium; 
+    margin-right: 1rem;
+  }
+}
+
+.profile-intro {
+  padding:0 0.2rem;
+  font-weight:$font-weight-content;
+  font-size: $font-size-intro;
+  line-height:$font-line-intro;
+  color: $font-color-black;
+  @include phone-width {
+    font-size:$font-size-small;
+  }
+}
+
+
+
+//count--------------------
+
+//tweets card
+.tweets-count {
+  font-size: $font-size-small;
+  line-height: $font-line-small;
+  color: $font-color-account;
+  font-weight: $font-weight-sub-title;
+}
+
+
+//tweet card
+//number
+%tweet-card-count-style {
+  font-weight: $font-weight-title;
+  font-size: $font-size-medium;
+  line-height: $font-line-medium;
+  @include phone-width {
+    font-size:$font-size-title;
+  }
+}
+.tweet-count {
+  @extend %tweet-card-count-style;
+  color: $font-color-black;
+}
+.tweet-count-text {
+  @extend %tweet-card-count-style;
+  color: $font-color-account;
+}
+
+
+//profile
+
+%profile-card-count-style {
+  font-weight: $font-weight-sub-title;
+  font-size: $font-size-intro;
+  line-height: $font-line-intro;
+  @include phone-width {
+    font-size:$font-size-small;
+  }
+}
+.profile-count {
+  @extend %profile-card-count-style;
+  color: $font-color-black;
+}
+.profile-text {
+  @extend %profile-card-count-style;
+  color: $font-color-account;
+}
+
+.reply-target {
+  font-weight: $font-weight-sub-title;
+  font-size: $font-size-root;
+  line-height: $font-line-root;
+  color: $font-color-primary;
+  @include phone-width {
+    font-size:$font-size-intro;
+  }
+}
+
+%reply-modal-text-style {
+  font-weight: $font-weight-sub-title;
+  font-size:$font-size-small;
+  line-height:$font-line-small;
+}
+.reply-modal-text {
+  @extend %reply-modal-text-style;
+  color:$font-color-account;
+  margin-right: 1rem;
+}
+.reply-modal-target {
+  @extend %reply-modal-text-style;
+  color:$font-color-primary;
+}
+.admin-user-icon-count {
+  font-weight: $font-weight-sub-title;
+  font-size: $font-size-root;
+  line-height: $font-line-sub-title;
+  color: $font-color-root;
+}
+%admin-user-card-count {
+  font-weight: $font-weight-sub-title;
+  font-size: $font-size-intro;
+  line-height: $font-line-intro;
+}
+.admin-user-follow-count {
+  @extend %admin-user-card-count;
+  color: $font-color-black;
+
+}
+.admin-user-follow-text {
+  @extend %admin-user-card-count;
+  color: $font-color-account;
+  
+}
