@@ -16,11 +16,13 @@
     border-left: 1px solid #E5E5E5;
   }
   @include small-pad-width {
-    width: 87%;
+    width: 85%;
     border-left: 1px solid #E5E5E5;
   }
   @include phone-width {
-    width: 85%;
+    justify-content: center;
+    width: 68%;
+    margin: 0 auto;
     border-left: 1px solid #E5E5E5;
   }
 }

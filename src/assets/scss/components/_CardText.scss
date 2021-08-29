@@ -64,6 +64,27 @@
     font-size:$font-size-intro;
   }
 }
+%admin-users-card-style {
+  // justify-content: center;
+  // padding-bottom: 0 ;
+  font-size: $font-size-root;
+  line-height: $font-line-root;
+}
+.admin-user-name {
+  @extend %admin-users-card-style;
+  font-weight: $font-weight-medium;
+  color: $font-color-root;
+}
+.admin-user-account {
+  @extend %admin-users-card-style;
+  font-weight: $font-weight-sub-title;
+  color: $font-color-account!important;
+}
+
+.admin-user-icon {
+  color: $font-color-account;
+  margin-right: 0.5rem;
+}
 
 
 // header---------------------
@@ -228,4 +249,25 @@
 .reply-modal-target {
   @extend %reply-modal-text-style;
   color:$font-color-primary;
+}
+.admin-user-icon-count {
+  font-weight: $font-weight-sub-title;
+  font-size: $font-size-root;
+  line-height: $font-line-sub-title;
+  color: $font-color-root;
+}
+%admin-user-card-count {
+  font-weight: $font-weight-sub-title;
+  font-size: $font-size-intro;
+  line-height: $font-line-intro;
+}
+.admin-user-follow-count {
+  @extend %admin-user-card-count;
+  color: $font-color-black;
+
+}
+.admin-user-follow-text {
+  @extend %admin-user-card-count;
+  color: $font-color-account;
+  
 }
