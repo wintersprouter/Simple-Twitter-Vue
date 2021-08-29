@@ -2,7 +2,7 @@
   <v-card elevation="0" tile class="tweet-list" max-width="600px">
     <v-card elevation="0" class="tweet-card">
       <v-container class="d-flex justify-space-between">
-        <router-link :to="`/users/${tweet.UserId}`" class="links">
+        <router-link :to="`/users/${tweet.UserId}`">
           <v-avatar size="50" class="tweet-card-avatar mt-2">
             <v-img :src="tweet.avatar" :alt="tweet.name" />
           </v-avatar>
@@ -10,7 +10,7 @@
 
         <v-list class="tweet-card-list">
           <v-card-text class="py-0">
-            <router-link :to="`/tweets/${tweet.id}`" class="links">
+            <router-link :to="`/tweets/${tweet.id}`">
               <v-list-item-group>
                 <v-list-item-title>
                   <span class="mr-1 tweets-user-name">{{ tweet.name }}</span>

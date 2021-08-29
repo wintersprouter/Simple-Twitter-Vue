@@ -7,7 +7,12 @@
         :key="tweet.replyId"
         :initial-tweet="tweet"
       />
-      <v-card elevation="0" v-if="!tweets.length" class="message-card">
+      <v-card
+        elevation="0"
+        v-if="!tweets.length"
+        class="message-card"
+        max-width="600px"
+        >>
         <v-card-title>This account haven’t any replies. </v-card-title>
       </v-card>
     </template>
