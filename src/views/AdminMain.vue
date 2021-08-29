@@ -26,7 +26,6 @@ export default {
 };
 </script>
 <style lang="scss">
-@import "./../assets/scss/layout/TwoColumn.scss";
 .header-card {
   width: 100%;
 }

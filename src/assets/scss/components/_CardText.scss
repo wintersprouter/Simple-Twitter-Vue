@@ -30,9 +30,6 @@
     font-size:$font-size-intro;
   }
 }
-
-//name----------------
-
 .profile-user-name {
   margin-top: 2rem;
   font-weight: $font-weight-medium;
@@ -41,25 +38,32 @@
   color: $font-color-root;
 }
 
-//followcard
-//font-weight: bold;
-// font-size: 15px;
-// line-height: 15px;
-// color: #1C1C1C;
-
-
-
-
-//account------------------
-
-
-//followCard
-// font-weight: 500;
-// font-size: 15px;
-// line-height: 15px;
-// color: #657786;
-
-
+%follow-card-style {
+  font-size: $font-size-root;
+  line-height: $font-line-sub-title;
+  @include phone-width {
+    font-size:$font-size-intro;
+  }
+}
+.followship-user-name {
+  @extend %follow-card-style;
+  font-weight: $font-weight-title;
+  color: $font-color-root;
+}
+.followship-user-account {
+  @extend %follow-card-style;
+  font-weight: $font-weight-sub-title;
+  color: $font-color-account;
+}
+.followship-intro {
+  font-weight: $font-weight-sub-title;
+  font-size: $font-size-root;
+  line-height: $font-line-root;
+  color: $font-color-root;
+  @include phone-width {
+    font-size:$font-size-intro;
+  }
+}
 
 
 // header---------------------

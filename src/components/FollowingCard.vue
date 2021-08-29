@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="0">
+  <v-card elevation="0" tile class="mt-0" max-width="600px">
     <v-container class="d-flex justify-space-between">
       <router-link :to="`/users/${follow.followingId}`" class="links">
         <v-avatar size="50" class="tweet-card-avatar">
@@ -8,10 +8,10 @@
       </router-link>
 
       <v-card-text class="py-0">
-        <v-list-item-title class="followship-name mb-1">{{
+        <v-list-item-title class="followship-user-name mb-1">{{
           follow.name
         }}</v-list-item-title>
-        <v-list-item-subtitle class="followship-account"
+        <v-list-item-subtitle class="followship-user-account"
           >@{{ follow.account }}</v-list-item-subtitle
         >
         <v-list-item-content class="followship-intro pb-0 pt-1">

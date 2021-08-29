@@ -8,7 +8,12 @@
         :initial-follow="follower"
         @after-build-followship="afterBuildFollowship"
       />
-      <v-card elevation="0" v-if="message" class="message-card">
+      <v-card
+        elevation="0"
+        v-if="message"
+        class="message-card mt-0"
+        max-width="600px"
+      >
         <v-card-title>{{ this.message }}</v-card-title>
       </v-card>
     </template>
