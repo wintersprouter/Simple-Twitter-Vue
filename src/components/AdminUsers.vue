@@ -21,8 +21,8 @@
 
 <script>
 import AdminUserCard from "./AdminUserCard.vue";
-import adminAPI from "./../apis/admin";
-import { Toast } from "./../utils/helpers";
+import adminAPI from "../apis/admin";
+import { Toast } from "../utils/helpers";
 import UserLoading from "./../components/UserLoading";
 export default {
   name: "AdminUsersList",

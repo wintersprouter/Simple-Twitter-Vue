@@ -1,7 +1,7 @@
 <template>
-  <div class="main-container d-flex pa-0">
+  <div class="admin-main-container d-flex pa-0">
     <section class="left-section"><Navbar /></section>
-    <section class="main-section">
+    <section class="admin-main-section">
       <router-view></router-view>
     </section>
   </div>

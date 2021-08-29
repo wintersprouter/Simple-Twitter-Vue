@@ -1,6 +1,6 @@
 <template>
-  <v-card elevation="0">
-    <v-card elevation="0" height="55px" class="header-card">
+  <v-card elevation="0" tile class="mt-0">
+    <v-card elevation="0" height="55px" class="header-card mt-0" tile>
       <v-card-title class="header-title">推文清單</v-card-title>
     </v-card>
     <v-divider></v-divider>
@@ -55,9 +55,9 @@
 </template>
 <script>
 import tweetsAPI from "../apis/tweets";
-import { Toast } from "./../utils/helpers";
-import adminAPI from "./../apis/admin";
-import { fromNowFilter } from "./../utils/mixins";
+import { Toast } from "../utils/helpers";
+import adminAPI from "../apis/admin";
+import { fromNowFilter } from "../utils/mixins";
 import moment from "moment";
 export default {
   name: "AdminTweetsList",

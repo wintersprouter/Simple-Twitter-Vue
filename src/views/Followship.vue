@@ -5,7 +5,7 @@
     </section>
     <section class="middle-section">
       <HeaderLoading v-if="isLoading" />
-      <v-card v-else elevation="0" height="55px" class="mt-0 header-card">
+      <v-card v-else elevation="0" height="55px " tile class="mt-0 header-card">
         <v-container class="d-flex p-0">
           <v-btn icon @click="$router.back()">
             <v-icon color="black">mdi-arrow-left</v-icon>
