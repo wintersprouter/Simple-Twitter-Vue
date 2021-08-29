@@ -21,7 +21,7 @@
         </v-container>
       </v-card>
 
-      <v-tabs>
+      <v-tabs class="mt-2">
         <v-tab :to="`/users/${this.$route.params.id}/followship/follower`">
           跟隨者
         </v-tab>
