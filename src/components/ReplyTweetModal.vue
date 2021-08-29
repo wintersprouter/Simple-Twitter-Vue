@@ -143,7 +143,6 @@ export default {
 .modal-top {
   position: relative;
   #connect-line {
-    // background-color: $font-color-outline;
     position: absolute;
     left: 6.5%;
     top: 50%;

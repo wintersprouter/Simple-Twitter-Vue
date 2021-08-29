@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="0" style="border-radius: 14px">
+  <v-card elevation="0" style="border-radius: 14px" class="mt-0">
     <v-card-actions>
       <v-btn @click.stop.prevent="handleClick" icon
         ><span>&#10005;</span>
@@ -16,19 +16,19 @@
 
         <v-card-text class="py-0">
           <v-list-item-title>
-            <span class="mr-2 tweets-name">{{ tweet.name }}</span>
-            <span class="tweets-account">@{{ tweet.account }}</span>
-            <span class="tweets-account"> · </span>
-            <span class="tweets-account">
+            <span class="mr-2 tweets-user-name">{{ tweet.name }}</span>
+            <span class="tweets-user-account">@{{ tweet.account }}</span>
+            <span class="tweets-user-account"> · </span>
+            <span class="tweets-user-account">
               {{ tweet.tweetCreatedAt | fromNow }}</span
             >
           </v-list-item-title>
-          <p class="pt-2 pb-1 pr-0 tweet-description">
+          <p class="pt-2 pb-1 pr-0 reply-description">
             {{ tweet.description }}
           </p>
           <v-list-item-subtitle>
-            <span class="tweet-reply-title mr-1">回覆給</span>
-            <span class="tweet-reply-target"
+            <span class="reply-modal-text">回覆給</span>
+            <span class="reply-modal-target"
               >@{{ tweet.account }}</span
             ></v-list-item-subtitle
           >
@@ -137,3 +137,14 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.modal-top {
+  position: relative;
+  #connect-line {
+    position: absolute;
+    left: 6.5%;
+    top: 50%;
+    height: 80px;
+  }
+}
+</style>
