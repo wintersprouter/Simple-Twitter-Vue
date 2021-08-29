@@ -65,8 +65,6 @@
   }
 }
 %admin-users-card-style {
-  // justify-content: center;
-  // padding-bottom: 0 ;
   font-size: $font-size-root;
   line-height: $font-line-root;
 }
@@ -88,7 +86,6 @@
 
 
 // header---------------------
-//帳戶設定title
 .header-setting {
   font-weight: $font-weight-title;
   font-size: $font-size-medium;
@@ -165,6 +162,7 @@
 
 .profile-intro {
   padding:0 0.2rem;
+  margin-left: 0.5rem;
   font-weight:$font-weight-content;
   font-size: $font-size-intro;
   line-height:$font-line-intro;
