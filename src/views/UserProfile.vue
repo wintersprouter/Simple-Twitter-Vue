@@ -6,7 +6,7 @@
     <section class="middle-section">
       <ProfileLoading v-if="isLoading" />
       <template v-else>
-        <v-card elevation="0" height="55px" tile class="mt-0" max-width="600px">
+        <v-card elevation="0" height="55px" tile class="header-card mt-0">
           <v-container class="d-flex pt-1">
             <v-btn icon @click="$router.back()">
               <v-icon color="black">mdi-arrow-left</v-icon>
@@ -28,7 +28,7 @@
           @after-build-followship="afterBuildFollowship"
         />
       </template>
-      <v-tabs>
+      <v-tabs class="d-flex flex-start m-0">
         <v-tab v-for="tab in tabs" :key="tab.id" :to="tab.path">
           {{ tab.name }}
         </v-tab>
@@ -195,3 +195,9 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.header-card {
+  padding-left: 0;
+  margin: 0 auto;
+}
+</style>

@@ -26,6 +26,7 @@
                 v-bind="attrs"
                 v-on="on"
                 color="primary"
+                :small="$vuetify.breakpoint.smAndDown"
                 class="text-no-wrap rounded-pill px-4"
                 >編輯個人資料</v-btn
               >
@@ -55,9 +56,11 @@
         </v-row>
       </v-card-actions>
       <v-list class="ml-4 mt-0 pt-0" align="start">
-        <v-list-item-title class="profile-user-name" style="font-size: 19px">{{
-          user.name
-        }}</v-list-item-title>
+        <v-list-item-title
+          class="profile-user-name pt-md-0 pt-3"
+          style="font-size: 19px"
+          >{{ user.name }}</v-list-item-title
+        >
         <v-list-item-subtitle class="tweets-user-account"
           >@{{ user.account }}</v-list-item-subtitle
         >

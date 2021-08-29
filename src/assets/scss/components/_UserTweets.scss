@@ -1,0 +1,22 @@
+.v-list-item-group {
+  @include pc-width {
+    max-width: 480px;
+  }
+  @include pcs-width {
+    max-width: 450px;
+  }
+  @include pad-width {
+    width: 100%;
+  }
+  @include small-pad-width {
+    width: 100%;
+  }
+  @include phone-width {
+    width: 100%;
+  }
+}
+.tweet-card {
+  @include phone-width {
+    padding: 0 10px;
+  }
+}

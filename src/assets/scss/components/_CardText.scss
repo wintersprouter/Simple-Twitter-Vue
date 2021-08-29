@@ -16,13 +16,19 @@
   font-weight: $font-weight-title;
   font-size: $font-size-root;
   line-height:$font-line-root;
-  color:$font-color-root
+  color:$font-color-root;
+  @include phone-width {
+    font-size:$font-size-intro;
+  }
 }
 .tweets-user-account {
   font-weight: $font-weight-sub-title;
   font-size: $font-size-root;
   line-height:$font-line-root;
   color:$font-color-account;
+  @include phone-width {
+    font-size:$font-size-intro;
+  }
 }
 
 //name----------------
@@ -70,6 +76,9 @@
   font-size: $font-size-title;
   line-height: $font-line-title;
   color: $font-color-root;
+  @include phone-width {
+    font-size:$font-size-root;
+  }
 }
 
 .header-user-title {
@@ -77,6 +86,9 @@
   font-size: $font-size-medium;
   line-height: $font-line-medium;
   color: $font-color-root;
+  @include phone-width {
+    font-size:$font-size-title;
+  }
 }
 
 .header-user-subtitle {
@@ -92,6 +104,9 @@
   font-size: $font-size-root;
   line-height: $font-line-root;
   color: $font-color-root;
+  @include phone-width {
+    font-size:$font-size-intro;
+  }
 }
 
 //tweets card//follow-card
@@ -112,6 +127,10 @@
   font-size:$font-size-large; 
   color: $font-color-root;
   line-height: $font-line-large;
+  @include phone-width {
+    font-size:$font-size-medium; 
+    margin-right: 1rem;
+  }
 }
 
 .profile-intro {
@@ -120,6 +139,9 @@
   font-size: $font-size-intro;
   line-height:$font-line-intro;
   color: $font-color-black;
+  @include phone-width {
+    font-size:$font-size-small;
+  }
 }
 
 
@@ -141,6 +163,9 @@
   font-weight: $font-weight-title;
   font-size: $font-size-medium;
   line-height: $font-line-medium;
+  @include phone-width {
+    font-size:$font-size-title;
+  }
 }
 .tweet-count {
   @extend %tweet-card-count-style;
@@ -158,6 +183,9 @@
   font-weight: $font-weight-sub-title;
   font-size: $font-size-intro;
   line-height: $font-line-intro;
+  @include phone-width {
+    font-size:$font-size-small;
+  }
 }
 .profile-count {
   @extend %profile-card-count-style;
@@ -173,6 +201,9 @@
   font-size: $font-size-root;
   line-height: $font-line-root;
   color: $font-color-primary;
+  @include phone-width {
+    font-size:$font-size-intro;
+  }
 }
 
 %reply-modal-text-style {

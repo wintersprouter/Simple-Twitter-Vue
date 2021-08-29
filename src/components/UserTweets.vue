@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="0" tile class="tweet-list">
+  <v-card elevation="0" tile class="tweet-list" max-width="600px">
     <v-card elevation="0" class="tweet-card">
       <v-container class="d-flex justify-space-between">
         <router-link :to="`/users/${tweet.UserId}`" class="links">
@@ -13,11 +13,12 @@
             <router-link :to="`/tweets/${tweet.id}`" class="links">
               <v-list-item-group>
                 <v-list-item-title>
-                  <span class="mr-2 tweets-user-name">{{ tweet.name }}</span>
-                  <span class="tweets-user-account">@{{ tweet.account }}</span>
-                  <span class="tweets-user-account"> · </span>
+                  <span class="mr-1 tweets-user-name">{{ tweet.name }}</span>
+                  <template v-if="$vuetify.breakpoint.xsOnly">
+                    <br />
+                  </template>
                   <span class="tweets-user-account"
-                    >{{ tweet.createdAt | fromNow }}
+                    >@{{ tweet.account }}·{{ tweet.createdAt | fromNow }}
                   </span>
                 </v-list-item-title>
                 <v-list-item-content class="tweets-description pt-2 pb-2">
@@ -164,9 +165,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .tweet-list {
-  max-width: 600px;
-  margin: 0 auto;
+  width: 100%;
+  padding: 0;
+  margin: 0;
   .tweet-card {
+    width: 100%;
     margin: 0 auto;
     padding: 0 15px;
 
@@ -174,7 +177,7 @@ export default {
       margin-top: 0;
       margin-left: 0;
       .v-list-item-group {
-        max-width: 490px;
+        max-width: 480px;
         .tweet-card-description {
           max-width: 490px;
           padding: 0;

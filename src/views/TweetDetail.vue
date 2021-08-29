@@ -265,10 +265,11 @@ export default {
   margin: 0 auto;
 }
 .detail-tweet-card {
-  margin: 0;
+  margin: 0 auto;
   padding: 15px;
 }
 .tweet-description {
-  min-width: 450px;
+  min-width: 300px;
+  width: 100%;
 }
 </style>
