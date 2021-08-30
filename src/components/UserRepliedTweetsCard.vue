@@ -1,6 +1,6 @@
 <template>
   <v-card elevation="0" relative max-width="600px" tile class="mt-0">
-    <v-list class="p-0 mt-0">
+    <v-list class="profile-reply-list pa-1">
       <v-container
         class="profile-reply-card d-flex justify-space-between align-start"
       >
@@ -26,9 +26,9 @@
               >@{{ tweet.tweetAuthorAccount }}</span
             ></v-list-item-subtitle
           >
-          <v-list-item-content class="pt-2 pb-2 reply-description">
+          <p class="pt-2 pb-2 tweets-description">
             {{ tweet.replyComment }}
-          </v-list-item-content>
+          </p>
         </v-card-text>
       </v-container>
       <v-container class="profile-reply-card d-flex align-start">
@@ -55,9 +55,9 @@
                 }}
               </span>
             </v-list-item-title>
-            <v-list-item-content class="pt-2 pb-2 reply-description">
+            <p class="pt-2 pb-2 tweets-description">
               {{ tweet.tweetDescription }}
-            </v-list-item-content>
+            </p>
           </v-card-text>
         </router-link>
       </v-container>
@@ -83,3 +83,14 @@ export default {
   mixins: [fromNowFilter],
 };
 </script>
+<style lang="scss" scoped>
+.profile-reply-list {
+  margin: 0 auto;
+  .profile-reply-card {
+    max-width: 600px;
+    padding: 12px 27px;
+    margin: 0 auto;
+    position: relative;
+  }
+}
+</style>
