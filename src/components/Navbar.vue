@@ -11,7 +11,11 @@
         <div style="broder=1px solid blue">
           <v-list rounded nav class="option-list">
             <!-- user -->
-            <v-list-item-group color="primary">
+            <v-list-item-group
+              color="primary"
+              v-model="model"
+              active-class="icon"
+            >
               <!-- logo -->
               <v-btn icon color="primary" rounded class="logo-btn" :to="'/'">
                 <v-img src="../assets/img/logo.svg" class="logo-img"></v-img>
@@ -267,3 +271,8 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.icon {
+  color: primary;
+}
+</style>
