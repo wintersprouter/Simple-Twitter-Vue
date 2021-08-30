@@ -5,7 +5,7 @@
     </v-card>
     <v-divider></v-divider>
     <v-container>
-      <v-row class="mb-6" no-gutters>
+      <v-row class="mb-6 mx-0" no-gutters>
         <UserLoading v-if="isLoading" />
         <template v-else>
           <AdminUserCard

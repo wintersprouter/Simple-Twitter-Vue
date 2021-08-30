@@ -14,7 +14,7 @@
             <v-list-item-group
               color="primary"
               v-model="model"
-              active-class="icon"
+              active-class="active-icon"
             >
               <!-- logo -->
               <v-btn icon color="primary" rounded class="logo-btn" :to="'/'">
@@ -272,7 +272,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.icon {
-  color: primary;
+.active-icon {
+  color: #1da1f2;
 }
 </style>
