@@ -24,8 +24,12 @@
       >
         <template v-slot:top>
           <v-dialog v-model="dialogDelete" max-width="500px">
-            <v-card>
-              <v-card-title class="text-h5"
+            <v-card class="mt-0">
+              <v-card-title
+                class="
+                  font-weight-bold
+                  text-lg-h6 text-md-h6 text-sm-h6 text-xs-body-1
+                "
                 >Are you sure you want to delete this tweet?</v-card-title
               >
               <v-card-actions>
