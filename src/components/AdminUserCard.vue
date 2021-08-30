@@ -55,7 +55,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .admin-users-card {
-  // width: 245px;
   max-width: 245px;
   height: 314px;
   border-radius: 10px;
