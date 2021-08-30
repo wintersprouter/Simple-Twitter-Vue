@@ -23,4 +23,4 @@ git commit -m 'deploy'
 # git push -f https://github.com/<USERNAME>/<REPO>.git master:gh-pages
 git push -f https://github.com/wintersprouter/simple-twitter-vue.git master:gh-pages
 
-cd -
+cd ../
