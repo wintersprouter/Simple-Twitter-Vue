@@ -29,11 +29,9 @@
               >@{{ reply.tweetAuthorAccount }}</span
             >
           </v-list-item-subtitle>
-          <v-list-item-content class="reply-description ml-2"
-            ><p class="reply-description">
-              {{ reply.comment }}
-            </p></v-list-item-content
-          >
+          <p class="ml-2 reply-description">
+            {{ reply.comment }}
+          </p>
         </v-list>
       </v-container>
     </v-card>
@@ -78,6 +76,7 @@ export default {
       .tweet-card-description {
         max-width: 490px;
         padding: 0;
+        word-break: break-all;
       }
     }
   }
