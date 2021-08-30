@@ -65,9 +65,7 @@
           >@{{ user.account }}</v-list-item-subtitle
         >
       </v-list>
-      <v-card-text class="profile-intro pt-0"
-        >{{ user.introduction }}
-      </v-card-text>
+      <p class="profile-intro pa-0 ml-4">{{ user.introduction }}</p>
       <v-card-subtitle class="profile-followship py-0">
         <router-link :to="`/users/${user.id}/followship`" class="links">
           <span class="profile-count ml-3"

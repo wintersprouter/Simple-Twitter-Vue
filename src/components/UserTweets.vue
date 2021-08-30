@@ -21,9 +21,9 @@
                     >@{{ tweet.account }}·{{ tweet.createdAt | fromNow }}
                   </span>
                 </v-list-item-title>
-                <v-list-item-content class="tweets-description pt-2 pb-2">
+                <p class="tweets-description pt-2 pb-2">
                   {{ tweet.description }}
-                </v-list-item-content>
+                </p>
               </v-list-item-group>
             </router-link>
           </v-card-text>
