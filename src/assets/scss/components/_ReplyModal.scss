@@ -21,4 +21,16 @@
       left: 62px;
       border-left: 2px solid #ccd6dd; 
   }
+  @include phone-width {
+    &::before {
+        position: absolute;
+        content: '';
+        width: 2px;
+        // height: calc(100% - 24px - 300px);
+        height: calc(36.1%);
+        top: 74px;
+        left: 62px;
+        border-left: 2px solid #ccd6dd; 
+    }
+  }  
 }
