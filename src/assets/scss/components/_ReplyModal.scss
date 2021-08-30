@@ -1,0 +1,24 @@
+.modal-top {
+  position: relative;
+  &::before {
+      position: absolute;
+      content: '';
+      width: 2px;
+      height: calc(100% - 50px - 10px);
+      top: 75px;
+      left: 35px;
+      border-left: 2px solid #ccd6dd;
+  }
+}
+.profile-reply {
+  position: relative;
+  &::before {
+      position: absolute;
+      content: '';
+      width: 2px;
+      height: calc(100% - 170px);
+      top: 74px;
+      left: 62px;
+      border-left: 2px solid #ccd6dd; 
+  }
+}

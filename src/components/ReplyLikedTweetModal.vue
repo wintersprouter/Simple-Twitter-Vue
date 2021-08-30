@@ -12,8 +12,6 @@
         <v-avatar size="50" class="tweet-card-avatar">
           <img :src="tweet.avatar" :alt="tweet.name" />
         </v-avatar>
-        <v-divider vertical inset class="my-1" id="connect-line"></v-divider>
-
         <v-card-text class="py-0">
           <v-list-item-title>
             <span class="mr-2 tweets-user-name">{{ tweet.name }}</span>
