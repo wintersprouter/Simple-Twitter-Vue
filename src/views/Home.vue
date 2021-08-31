@@ -4,47 +4,47 @@
       <Navbar @after-post-tweet="updateTweet" />
     </section>
     <section class="middle-section">
-      <Spinner v-if="isLoading" />
+      <v-card elevation="0" height="55px" tile class="mt-0" max-width="600px"
+        ><v-card-title class="header-title">首頁</v-card-title></v-card
+      >
+      <v-divider></v-divider>
+      <v-card elevation="0" class="mt-0" tile max-width="600px">
+        <v-form @submit.stop.prevent="handleSubmit()">
+          <v-container class="d-flex justify-space-between px-4 pt-4 pb-0">
+            <v-avatar size="50" class="mr-5 ml-2">
+              <v-img
+                :src="currentUser.avatar"
+                :alt="'@' + currentUser.account"
+              />
+            </v-avatar>
+            <v-textarea
+              v-model="text"
+              counter
+              maxlength="140"
+              auto-grow
+              row-height="5"
+              placeholder="有什麼新鮮事？"
+              class="pt-2"
+            ></v-textarea>
+          </v-container>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="primary"
+              rounded
+              depressed
+              type="submit"
+              class="mt-0 mb-2 mr-3"
+              :disabled="isProcessing"
+            >
+              推文
+            </v-btn>
+          </v-card-actions>
+        </v-form>
+      </v-card>
+      <v-divider></v-divider>
+      <HomeLoading v-if="isLoading" />
       <template v-else>
-        <v-card elevation="0" height="55px" tile class="mt-0" max-width="600px"
-          ><v-card-title class="header-title">首頁</v-card-title></v-card
-        >
-        <v-divider></v-divider>
-        <v-card elevation="0" class="mt-0" tile max-width="600px">
-          <v-form @submit.stop.prevent="handleSubmit()">
-            <v-container class="d-flex justify-space-between px-4 pt-4 pb-0">
-              <v-avatar size="50" class="mr-5 ml-2">
-                <v-img
-                  :src="currentUser.avatar"
-                  :alt="'@' + currentUser.account"
-                />
-              </v-avatar>
-              <v-textarea
-                v-model="text"
-                counter
-                maxlength="140"
-                auto-grow
-                row-height="5"
-                placeholder="有什麼新鮮事？"
-                class="pt-2"
-              ></v-textarea>
-            </v-container>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn
-                color="primary"
-                rounded
-                depressed
-                type="submit"
-                class="mt-0 mb-2 mr-3"
-                :disabled="isProcessing"
-              >
-                推文
-              </v-btn>
-            </v-card-actions>
-          </v-form>
-        </v-card>
-        <v-divider></v-divider>
         <UserTweets
           v-for="tweet in tweets"
           :key="tweet.id"
@@ -65,7 +65,7 @@ import UserTweets from "./../components/UserTweets";
 import { mapState } from "vuex";
 import tweetsAPI from "../apis/tweets";
 import { Toast } from "./../utils/helpers";
-import Spinner from "./../components/Spinner.vue";
+import HomeLoading from "./../components/HomeLoading.vue";
 
 export default {
   name: "Home",
@@ -87,7 +87,7 @@ export default {
     Navbar,
     UserTweets,
     FollowRecommendations,
-    Spinner,
+    HomeLoading,
   },
   computed: {
     ...mapState(["currentUser", "isAuthenticated", "topUsers"]),
