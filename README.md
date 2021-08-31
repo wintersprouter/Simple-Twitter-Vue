@@ -2,9 +2,15 @@
 <p align="center">
    <img src="https://raw.githubusercontent.com/wintersprouter/Simple-Twitter-Vue/master/src/assets/img/demo/demo2.png"/>
 </p>
- 這是一個使用 Vue 2.0 前端框架開發的 Simple Twitter SPA 專案，串接後端 RESTFul API [Simple Twitter RESTful API](https://github.com/wintersprouter/Simple-Twitter-API) ，以滿足社群網站不同資料的互動需求。
+這是一個使用 Vue 2.0 前端框架開發的 Simple Twitter SPA 專案，串接後端 RESTFul API [Simple-Twitter-RESTful-API](https://github.com/wintersprouter/Simple-Twitter-API) ，以滿足社群網站不同資料的互動需求。
 
- ## Live Demo 
+ ## Outline-目錄
+- [Live Demo - 專案Demo](#Live-Demo-專案Demo)
+- [Features - 實作功能](#Features-實作功能)
+- [Installing - 專案安裝流程](#Installing-專案安裝流程)
+- [Contributor - 開發人員](#Contributor-開發人員)
+
+ ## Live Demo-專案Demo
  ### Demo 網址
  [Simple-Twitter-Demo](https://wintersprouter.github.io/Simple-Twitter-Vue/#/)
 
@@ -15,11 +21,6 @@
 | -------- | -------- | -------- |
 | user   | RyanHuang   | 12345678    
 | admin  | root   | 12345678  |
-
- ## Outline-目錄
-- [Features - 實作功能](#Features-實作功能)
-- [Installing - 專案安裝流程](#Installing-專案安裝流程)
-- [Contributor - 開發人員與工作分配](#Contributor-開發人員)
 
 ## Features-實作功能
 - 使用 Vue 2 前端框架打造 SPA 專案
