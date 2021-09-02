@@ -2,7 +2,7 @@
 <p align="center">
    <img src="https://raw.githubusercontent.com/wintersprouter/Simple-Twitter-Vue/master/src/assets/img/demo/demo2.png"/>
 </p>
-這是一個使用 Vue 2.0 前端框架開發的 Simple Twitter SPA 專案，串接後端 RESTFul API [Simple-Twitter-RESTful-API](https://github.com/wintersprouter/Simple-Twitter-API) ，以滿足社群網站不同資料的互動需求。
+這是一個使用 Vue 2.0 前端框架開發的 Simple Twitter SPA 專案，串接 RESTFul API 後端專案 https://github.com/wintersprouter/Simple-Twitter-API ，以滿足社群網站不同資料的互動需求。
 
  ## Outline-目錄
 - [Live Demo - 專案Demo](#Live-Demo-專案Demo)
@@ -56,10 +56,7 @@ $ touch vue.config.js
 module.exports = {
   transpileDependencies: [
     'vuetify'
-  ],
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/Simple-Twitter-Vue/'
-    : '/'
+  ]
 }
 
 ```
